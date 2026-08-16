@@ -1454,3 +1454,258 @@ header {
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.35);
     transform: translateY(-2px);
 }
+/* MENU MOBILE */
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    flex-direction: column;
+    gap: 0;
+}
+
+.menu-toggle span {
+    display: block;
+    font-size: 28px;
+    line-height: 12px;
+    color: #ffffff;
+    transition: 0.3s;
+}
+
+
+/* CELULAR */
+
+@media (max-width: 768px) {
+
+    header {
+        position: relative;
+        flex-wrap: wrap;
+    }
+
+    .menu-toggle {
+        display: flex;
+        margin-left: auto;
+    }
+
+    nav {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 20px 0;
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    nav a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .login {
+        display: none;
+    }
+
+    nav.active + .login {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+}
+/* =========================
+   HEADER
+========================= */
+
+header {
+    width: 100%;
+    min-height: 80px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 50px;
+    box-sizing: border-box;
+
+    gap: 35px;
+}
+
+
+/* LOGO */
+
+.logo {
+    flex-shrink: 0;
+}
+
+.logo h1 {
+    margin: 0;
+}
+
+
+/* NAVEGAÇÃO */
+
+header nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 30px;
+
+    margin-left: auto;
+}
+
+header nav a {
+    text-decoration: none;
+    color: white;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    transition: 0.3s ease;
+}
+
+header nav a:hover {
+    opacity: 0.65;
+}
+
+
+/* BOTÃO SAIR */
+
+.login {
+    text-decoration: none;
+
+    color: white;
+
+    padding: 9px 18px;
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 8px;
+
+    transition: 0.3s ease;
+
+    flex-shrink: 0;
+}
+
+.login:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================
+   BOTÃO DO MENU
+========================= */
+
+.menu-toggle {
+    display: none;
+
+    background: transparent;
+    border: none;
+
+    cursor: pointer;
+
+    padding: 5px;
+
+    flex-direction: column;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+}
+
+.menu-toggle span {
+    display: block;
+
+    color: white;
+
+    font-size: 28px;
+    line-height: 11px;
+
+    transition: 0.3s ease;
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 768px) {
+
+    header {
+        min-height: 70px;
+
+        padding: 0 20px;
+
+        position: relative;
+
+        flex-wrap: wrap;
+
+        gap: 0;
+    }
+
+
+    /* LOGO */
+
+    .logo {
+        margin-right: auto;
+    }
+
+
+    /* BOTÃO */
+
+    .menu-toggle {
+        display: flex;
+    }
+
+
+    /* NAVEGAÇÃO */
+
+    header nav {
+        display: none;
+
+        width: 100%;
+
+        flex-direction: column;
+        align-items: center;
+
+        gap: 18px;
+
+        padding: 20px 0;
+
+        margin: 0;
+    }
+
+    header nav.active {
+        display: flex;
+    }
+
+
+    header nav a {
+        font-size: 16px;
+    }
+
+
+    /* SAIR */
+
+    .login {
+        display: none;
+
+        width: 100%;
+
+        box-sizing: border-box;
+
+        text-align: center;
+
+        margin-bottom: 15px;
+    }
+
+    header nav.active + .login {
+        display: block;
+    }
+
+}
