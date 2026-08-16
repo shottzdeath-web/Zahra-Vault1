@@ -1329,8 +1329,6 @@ nav {
     backdrop-filter: blur(12px);
 }
 
-/* Links */
-
 nav a {
     position: relative;
 
@@ -1349,7 +1347,7 @@ nav a {
         text-shadow 0.3s ease;
 }
 
-/* Linha metálica embaixo */
+/* Linha prateada */
 
 nav a::after {
     content: "";
@@ -1379,7 +1377,6 @@ nav a::after {
 
 nav a:hover {
     color: #ffffff;
-
     transform: translateY(-2px);
 
     text-shadow:
@@ -1389,4 +1386,80 @@ nav a:hover {
 
 nav a:hover::after {
     width: 100%;
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 600px) {
+
+    nav {
+        gap: 0;
+        justify-content: space-between;
+
+        padding: 14px 12px;
+
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    nav a {
+        font-size: 10px;
+        letter-spacing: 0.7px;
+
+        padding: 7px 3px;
+    }
+
+    nav a::after {
+        bottom: 0;
+    }
+
+    nav a:hover {
+        transform: none;
+    }
+
+}
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    text-align: center;
+}
+
+.login-btn {
+    margin-top: 8px;
+    margin-bottom: 15px;
+
+    padding: 9px 25px;
+
+    color: #e5e5e5;
+    text-decoration: none;
+
+    border: 1px solid rgba(220, 220, 230, 0.45);
+    border-radius: 20px;
+
+    font-family: "Cinzel", serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    transition: 0.3s ease;
+}
+
+.login-btn:hover {
+    color: #ffffff;
+
+    border-color: #ffffff;
+
+    box-shadow:
+        0 0 10px rgba(255, 255, 255, 0.25),
+        inset 0 0 10px rgba(255, 255, 255, 0.05);
+
+    transform: translateY(-2px);
 }
