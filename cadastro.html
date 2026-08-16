@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <title>Login | Zahra Vault</title>
+    <title>Cadastro | Zahra Vault</title>
 </head>
 
 <body>
@@ -16,12 +16,24 @@
 
         <div class="login-box">
 
-            <h1>Zahra Vault</h1>
+            <h1 class="chrome-text">Zahra Vault</h1>
 
-            <p>Entre na sua conta</p>
+            <p>Crie sua conta</p>
 
 
             <form>
+
+                <label for="username">
+                    Nome de usuário
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Seu nome"
+                    required
+                >
+
 
                 <label for="email">
                     E-mail
@@ -47,16 +59,31 @@
                 >
 
 
+                <label for="confirm-password">
+                    Confirmar senha
+                </label>
+
+                <input
+                    type="password"
+                    id="confirm-password"
+                    placeholder="Confirme sua senha"
+                    required
+                >
+
+
                 <button type="submit">
-                    Entrar
+                    Criar conta
                 </button>
 
             </form>
 
-    <p>Não possui uma conta? 
-    <a href="cadastro.html">Cadastrar.</a>
-    
-    </p>
+
+            <p>
+                Já possui uma conta?
+                <a href="login.html">Entrar.</a>
+            </p>
+
+
             <a href="index.html">
                 Voltar para o início
             </a>

@@ -787,3 +787,514 @@ body {
         margin-top: 10px;
     }
 }
+.visual-card {
+    width: 300px;
+    height: 350px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #353941;
+    border-radius: 20px;
+
+    background: linear-gradient(
+        145deg,
+        #181A1F,
+        #0D0E11
+    );
+
+    box-shadow:
+        0 0 50px rgba(200, 204, 210, 0.08);
+
+    overflow: hidden;
+}
+
+.visual-card img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+}
+p a {
+    color: #d8d8d8;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+p a:hover {
+    color: #ffffff;
+}
+.login-box h1 {
+    background: linear-gradient(
+        120deg,
+        #8f8f8f,
+        #f5f5f5,
+        #bdbdbd,
+        #ffffff,
+        #707070,
+        #e8e8e8,
+        #ffffff,
+        #999999
+    );
+
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    animation: chromeMove 5s linear infinite;
+}
+
+@keyframes chromeMove {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+.chrome-text {
+    background: linear-gradient(
+        120deg,
+        #8a8a8a,
+        #eeeeee,
+        #ffffff,
+        #b8b8b8,
+        #f8f8f8,
+        #777777,
+        #eeeeee,
+        #ffffff
+    );
+
+    background-size: 300% 300%;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    animation: chromeMove 5s linear infinite;
+}
+
+@keyframes chromeMove {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+/* =========================
+   HOME DA CONTA
+========================= */
+
+.account-home {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 25px;
+}
+
+
+/* =========================
+   BOAS-VINDAS
+========================= */
+
+.welcome {
+    margin-bottom: 45px;
+}
+
+.welcome .subtitle {
+    font-size: 13px;
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+}
+
+.welcome h2 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.welcome > p:last-child {
+    color: #999;
+    font-size: 16px;
+}
+
+
+/* =========================
+   PAINEL DA CONTA
+========================= */
+
+.account-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+
+    padding: 30px;
+
+    background: linear-gradient(
+        145deg,
+        #151515,
+        #0d0d0d
+    );
+
+    border: 1px solid #2d2d2d;
+    border-radius: 18px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.35);
+
+    margin-bottom: 80px;
+}
+
+
+/* =========================
+   INFORMAÇÕES DO USUÁRIO
+========================= */
+
+.account-info {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.account-avatar {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        145deg,
+        #eeeeee,
+        #777777
+    );
+
+    color: #111;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    box-shadow:
+        0 0 25px rgba(255, 255, 255, 0.08);
+}
+
+.account-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.account-info h3 {
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.account-info p:last-child {
+    color: #888;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.account-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 15px 20px;
+
+    border: 1px solid #292929;
+    border-radius: 12px;
+
+    background: #111;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #d8d8d8;
+
+    box-shadow:
+        0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.account-status strong {
+    font-size: 14px;
+}
+
+.account-status p {
+    margin-top: 4px;
+    color: #777;
+    font-size: 12px;
+}
+
+
+/* =========================
+   TÍTULO DAS OPÇÕES
+========================= */
+
+.account-options {
+    margin-bottom: 70px;
+}
+
+.account-options .section-title {
+    margin-bottom: 30px;
+}
+
+.account-options .section-title p {
+    color: #777;
+    letter-spacing: 4px;
+    font-size: 12px;
+}
+
+.account-options .section-title h2 {
+    margin-top: 8px;
+    font-size: 30px;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.account-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.account-card {
+    display: block;
+
+    padding: 30px;
+
+    background: #111;
+
+    border: 1px solid #292929;
+    border-radius: 16px;
+
+    color: white;
+    text-decoration: none;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.account-card:hover {
+    transform: translateY(-6px);
+
+    border-color: #777;
+
+    background: #161616;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.card-icon {
+    display: block;
+
+    font-size: 28px;
+
+    color: #dcdcdc;
+
+    margin-bottom: 20px;
+}
+
+.account-card h3 {
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+
+.account-card p {
+    color: #777;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   DESTAQUE
+========================= */
+
+.featured-account {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 30px;
+
+    padding: 45px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #151515,
+            #0b0b0b
+        );
+
+    border: 1px solid #303030;
+
+    margin-bottom: 40px;
+}
+
+.featured-account p {
+    color: #777;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 10px;
+}
+
+.featured-account h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.featured-account span {
+    color: #888;
+    font-size: 14px;
+}
+
+.featured-account a {
+    flex-shrink: 0;
+
+    padding: 13px 22px;
+
+    border: 1px solid #777;
+
+    border-radius: 8px;
+
+    color: white;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.featured-account a:hover {
+    background: #eee;
+    color: #111;
+}
+
+
+/* =========================
+   CROMADO
+========================= */
+
+.chrome-text {
+    background: linear-gradient(
+        120deg,
+        #888888,
+        #eeeeee,
+        #ffffff,
+        #b8b8b8,
+        #f8f8f8,
+        #777777,
+        #eeeeee,
+        #ffffff
+    );
+
+    background-size: 300% 300%;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+
+    animation: chromeMove 5s linear infinite;
+}
+
+@keyframes chromeMove {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 700px) {
+
+    .account-home {
+        padding: 55px 18px;
+    }
+
+    .welcome h2 {
+        font-size: 32px;
+    }
+
+    .account-panel {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .account-status {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .account-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .featured-account {
+        flex-direction: column;
+        align-items: flex-start;
+
+        padding: 30px;
+    }
+
+    .featured-account a {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+}
