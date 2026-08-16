@@ -644,3 +644,146 @@ body {
     background-color: black;
     color: white;
 }
+.partner-card {
+    max-width: 850px;
+    margin: 60px auto;
+    padding: 35px;
+    display: flex;
+    align-items: center;
+    gap: 35px;
+
+    background: linear-gradient(
+        135deg,
+        #151515,
+        #0d0d0d
+    );
+
+    border: 1px solid #8c8c8c;
+    border-radius: 18px;
+
+    box-shadow:
+        0 0 25px rgba(255, 255, 255, 0.06);
+
+    transition: 0.4s ease;
+}
+
+.partner-card:hover {
+    transform: translateY(-6px);
+    border-color: #d0d0d0;
+
+    box-shadow:
+        0 10px 40px rgba(255, 255, 255, 0.12);
+}
+
+.partner-logo {
+    min-width: 130px;
+    height: 130px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #777;
+    border-radius: 50%;
+
+    background: #111;
+
+    font-family: "Cinzel", serif;
+    font-size: 45px;
+    color: #d8d8d8;
+}
+
+.partner-info {
+    flex: 1;
+}
+
+.partner-label {
+    font-family: "Cinzel", serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #999;
+}
+
+.partner-info h2 {
+    margin: 8px 0;
+    font-family: "Cinzel", serif;
+    color: #eee;
+    font-size: 28px;
+}
+
+.partner-info p {
+    color: #aaa;
+    line-height: 1.6;
+    max-width: 550px;
+}
+
+.partner-button {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 11px 22px;
+
+    border: 1px solid #aaa;
+    border-radius: 5px;
+
+    color: #eee;
+    text-decoration: none;
+
+    font-size: 12px;
+    letter-spacing: 2px;
+
+    transition: 0.3s ease;
+}
+
+.partner-button:hover {
+    background: #eee;
+    color: #111;
+}
+@media (max-width: 600px) {
+
+    .partner-card {
+        width: calc(100% - 30px);
+        margin: 40px auto;
+        padding: 28px 20px;
+
+        flex-direction: column;
+        text-align: center;
+
+        gap: 20px;
+        box-sizing: border-box;
+    }
+
+    .partner-logo {
+        min-width: 100px;
+        width: 100px;
+        height: 100px;
+
+        font-size: 35px;
+    }
+
+    .partner-info {
+        width: 100%;
+    }
+
+    .partner-label {
+        font-size: 9px;
+        letter-spacing: 2px;
+    }
+
+    .partner-info h2 {
+        font-size: 23px;
+        margin: 8px 0;
+    }
+
+    .partner-info p {
+        font-size: 14px;
+        line-height: 1.5;
+        margin: 10px auto;
+    }
+
+    .partner-button {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 0;
+        margin-top: 10px;
+    }
+}
