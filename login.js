@@ -4,7 +4,7 @@ loginForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
     const email = document.getElementById("email").value;
-    const senha = document.getElementById("senha").value;
+    const password = document.getElementById("password").value;
 
     const usuarioSalvo = JSON.parse(localStorage.getItem("usuario"));
 
@@ -13,12 +13,13 @@ loginForm.addEventListener("submit", function(event) {
         return;
     }
 
-    if (email === usuarioSalvo.email && senha === usuarioSalvo.senha) {
-
+    if (
+        email === usuarioSalvo.email &&
+        password === usuarioSalvo.password
+    ) {
         localStorage.setItem("logado", "true");
 
         window.location.href = "home.html";
-
     } else {
         alert("E-mail ou senha incorretos.");
     }

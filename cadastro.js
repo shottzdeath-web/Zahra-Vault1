@@ -3,18 +3,23 @@ const cadastroForm = document.getElementById("cadastroForm");
 cadastroForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const nome = document.getElementById("nome").value;
+    const username = document.getElementById("username").value;
     const email = document.getElementById("email").value;
-    const senha = document.getElementById("senha").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+
+    if (password !== confirmPassword) {
+        alert("As senhas não são iguais.");
+        return;
+    }
 
     const usuario = {
-        nome: nome,
+        username: username,
         email: email,
-        senha: senha
+        password: password
     };
 
     localStorage.setItem("usuario", JSON.stringify(usuario));
-
     localStorage.setItem("logado", "true");
 
     window.location.href = "home.html";
