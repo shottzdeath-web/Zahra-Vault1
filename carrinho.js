@@ -1,11 +1,22 @@
-const logado = localStorage.getItem("logado");
+/* =========================================================
+   PROTEÇÃO DE LOGIN
+========================================================= */
+
+const logado =
+    localStorage.getItem("logado");
+
 
 if (logado !== "true") {
 
-    window.location.href = "login.html";
+    window.location.href =
+        "login.html";
 
 }
 
+
+/* =========================================================
+   ELEMENTOS
+========================================================= */
 
 const cartItems =
     document.getElementById("cart-items");
@@ -20,10 +31,32 @@ const checkoutButton =
     document.getElementById("checkout-button");
 
 
+/* =========================================================
+   FORMATAÇÃO DE PREÇO
+========================================================= */
+
+function formatarPreco(valor) {
+
+    return valor.toLocaleString("pt-BR", {
+
+        style: "currency",
+
+        currency: "BRL"
+
+    });
+
+}
+
+
+/* =========================================================
+   CARREGAR CARRINHO
+========================================================= */
+
 function carregarCarrinho() {
 
     const carrinhoSalvo =
         localStorage.getItem("carrinho");
+
 
     const carrinho =
         carrinhoSalvo
@@ -36,75 +69,87 @@ function carregarCarrinho() {
 
     if (carrinho.length === 0) {
 
-        cartEmpty.style.display = "block";
+        cartEmpty.style.display =
+            "block";
 
-        cartTotal.textContent = "R$ 0,00";
+        cartTotal.textContent =
+            "R$ 0,00";
 
-        checkoutButton.disabled = true;
+        checkoutButton.disabled =
+            true;
 
         return;
+
     }
 
 
-    cartEmpty.style.display = "none";
+    cartEmpty.style.display =
+        "none";
 
-    checkoutButton.disabled = false;
+    checkoutButton.disabled =
+        false;
 
 
     let total = 0;
 
 
-    carrinho.forEach((produto, index) => {
+    carrinho.forEach(
+        (produto, index) => {
 
-        total += produto.preco;
-
-
-        const item =
-            document.createElement("div");
-
-        item.className = "cart-item";
+            total += produto.preco;
 
 
-        item.innerHTML = `
-
-            <div class="cart-item-info">
-
-                <span class="cart-item-category">
-                    ${produto.categoria}
-                </span>
-
-                <h3>
-                    ${produto.nome}
-                </h3>
-
-                <p>
-                    ${produto.descricao}
-                </p>
-
-            </div>
+            const item =
+                document.createElement(
+                    "div"
+                );
 
 
-            <div class="cart-item-right">
-
-                <strong>
-                    ${formatarPreco(produto.preco)}
-                </strong>
-
-                <button
-                    class="remove-cart-item"
-                    data-index="${index}"
-                >
-                    Remover
-                </button>
-
-            </div>
-
-        `;
+            item.className =
+                "cart-item";
 
 
-        cartItems.appendChild(item);
+            item.innerHTML = `
 
-    });
+                <div class="cart-item-info">
+
+                    <span class="cart-item-category">
+                        ${produto.categoria}
+                    </span>
+
+                    <h3>
+                        ${produto.nome}
+                    </h3>
+
+                    <p>
+                        ${produto.descricao}
+                    </p>
+
+                </div>
+
+
+                <div class="cart-item-right">
+
+                    <strong>
+                        ${formatarPreco(produto.preco)}
+                    </strong>
+
+                    <button
+                        class="remove-cart-item"
+                        data-index="${index}"
+                    >
+                        Remover
+                    </button>
+
+                </div>
+
+            `;
+
+
+            cartItems.appendChild(item);
+
+        }
+    );
 
 
     cartTotal.textContent =
@@ -125,25 +170,23 @@ function carregarCarrinho() {
 }
 
 
-function formatarPreco(valor) {
-
-    return valor.toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL"
-    });
-
-}
-
+/* =========================================================
+   REMOVER PRODUTO
+========================================================= */
 
 function removerProduto(event) {
 
     const index =
-        Number(event.currentTarget.dataset.index);
+        Number(
+            event.currentTarget.dataset.index
+        );
 
 
     const carrinho =
         JSON.parse(
-            localStorage.getItem("carrinho")
+            localStorage.getItem(
+                "carrinho"
+            )
         );
 
 
@@ -161,80 +204,50 @@ function removerProduto(event) {
 }
 
 
-checkoutButton.addEventListener(
-    "click",
-    function() {
+/* =========================================================
+   IR PARA CHECKOUT
+========================================================= */
 
-        const carrinho =
-            JSON.parse(
-                localStorage.getItem("carrinho")
-            );
+if (checkoutButton) {
+
+    checkoutButton.addEventListener(
+        "click",
+        function () {
+
+            const carrinhoSalvo =
+                localStorage.getItem(
+                    "carrinho"
+                );
 
 
-        if (!carrinho || carrinho.length === 0) {
+            const carrinho =
+                carrinhoSalvo
+                    ? JSON.parse(
+                        carrinhoSalvo
+                    )
+                    : [];
 
-            return;
+
+            if (
+                carrinho.length === 0
+            ) {
+
+                return;
+
+            }
+
+
+            window.location.href =
+                "checkout.html";
 
         }
+    );
 
-
-        window.location.href =
-            "checkout.html";
-
-    }
-);
-
-
-carregarCarrinho();
+}
 
 
 /* =========================================================
-   LOGOUT
+   INICIALIZAÇÃO
 ========================================================= */
 
-const logout =
-    document.getElementById("logout");
-
-const footerLogout =
-    document.getElementById("footer-logout");
-
-
-function sair() {
-
-    localStorage.removeItem("logado");
-
-    window.location.href = "index.html";
-
-}
-
-
-if (logout) {
-
-    logout.addEventListener(
-        "click",
-        function(event) {
-
-            event.preventDefault();
-
-            sair();
-
-        }
-    );
-
-}
-
-
-if (footerLogout) {
-
-    footerLogout.addEventListener(
-        "click",
-        function(event) {
-
-            event.preventDefault();
-
-            sair();
-
-        }
-    );
-
-}
+carregarCarrinho();

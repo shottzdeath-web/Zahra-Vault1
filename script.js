@@ -1,43 +1,3 @@
-console.log("Zvory Vault carregada!");
-
-/* =========================================================
-   BOTÃO DE VENDEDOR
-========================================================= */
-
-const sellerButtons = document.querySelectorAll(".seller-button");
-const message = document.querySelector("#message");
-
-sellerButtons.forEach(button => {
-
-    button.addEventListener("click", function(event) {
-
-        /*
-         * Se o botão estiver dentro de um link,
-         * não bloqueamos a navegação.
-         */
-
-        if (message) {
-
-            message.textContent =
-                "Em breve você poderá vender na Zvory Vault!";
-
-            message.style.opacity = "1";
-            message.style.transform = "translateY(0)";
-
-            setTimeout(() => {
-
-                message.style.opacity = "0";
-                message.style.transform = "translateY(20px)";
-
-            }, 3000);
-
-        }
-
-    });
-
-});
-
-
 /* =========================================================
    MENU MOBILE
 ========================================================= */
@@ -51,10 +11,81 @@ const mainNav =
 
 if (menuToggle && mainNav) {
 
-    menuToggle.addEventListener("click", () => {
+    menuToggle.addEventListener(
+        "click",
+        function () {
 
-        mainNav.classList.toggle("active");
+            mainNav.classList.toggle("active");
 
-    });
+        }
+    );
+
+
+    mainNav
+        .querySelectorAll("a")
+        .forEach(link => {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    mainNav.classList.remove("active");
+
+                }
+            );
+
+        });
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+const logout =
+    document.getElementById("logout");
+
+const footerLogout =
+    document.getElementById("footer-logout");
+
+
+function sair() {
+
+    localStorage.removeItem("logado");
+
+    window.location.href = "index.html";
+
+}
+
+
+if (logout) {
+
+    logout.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            sair();
+
+        }
+    );
+
+}
+
+
+if (footerLogout) {
+
+    footerLogout.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            sair();
+
+        }
+    );
 
 }
