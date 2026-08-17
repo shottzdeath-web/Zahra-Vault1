@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <title>Minha conta | Zahra Vault</title>
+    <title>Minha conta | Zvory Vault</title>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
 <header>
 
     <div class="logo">
-        <h1 class="chrome-text">Zahra Vault</h1>
+        <h1 class="chrome-text">Zvory Vault</h1>
     </div>
 
     <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
@@ -31,7 +31,9 @@
         <a href="suporte.html">Suporte</a>
     </nav>
 
-    <a href="index.html" class="login">Sair</a>
+    <a href="index.html" class="login" id="logout">
+        Sair
+    </a>
 
 </header>
 
@@ -45,7 +47,7 @@
             </p>
 
             <h2>
-                Bem-vindo à Zahra Vault.
+                Bem-vindo à Zvory Vault.
             </h2>
 
             <p>
@@ -61,7 +63,7 @@
             <div class="account-info">
 
                 <div class="account-avatar">
-                    <span>U</span>
+                    <span id="account-avatar">U</span>
                 </div>
 
                 <div>
@@ -70,11 +72,11 @@
                         USUÁRIO
                     </p>
 
-                    <h3>
+                    <h3 id="account-username">
                         Seu usuário
                     </h3>
 
-                    <p>
+                    <p id="account-email">
                         exemplo@gmail.com
                     </p>
 
@@ -127,7 +129,7 @@
 
                     <p>
                         Encontre produtos e serviços
-                        disponíveis na Zahra Vault.
+                        disponíveis na Zvory Vault.
                     </p>
 
                 </a>
@@ -176,7 +178,7 @@
             <div>
 
                 <p>
-                    ZAHRA VAULT
+                    ZVORY VAULT
                 </p>
 
                 <h2>
@@ -206,7 +208,7 @@
             <div class="footer-brand">
 
                 <h2>
-                    Zahra Vault
+                    Zvory Vault
                 </h2>
 
                 <p>
@@ -244,7 +246,7 @@
                     Conta
                 </h3>
 
-                <a href="#">
+                <a href="pedidos.html">
                     Meus pedidos
                 </a>
 
@@ -252,7 +254,7 @@
                     Configurações
                 </a>
 
-                <a href="index.html">
+                <a href="index.html" id="footer-logout">
                     Sair
                 </a>
 
@@ -285,7 +287,7 @@
         <div class="footer-bottom">
 
             <p>
-                © 2026 Zahra Vault
+                © 2026 Zvory Vault
             </p>
 
             <span>
@@ -298,6 +300,7 @@
 
 
     <script src="script.js"></script>
+    <script src="home.js"></script>
 
 </body>
 

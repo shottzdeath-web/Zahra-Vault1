@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <title>Produtos | Zvory Vault</title>
+    <title>Meus pedidos | Zvory Vault</title>
 </head>
 
 <body>
@@ -25,95 +25,63 @@
     </button>
 
     <nav id="main-nav">
-        <a href="index.html">Início</a>
+        <a href="home.html">Início</a>
         <a href="produtos.html">Produtos</a>
         <a href="categorias.html">Categorias</a>
         <a href="suporte.html">Suporte</a>
     </nav>
 
-    <a href="login.html" class="login">
-        Entrar
+    <a href="index.html" class="login" id="logout">
+        Sair
     </a>
 
 </header>
 
 
-<main class="products-page">
+<main class="orders-page">
 
     <div class="section-title">
 
-        <p>LOJA</p>
+        <p>MINHA CONTA</p>
 
         <h2 class="chrome-text">
-            Todos os produtos
+            Meus pedidos
         </h2>
 
         <span>
-            Encontre o que você procura na Zvory Vault.
+            Acompanhe suas compras e pedidos realizados.
         </span>
 
     </div>
 
 
-    <div class="products-toolbar">
+    <section class="orders-container" id="orders-container">
 
-        <div class="products-search">
-
-            <input
-                type="search"
-                id="product-search"
-                placeholder="Pesquisar produtos..."
-                aria-label="Pesquisar produtos"
-            >
-
-        </div>
+    </section>
 
 
-        <select id="category-filter">
+    <div class="orders-empty" id="orders-empty">
 
-            <option value="todos">
-                Todas as categorias
-            </option>
+        <span class="orders-empty-icon">
+            ◇
+        </span>
 
-            <option value="roblox">
-                Roblox
-            </option>
+        <h3>
+            Nenhum pedido encontrado
+        </h3>
 
-            <option value="minecraft">
-                Minecraft
-            </option>
+        <p>
+            Quando você realizar uma compra,
+            seus pedidos aparecerão aqui.
+        </p>
 
-            <option value="discord">
-                Discord
-            </option>
+        <a href="produtos.html">
+            Explorar produtos
+        </a>
 
-            <option value="gift-cards">
-                Gift Cards
-            </option>
-
-        </select>
-
-    </div>
-
-
-    <div
-        class="products-container"
-        id="products-container"
-    >
-    </div>
-
-
-    <div
-        id="products-message"
-        class="products-message"
-    >
-        Nenhum produto encontrado.
     </div>
 
 </main>
-
-
-<div id="message"></div>
 
 
 <footer class="footer">
@@ -140,8 +108,8 @@
                 Explorar
             </h3>
 
-            <a href="index.html">
-                Início
+            <a href="home.html">
+                Minha conta
             </a>
 
             <a href="produtos.html">
@@ -161,12 +129,16 @@
                 Conta
             </h3>
 
-            <a href="login.html">
-                Minha conta
+            <a href="pedidos.html">
+                Meus pedidos
             </a>
 
-            <a href="suporte.html">
-                Suporte
+            <a href="#">
+                Configurações
+            </a>
+
+            <a href="index.html" id="footer-logout">
+                Sair
             </a>
 
         </div>
@@ -211,7 +183,7 @@
 
 
 <script src="script.js"></script>
-<script src="produtos.js"></script>
+<script src="pedidos.js"></script>
 
 </body>
 

@@ -1,26 +1,32 @@
 const loginForm = document.getElementById("loginForm");
 
-loginForm.addEventListener("submit", function(event) {
-    event.preventDefault();
+if (loginForm) {
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    loginForm.addEventListener("submit", function(event) {
+        event.preventDefault();
 
-    const usuarioSalvo = JSON.parse(localStorage.getItem("usuario"));
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
 
-    if (!usuarioSalvo) {
-        alert("Nenhuma conta cadastrada.");
-        return;
-    }
+        const dadosSalvos = localStorage.getItem("usuario");
 
-    if (
-        email === usuarioSalvo.email &&
-        password === usuarioSalvo.password
-    ) {
-        localStorage.setItem("logado", "true");
+        if (!dadosSalvos) {
+            alert("Nenhuma conta cadastrada.");
+            return;
+        }
 
-        window.location.href = "home.html";
-    } else {
-        alert("E-mail ou senha incorretos.");
-    }
-});
+        const usuarioSalvo = JSON.parse(dadosSalvos);
+
+        if (
+            email === usuarioSalvo.email &&
+            password === usuarioSalvo.password
+        ) {
+            localStorage.setItem("logado", "true");
+
+            window.location.href = "home.html";
+        } else {
+            alert("E-mail ou senha incorretos.");
+        }
+    });
+
+}

@@ -1,24 +1,60 @@
-console.log("Zahra Vault carregada!");
-const sellerButton = document.querySelector(".seller-button");
-sellerButton.addEventListener("click", function() {
+console.log("Zvory Vault carregada!");
 
-    alert("Em breve você poderá vender na Zahra Vault!");
+/* =========================================================
+   BOTÃO DE VENDEDOR
+========================================================= */
 
-});
-const sellerButton = document.querySelector(".seller-button");
+const sellerButtons = document.querySelectorAll(".seller-button");
 const message = document.querySelector("#message");
 
-sellerButton.addEventListener("click", function() {
+sellerButtons.forEach(button => {
 
-    message.textContent = "Em breve você poderá vender na Zahra Vault!";
+    button.addEventListener("click", function(event) {
 
-    message.style.opacity = "1";
-    message.style.transform = "translateY(0)";
+        /*
+         * Se o botão estiver dentro de um link,
+         * não bloqueamos a navegação.
+         */
+
+        if (message) {
+
+            message.textContent =
+                "Em breve você poderá vender na Zvory Vault!";
+
+            message.style.opacity = "1";
+            message.style.transform = "translateY(0)";
+
+            setTimeout(() => {
+
+                message.style.opacity = "0";
+                message.style.transform = "translateY(20px)";
+
+            }, 3000);
+
+        }
+
+    });
 
 });
-const menuToggle = document.getElementById("menu-toggle");
-const mainNav = document.getElementById("main-nav");
 
-menuToggle.addEventListener("click", () => {
-    mainNav.classList.toggle("active");
-});
+
+/* =========================================================
+   MENU MOBILE
+========================================================= */
+
+const menuToggle =
+    document.getElementById("menu-toggle");
+
+const mainNav =
+    document.getElementById("main-nav");
+
+
+if (menuToggle && mainNav) {
+
+    menuToggle.addEventListener("click", () => {
+
+        mainNav.classList.toggle("active");
+
+    });
+
+}

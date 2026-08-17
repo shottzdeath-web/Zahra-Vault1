@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>Carrinho | Zvory Vault</title>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        <h1 class="chrome-text">Zvory Vault</h1>
+    </div>
+
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+        <span>—</span>
+        <span>—</span>
+        <span>—</span>
+    </button>
+
+    <nav id="main-nav">
+        <a href="home.html">Início</a>
+        <a href="produtos.html">Produtos</a>
+        <a href="categorias.html">Categorias</a>
+        <a href="suporte.html">Suporte</a>
+    </nav>
+
+    <a href="index.html" class="login" id="logout">
+        Sair
+    </a>
+
+</header>
+
+
+<main class="cart-page">
+
+    <div class="section-title">
+
+        <p>MINHA COMPRA</p>
+
+        <h2 class="chrome-text">
+            Seu carrinho
+        </h2>
+
+        <span>
+            Revise os produtos antes de continuar.
+        </span>
+
+    </div>
+
+
+    <div class="cart-layout">
+
+        <section class="cart-items" id="cart-items">
+        </section>
+
+
+        <aside class="cart-summary">
+
+            <p class="cart-summary-label">
+                RESUMO
+            </p>
+
+            <h3>
+                Total da compra
+            </h3>
+
+            <div class="cart-total">
+
+                <span>
+                    Total
+                </span>
+
+                <strong id="cart-total">
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+            <button
+                id="checkout-button"
+                class="checkout-button"
+            >
+                Continuar para pagamento
+            </button>
+
+            <a
+                href="produtos.html"
+                class="continue-shopping"
+            >
+                Continuar comprando
+            </a>
+
+        </aside>
+
+    </div>
+
+
+    <div
+        class="cart-empty"
+        id="cart-empty"
+    >
+
+        <span>
+            ◇
+        </span>
+
+        <h3>
+            Seu carrinho está vazio
+        </h3>
+
+        <p>
+            Explore os produtos da Zvory Vault
+            e adicione algo ao seu carrinho.
+        </p>
+
+        <a href="produtos.html">
+            Explorar produtos
+        </a>
+
+    </div>
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+
+            <h2 class="chrome-text">
+                Zvory Vault
+            </h2>
+
+            <p>
+                Um espaço onde produtos, criatividade
+                e oportunidades se encontram.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Explorar</h3>
+
+            <a href="home.html">Minha conta</a>
+            <a href="produtos.html">Produtos</a>
+            <a href="categorias.html">Categorias</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Conta</h3>
+
+            <a href="pedidos.html">Meus pedidos</a>
+            <a href="carrinho.html">Carrinho</a>
+            <a href="index.html" id="footer-logout">Sair</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>Ajuda</h3>
+
+            <a href="suporte.html">Central de suporte</a>
+            <a href="#">Termos de uso</a>
+            <a href="#">Privacidade</a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Zvory Vault
+        </p>
+
+        <span>
+            Feito para quem busca mais.
+        </span>
+
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+<script src="carrinho.js"></script>
+
+</body>
+
+</html>
