@@ -1,54 +1,91 @@
-const logado = localStorage.getItem("logado");
-const dadosUsuario = localStorage.getItem("usuario");
+/* =========================================================
+   PROTEÇÃO DA CONTA
+========================================================= */
 
-if (logado !== "true" || !dadosUsuario) {
+const logado =
+    localStorage.getItem("logado");
 
-    window.location.href = "login.html";
+
+if (logado !== "true") {
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* =========================================================
+   CARREGAR DADOS DO USUÁRIO
+========================================================= */
+
+const dadosSalvos =
+    localStorage.getItem("usuario");
+
+
+if (!dadosSalvos) {
+
+    window.location.href =
+        "login.html";
 
 } else {
 
-    const usuario = JSON.parse(dadosUsuario);
+    const usuario =
+        JSON.parse(dadosSalvos);
 
-    const username = document.getElementById("account-username");
-    const email = document.getElementById("account-email");
-    const avatar = document.getElementById("account-avatar");
+
+    const username =
+        document.getElementById(
+            "account-username"
+        );
+
+
+    const email =
+        document.getElementById(
+            "account-email"
+        );
+
+
+    const avatar =
+        document.getElementById(
+            "account-avatar"
+        );
+
+
+    /* =====================================================
+       USUÁRIO
+    ===================================================== */
 
     if (username) {
-        username.textContent = usuario.username;
+
+        username.textContent =
+            usuario.username;
+
     }
+
+
+    /* =====================================================
+       E-MAIL
+    ===================================================== */
 
     if (email) {
-        email.textContent = usuario.email;
+
+        email.textContent =
+            usuario.email;
+
     }
+
+
+    /* =====================================================
+       AVATAR
+    ===================================================== */
 
     if (avatar) {
-        avatar.textContent = usuario.username.charAt(0).toUpperCase();
+
+        avatar.textContent =
+            usuario.username
+                .charAt(0)
+                .toUpperCase();
+
     }
-}
 
-
-const logout = document.getElementById("logout");
-const footerLogout = document.getElementById("footer-logout");
-
-function sair() {
-
-    localStorage.removeItem("logado");
-
-    window.location.href = "index.html";
-}
-
-
-if (logout) {
-    logout.addEventListener("click", function(event) {
-        event.preventDefault();
-        sair();
-    });
-}
-
-
-if (footerLogout) {
-    footerLogout.addEventListener("click", function(event) {
-        event.preventDefault();
-        sair();
-    });
 }
