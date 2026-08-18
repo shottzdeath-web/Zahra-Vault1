@@ -1,44 +1,299 @@
-alert("perfil.js carregou");
 /* =========================================================
-   PROTEÇÃO DO PERFIL
+   PERFIL ZVORY VAULT
+========================================================= */
+
+console.log("perfil.js carregado");
+
+
+/* =========================================================
+   PROTEÇÃO
 ========================================================= */
 
 const logado = localStorage.getItem("logado");
 
 if (logado !== "true") {
-
     window.location.href = "login.html";
-
 }
 
 
 /* =========================================================
-   USUÁRIO LOCAL
+   ELEMENTOS
 ========================================================= */
+
+const avatar =
+    document.getElementById("profile-avatar");
+
+const avatarLetter =
+    document.getElementById("avatar-letter");
+
+const avatarInput =
+    document.getElementById("avatar-input");
+
+const changeAvatar =
+    document.getElementById("change-avatar");
+
+const editProfile =
+    document.getElementById("edit-profile");
+
+const editor =
+    document.getElementById("profile-editor");
+
+const closeEditor =
+    document.getElementById("close-editor");
+
+const usernameInput =
+    document.getElementById("profile-username");
+
+const displayInput =
+    document.getElementById("profile-display");
+
+const bioInput =
+    document.getElementById("profile-bio");
+
+const emailInput =
+    document.getElementById("profile-email");
+
+const saveButton =
+    document.getElementById("save-profile");
+
+const message =
+    document.getElementById("profile-message");
+
+
+const displayName =
+    document.getElementById("profile-display-name");
+
+const usernameDisplay =
+    document.getElementById("profile-username-display");
+
+const bioDisplay =
+    document.getElementById("profile-bio-display");
+
+const bioDetails =
+    document.getElementById("profile-bio-details");
+
+const infoUsername =
+    document.getElementById("info-username");
+
+const infoEmail =
+    document.getElementById("info-email");
+
+
+/* =========================================================
+   USUÁRIO
+========================================================= */
+
+let usuario = null;
 
 const dadosSalvos =
     localStorage.getItem("usuario");
 
 
-if (!dadosSalvos) {
+if (dadosSalvos) {
+
+    try {
+
+        usuario =
+            JSON.parse(dadosSalvos);
+
+    } catch (error) {
+
+        console.error(
+            "Erro ao ler usuário:",
+            error
+        );
+
+    }
+
+}
+
+
+if (!usuario) {
 
     window.location.href = "login.html";
 
-} else {
-
-    const usuarioLocal =
-        JSON.parse(dadosSalvos);
+}
 
 
-    if (!usuarioLocal.id) {
+/* =========================================================
+   RENDERIZAR PERFIL
+========================================================= */
 
-        alert("Não foi possível identificar sua conta.");
+function renderizarPerfil() {
 
-        window.location.href = "login.html";
+    if (!usuario) {
+        return;
+    }
+
+
+    const username =
+        usuario.username ||
+        "usuario";
+
+
+    const nome =
+        usuario.displayName ||
+        usuario.display_name ||
+        username ||
+        "Usuário";
+
+
+    const bio =
+        usuario.bio ||
+        "Este usuário ainda não adicionou uma bio.";
+
+
+    if (displayName) {
+
+        displayName.textContent =
+            nome;
+
+    }
+
+
+    if (usernameDisplay) {
+
+        usernameDisplay.textContent =
+            "@" + username;
+
+    }
+
+
+    if (bioDisplay) {
+
+        bioDisplay.textContent =
+            bio;
+
+    }
+
+
+    if (bioDetails) {
+
+        bioDetails.textContent =
+            bio;
+
+    }
+
+
+    if (infoUsername) {
+
+        infoUsername.textContent =
+            username;
+
+    }
+
+
+    if (infoEmail) {
+
+        infoEmail.textContent =
+            usuario.email || "—";
+
+    }
+
+
+    if (usernameInput) {
+
+        usernameInput.value =
+            username;
+
+    }
+
+
+    if (displayInput) {
+
+        displayInput.value =
+            usuario.displayName ||
+            usuario.display_name ||
+            username;
+
+    }
+
+
+    if (bioInput) {
+
+        bioInput.value =
+            usuario.bio ||
+            "";
+
+    }
+
+
+    if (emailInput) {
+
+        emailInput.value =
+            usuario.email ||
+            "";
+
+    }
+
+
+    renderizarAvatar();
+
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+function renderizarAvatar() {
+
+    if (!avatar) {
+        return;
+    }
+
+
+    if (usuario.avatar) {
+
+        avatar.innerHTML = "";
+
+
+        const imagem =
+            document.createElement("img");
+
+
+        imagem.src =
+            usuario.avatar;
+
+
+        imagem.alt =
+            "Avatar";
+
+
+        imagem.style.width =
+            "100%";
+
+
+        imagem.style.height =
+            "100%";
+
+
+        imagem.style.objectFit =
+            "cover";
+
+
+        imagem.style.borderRadius =
+            "inherit";
+
+
+        avatar.appendChild(
+            imagem
+        );
+
 
     } else {
 
-        carregarPerfil(usuarioLocal.id);
+        avatar.innerHTML =
+            `<span id="avatar-letter">${
+                (
+                    usuario.displayName ||
+                    usuario.display_name ||
+                    usuario.username ||
+                    "U"
+                )
+                .charAt(0)
+                .toUpperCase()
+            }</span>`;
 
     }
 
@@ -46,703 +301,385 @@ if (!dadosSalvos) {
 
 
 /* =========================================================
-   CARREGAR PERFIL DO BANCO
+   EDITAR PERFIL
 ========================================================= */
 
-async function carregarPerfil(id) {
+if (editProfile) {
 
-    try {
+    editProfile.addEventListener(
+        "click",
+        function () {
 
-        const resposta =
-            await fetch(
-                `http://localhost:3000/api/usuario/${id}`
+            console.log(
+                "Botão editar clicado"
             );
 
 
-        const dados =
-            await resposta.json();
+            if (editor) {
 
+                editor.classList.add(
+                    "active"
+                );
 
-        if (!resposta.ok) {
-
-            alert(
-                dados.error ||
-                "Não foi possível carregar o perfil."
-            );
-
-            return;
+            }
 
         }
+    );
+
+}
 
 
-        const usuarioBanco =
-            dados.user;
+/* =========================================================
+   FECHAR EDITOR
+========================================================= */
 
+if (closeEditor) {
 
-        /* =================================================
-           PADRONIZAR DADOS
-        ================================================= */
+    closeEditor.addEventListener(
+        "click",
+        function () {
 
-        const usuario = {
-
-            id:
-                usuarioBanco.id,
-
-            username:
-                usuarioBanco.username || "",
-
-            email:
-                usuarioBanco.email || "",
-
-            displayName:
-                usuarioBanco.display_name ||
-                usuarioBanco.username ||
-                "",
-
-            bio:
-                usuarioBanco.bio || "",
-
-            avatar:
-                usuarioBanco.avatar || ""
-
-        };
-
-
-        /* =================================================
-           ATUALIZAR CACHE LOCAL
-        ================================================= */
-
-        localStorage.setItem(
-            "usuario",
-            JSON.stringify(usuario)
-        );
-
-
-        /* =================================================
-           ELEMENTOS
-        ================================================= */
-
-        const avatar =
-            document.getElementById(
-                "profile-avatar"
-            );
-
-        const avatarLetter =
-            document.getElementById(
-                "avatar-letter"
-            );
-
-        const avatarInput =
-            document.getElementById(
-                "avatar-input"
-            );
-
-        const changeAvatar =
-            document.getElementById(
-                "change-avatar"
-            );
-
-        const editProfile =
-            document.getElementById(
-                "edit-profile"
-            );
-
-        const editor =
-            document.getElementById(
-                "profile-editor"
-            );
-
-        const closeEditor =
-            document.getElementById(
-                "close-editor"
-            );
-
-        const usernameInput =
-            document.getElementById(
-                "profile-username"
-            );
-
-        const displayInput =
-            document.getElementById(
-                "profile-display"
-            );
-
-        const bioInput =
-            document.getElementById(
-                "profile-bio"
-            );
-
-        const emailInput =
-            document.getElementById(
-                "profile-email"
-            );
-
-        const saveButton =
-            document.getElementById(
-                "save-profile"
-            );
-
-        const message =
-            document.getElementById(
-                "profile-message"
+            console.log(
+                "Botão fechar clicado"
             );
 
 
-        const displayName =
-            document.getElementById(
-                "profile-display-name"
-            );
+            if (editor) {
 
-        const usernameDisplay =
-            document.getElementById(
-                "profile-username-display"
-            );
-
-        const bioDisplay =
-            document.getElementById(
-                "profile-bio-display"
-            );
-
-        const bioDetails =
-            document.getElementById(
-                "profile-bio-details"
-            );
-
-        const infoUsername =
-            document.getElementById(
-                "info-username"
-            );
-
-        const infoEmail =
-            document.getElementById(
-                "info-email"
-            );
-
-
-        /* =================================================
-           RENDERIZAR PERFIL
-        ================================================= */
-
-        function renderizarPerfil() {
-
-            const nome =
-                usuario.displayName ||
-                usuario.username ||
-                "Usuário";
-
-
-            const username =
-                usuario.username ||
-                "usuario";
-
-
-            const bio =
-                usuario.bio ||
-                "Este usuário ainda não adicionou uma bio.";
-
-
-            if (displayName) {
-
-                displayName.textContent =
-                    nome;
+                editor.classList.remove(
+                    "active"
+                );
 
             }
-
-
-            if (usernameDisplay) {
-
-                usernameDisplay.textContent =
-                    "@" + username;
-
-            }
-
-
-            if (bioDisplay) {
-
-                bioDisplay.textContent =
-                    bio;
-
-            }
-
-
-            if (bioDetails) {
-
-                bioDetails.textContent =
-                    bio;
-
-            }
-
-
-            if (infoUsername) {
-
-                infoUsername.textContent =
-                    username;
-
-            }
-
-
-            if (infoEmail) {
-
-                infoEmail.textContent =
-                    usuario.email || "—";
-
-            }
-
-
-            /* =================================================
-               FORMULÁRIO
-            ================================================= */
-
-            if (usernameInput) {
-
-                usernameInput.value =
-                    usuario.username || "";
-
-            }
-
-
-            if (displayInput) {
-
-                displayInput.value =
-                    usuario.displayName ||
-                    usuario.username ||
-                    "";
-
-            }
-
-
-            if (bioInput) {
-
-                bioInput.value =
-                    usuario.bio || "";
-
-            }
-
-
-            if (emailInput) {
-
-                emailInput.value =
-                    usuario.email || "";
-
-            }
-
-
-            carregarAvatar();
 
         }
+    );
+
+}
 
 
-        /* =================================================
-           AVATAR
-        ================================================= */
+/* =========================================================
+   ALTERAR AVATAR
+========================================================= */
 
-        function carregarAvatar() {
+if (changeAvatar) {
 
-            if (!avatar) {
+    changeAvatar.addEventListener(
+        "click",
+        function () {
+
+            console.log(
+                "Botão avatar clicado"
+            );
+
+
+            if (avatarInput) {
+
+                avatarInput.click();
+
+            }
+
+        }
+    );
+
+}
+
+
+if (avatarInput) {
+
+    avatarInput.addEventListener(
+        "change",
+        function () {
+
+            const arquivo =
+                avatarInput.files[0];
+
+
+            if (!arquivo) {
                 return;
             }
 
 
-            avatar.innerHTML = "";
+            if (
+                !arquivo.type.startsWith(
+                    "image/"
+                )
+            ) {
 
-
-            if (usuario.avatar) {
-
-                const imagem =
-                    document.createElement("img");
-
-
-                imagem.src =
-                    usuario.avatar;
-
-
-                imagem.alt =
-                    "Avatar do usuário";
-
-
-                avatar.appendChild(
-                    imagem
+                mostrarMensagem(
+                    "Escolha uma imagem válida.",
+                    true
                 );
 
-
-                if (avatarLetter) {
-
-                    avatarLetter.textContent =
-                        "";
-
-                }
-
-            } else {
-
-                if (avatarLetter) {
-
-                    avatarLetter.textContent =
-                        (
-                            usuario.displayName ||
-                            usuario.username ||
-                            "U"
-                        )
-                        .charAt(0)
-                        .toUpperCase();
-
-                }
+                return;
 
             }
 
-        }
 
+            const leitor =
+                new FileReader();
 
-        renderizarPerfil();
 
+            leitor.onload =
+                function (event) {
 
-        /* =================================================
-           ALTERAR AVATAR
-        ================================================= */
+                    usuario.avatar =
+                        event.target.result;
 
-        if (
-            changeAvatar &&
-            avatarInput
-        ) {
 
-            changeAvatar.addEventListener(
-                "click",
-                () => {
+                    salvarLocal();
 
-                    avatarInput.click();
 
-                }
-            );
+                    renderizarAvatar();
 
-
-            avatarInput.addEventListener(
-                "change",
-                () => {
-
-                    const file =
-                        avatarInput.files[0];
-
-
-                    if (!file) {
-                        return;
-                    }
-
-
-                    if (
-                        !file.type.startsWith(
-                            "image/"
-                        )
-                    ) {
-
-                        mostrarMensagem(
-                            "Escolha uma imagem válida.",
-                            true
-                        );
-
-                        return;
-
-                    }
-
-
-                    const reader =
-                        new FileReader();
-
-
-                    reader.onload =
-                        async event => {
-
-                            usuario.avatar =
-                                event.target.result;
-
-
-                            renderizarPerfil();
-
-
-                            await salvarPerfil(
-                                true
-                            );
-
-                        };
-
-
-                    reader.readAsDataURL(
-                        file
-                    );
-
-                }
-            );
-
-        }
-
-
-        /* =================================================
-           ABRIR EDITOR
-        ================================================= */
-
-        if (
-            editProfile &&
-            editor
-        ) {
-
-            editProfile.addEventListener(
-                "click",
-                () => {
-
-                    editor.classList.add(
-                        "active"
-                    );
-
-
-                    editor.scrollIntoView({
-                        behavior: "smooth",
-                        block: "center"
-                    });
-
-                }
-            );
-
-        }
-
-
-        /* =================================================
-           FECHAR EDITOR
-        ================================================= */
-
-        if (
-            closeEditor &&
-            editor
-        ) {
-
-            closeEditor.addEventListener(
-                "click",
-                () => {
-
-                    editor.classList.remove(
-                        "active"
-                    );
-
-                }
-            );
-
-        }
-
-
-        /* =================================================
-           SALVAR PERFIL
-        ================================================= */
-
-        if (saveButton) {
-
-            saveButton.addEventListener(
-                "click",
-                async () => {
-
-                    const novoUsername =
-                        usernameInput.value.trim();
-
-
-                    const novoDisplay =
-                        displayInput.value.trim();
-
-
-                    const novaBio =
-                        bioInput.value.trim();
-
-
-                    if (!novoUsername) {
-
-                        mostrarMensagem(
-                            "Digite um nome de usuário.",
-                            true
-                        );
-
-                        return;
-
-                    }
-
-
-                    usuario.username =
-                        novoUsername;
-
-
-                    usuario.displayName =
-                        novoDisplay ||
-                        novoUsername;
-
-
-                    usuario.bio =
-                        novaBio;
-
-
-                    await salvarPerfil();
-
-                }
-            );
-
-        }
-
-
-        /* =================================================
-           SALVAR NO BANCO
-        ================================================= */
-
-        async function salvarPerfil(
-            avatarAutomatico = false
-        ) {
-
-            try {
-
-                const resposta =
-                    await fetch(
-                        `http://localhost:3000/api/usuario/${usuario.id}`,
-                        {
-
-                            method: "PUT",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body:
-                                JSON.stringify({
-
-                                    username:
-                                        usuario.username,
-
-                                    email:
-                                        usuario.email,
-
-                                    displayName:
-                                        usuario.displayName,
-
-                                    bio:
-                                        usuario.bio,
-
-                                    avatar:
-                                        usuario.avatar
-
-                                })
-
-                        }
-                    );
-
-
-                const dados =
-                    await resposta.json();
-
-
-                if (!resposta.ok) {
 
                     mostrarMensagem(
-                        dados.error ||
-                        "Não foi possível salvar o perfil.",
-                        true
+                        "Avatar atualizado."
                     );
-
-                    return;
-
-                }
-
-
-                const usuarioAtualizado = {
-
-                    id:
-                        dados.user.id,
-
-                    username:
-                        dados.user.username,
-
-                    email:
-                        dados.user.email,
-
-                    displayName:
-                        dados.user.display_name || "",
-
-                    bio:
-                        dados.user.bio || "",
-
-                    avatar:
-                        dados.user.avatar || ""
 
                 };
 
 
-                Object.assign(
-                    usuario,
-                    usuarioAtualizado
-                );
-
-
-                localStorage.setItem(
-                    "usuario",
-                    JSON.stringify(usuario)
-                );
-
-
-                renderizarPerfil();
-
-
-                mostrarMensagem(
-                    avatarAutomatico
-                        ? "Avatar atualizado."
-                        : "Perfil atualizado com sucesso."
-                );
-
-
-            } catch (error) {
-
-                console.error(
-                    "Erro ao salvar perfil:",
-                    error
-                );
-
-
-                mostrarMensagem(
-                    "Não foi possível conectar ao servidor.",
-                    true
-                );
-
-            }
-
-        }
-
-
-        /* =================================================
-           MENSAGEM
-        ================================================= */
-
-        function mostrarMensagem(
-            texto,
-            erro = false
-        ) {
-
-            if (!message) {
-                return;
-            }
-
-
-            message.textContent =
-                texto;
-
-
-            message.style.color =
-                erro
-                    ? "#aaa"
-                    : "#ddd";
-
-
-            setTimeout(
-                () => {
-
-                    message.textContent =
-                        "";
-
-                },
-                3000
+            leitor.readAsDataURL(
+                arquivo
             );
 
         }
-
-    }
+    );
 
 }
+
+
+/* =========================================================
+   SALVAR PERFIL
+========================================================= */
+
+if (saveButton) {
+
+    saveButton.addEventListener(
+        "click",
+        async function () {
+
+            console.log(
+                "Salvar perfil clicado"
+            );
+
+
+            const novoUsername =
+                usernameInput
+                    ? usernameInput.value.trim()
+                    : "";
+
+
+            const novoDisplay =
+                displayInput
+                    ? displayInput.value.trim()
+                    : "";
+
+
+            const novaBio =
+                bioInput
+                    ? bioInput.value.trim()
+                    : "";
+
+
+            if (!novoUsername) {
+
+                mostrarMensagem(
+                    "Digite um nome de usuário.",
+                    true
+                );
+
+                return;
+
+            }
+
+
+            usuario.username =
+                novoUsername;
+
+
+            usuario.displayName =
+                novoDisplay ||
+                novoUsername;
+
+
+            usuario.bio =
+                novaBio;
+
+
+            /*
+             * Primeiro salva localmente.
+             * Isso mantém o perfil funcionando
+             * mesmo durante o desenvolvimento.
+             */
+
+            salvarLocal();
+
+
+            renderizarPerfil();
+
+
+            /*
+             * Depois tenta sincronizar
+             * com o backend.
+             */
+
+            if (usuario.id) {
+
+                try {
+
+                    const resposta =
+                        await fetch(
+                            `http://localhost:3000/api/usuario/${usuario.id}`,
+                            {
+
+                                method: "PUT",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+
+                                        username:
+                                            usuario.username,
+
+                                        email:
+                                            usuario.email,
+
+                                        displayName:
+                                            usuario.displayName,
+
+                                        bio:
+                                            usuario.bio,
+
+                                        avatar:
+                                            usuario.avatar ||
+                                            ""
+
+                                    })
+
+                            }
+                        );
+
+
+                    const dados =
+                        await resposta.json();
+
+
+                    if (resposta.ok) {
+
+                        const usuarioBanco =
+                            dados.user;
+
+
+                        usuario =
+                            {
+
+                                id:
+                                    usuarioBanco.id,
+
+                                username:
+                                    usuarioBanco.username,
+
+                                email:
+                                    usuarioBanco.email,
+
+                                displayName:
+                                    usuarioBanco.display_name,
+
+                                bio:
+                                    usuarioBanco.bio,
+
+                                avatar:
+                                    usuarioBanco.avatar
+
+                            };
+
+
+                        salvarLocal();
+
+                        renderizarPerfil();
+
+                    }
+
+                } catch (error) {
+
+                    console.log(
+                        "Backend não disponível. Perfil salvo localmente."
+                    );
+
+                }
+
+            }
+
+
+            mostrarMensagem(
+                "Perfil atualizado com sucesso."
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   LOCALSTORAGE
+========================================================= */
+
+function salvarLocal() {
+
+    localStorage.setItem(
+        "usuario",
+        JSON.stringify(usuario)
+    );
+
+}
+
+
+/* =========================================================
+   MENSAGEM
+========================================================= */
+
+function mostrarMensagem(
+    texto,
+    erro = false
+) {
+
+    if (!message) {
+        return;
+    }
+
+
+    message.textContent =
+        texto;
+
+
+    message.style.color =
+        erro
+            ? "#aaa"
+            : "#ddd";
+
+
+    setTimeout(
+        function () {
+
+            message.textContent =
+                "";
+
+        },
+        3000
+    );
+
+}
+
+
+/* =========================================================
+   INICIAR
+========================================================= */
+
+renderizarPerfil();
