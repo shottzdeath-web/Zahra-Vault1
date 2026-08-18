@@ -18,54 +18,83 @@
         <h1 class="chrome-text">Zvory Vault</h1>
     </div>
 
-    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+    <button
+        class="menu-toggle"
+        id="menu-toggle"
+        aria-label="Abrir menu"
+    >
         <span>—</span>
         <span>—</span>
         <span>—</span>
     </button>
 
-<nav id="main-nav">
+    <nav id="main-nav">
 
-    <a href="home.html">
-        Início
-    </a>
+        <a href="home.html">
+            Início
+        </a>
 
-    <a href="produtos.html">
-        Produtos
-    </a>
+        <a href="produtos.html">
+            Produtos
+        </a>
 
-    <a href="categorias.html">
-        Categorias
-    </a>
+        <a href="categorias.html">
+            Categorias
+        </a>
 
-    <a href="suporte.html">
-        Suporte
-    </a>
+        <a href="suporte.html">
+            Suporte
+        </a>
 
-    <a href="carrinho.html">
-        Carrinho
-    </a>
+        <a href="carrinho.html">
+            Carrinho
+        </a>
 
-    <a href="perfil.html">
-        Perfil
-    </a>
+        <a href="perfil.html">
+            Perfil
+        </a>
 
-</nav>
+    </nav>
 
-<button class="login" id="logout" type="button">
-    Sair
-</button>
 
-    <a href="perfil.html">
-    Configurações
-</a>
+    <!-- CONFIGURAÇÕES -->
 
-<a href="#" id="footer-logout">
-    Sair
-</a>
+    <div class="account-menu">
+
+        <button
+            type="button"
+            class="settings-button"
+            id="settings-button"
+            aria-label="Configurações"
+            aria-expanded="false"
+        >
+            ⚙
+        </button>
+
+
+        <div
+            class="settings-dropdown"
+            id="settings-dropdown"
+        >
+
+            <a href="perfil.html">
+                <span>⚙</span>
+                Configurações
+            </a>
+
+            <button
+                type="button"
+                id="logout"
+            >
+                <span>↪</span>
+                Sair
+            </button>
+
+        </div>
+
+    </div>
 
 </header>
-
 
     <main class="account-home">
 

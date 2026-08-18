@@ -3016,3 +3016,252 @@ p a:hover {
     }
 
 }
+/* =========================================================
+   MENU DE CONFIGURAÇÕES
+========================================================= */
+
+.account-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+
+.settings-button {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.04);
+    color: inherit;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.25s ease;
+}
+
+
+.settings-button:hover {
+    background: rgba(255, 255, 255, 0.10);
+
+    border-color:
+        rgba(255, 255, 255, 0.30);
+
+    transform: rotate(25deg);
+}
+
+
+/* =========================================================
+   DROPDOWN
+========================================================= */
+
+.settings-dropdown {
+    position: absolute;
+
+    top: calc(100% + 12px);
+    right: 0;
+
+    width: 210px;
+
+    padding: 8px;
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 14px;
+
+    background:
+        rgba(20, 20, 20, 0.96);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.45);
+
+    backdrop-filter: blur(18px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+        translateY(-8px)
+        scale(0.97);
+
+    transform-origin: top right;
+
+    transition:
+        opacity 0.18s ease,
+        visibility 0.18s ease,
+        transform 0.18s ease;
+
+    z-index: 1000;
+}
+
+
+.settings-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* =========================================================
+   ITENS
+========================================================= */
+
+.settings-dropdown a,
+.settings-dropdown button {
+
+    width: 100%;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 13px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: transparent;
+    color: inherit;
+
+    text-decoration: none;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+.settings-dropdown a:hover,
+.settings-dropdown button:hover {
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    transform: translateX(2px);
+}
+
+
+.settings-dropdown span {
+    width: 18px;
+
+    text-align: center;
+
+    opacity: 0.7;
+}
+
+
+.settings-dropdown button {
+    color: #d8d8d8;
+}
+
+
+/* =========================================================
+   DIVISÃO ANTES DO SAIR
+========================================================= */
+
+.settings-dropdown button {
+    margin-top: 5px;
+
+    border-top:
+        1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 0 0 9px 9px;
+}
+.account-menu {
+    position: relative;
+}
+
+.settings-button {
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.05);
+    color: inherit;
+
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.settings-dropdown {
+    position: absolute;
+
+    top: 50px;
+    right: 0;
+
+    width: 210px;
+    padding: 8px;
+
+    background: rgba(20,20,20,0.98);
+
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+
+    box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(-8px);
+
+    transition: 0.2s ease;
+
+    z-index: 9999;
+}
+
+.settings-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.settings-dropdown a,
+.settings-dropdown button {
+    display: flex;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+    color: inherit;
+
+    text-decoration: none;
+
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+
+    gap: 10px;
+}
+
+.settings-dropdown a:hover,
+.settings-dropdown button:hover {
+    background: rgba(255,255,255,0.08);
+}

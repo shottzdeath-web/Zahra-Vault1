@@ -2,15 +2,10 @@
    PROTEÇÃO DA CONTA
 ========================================================= */
 
-const logado =
-    localStorage.getItem("logado");
-
+const logado = localStorage.getItem("logado");
 
 if (logado !== "true") {
-
-    window.location.href =
-        "login.html";
-
+    window.location.href = "login.html";
 }
 
 
@@ -18,74 +13,118 @@ if (logado !== "true") {
    CARREGAR DADOS DO USUÁRIO
 ========================================================= */
 
-const dadosSalvos =
-    localStorage.getItem("usuario");
-
+const dadosSalvos = localStorage.getItem("usuario");
 
 if (!dadosSalvos) {
 
-    window.location.href =
-        "login.html";
+    window.location.href = "login.html";
 
 } else {
 
-    const usuario =
-        JSON.parse(dadosSalvos);
-
+    const usuario = JSON.parse(dadosSalvos);
 
     const username =
-        document.getElementById(
-            "account-username"
-        );
-
+        document.getElementById("account-username");
 
     const email =
-        document.getElementById(
-            "account-email"
-        );
-
+        document.getElementById("account-email");
 
     const avatar =
-        document.getElementById(
-            "account-avatar"
-        );
+        document.getElementById("account-avatar");
 
-
-    /* =====================================================
-       USUÁRIO
-    ===================================================== */
 
     if (username) {
 
         username.textContent =
-            usuario.username;
+            usuario.displayName ||
+            usuario.username ||
+            "Usuário";
 
     }
 
-
-    /* =====================================================
-       E-MAIL
-    ===================================================== */
 
     if (email) {
 
         email.textContent =
-            usuario.email;
+            usuario.email || "—";
 
     }
 
-
-    /* =====================================================
-       AVATAR
-    ===================================================== */
 
     if (avatar) {
 
-        avatar.textContent =
-            usuario.username
+        if (usuario.avatar) {
+
+            avatar.textContent = "";
+
+            avatar.style.backgroundImage =
+                `url("${usuario.avatar}")`;
+
+            avatar.style.backgroundSize = "cover";
+            avatar.style.backgroundPosition = "center";
+            avatar.style.backgroundRepeat = "no-repeat";
+
+        } else {
+
+            avatar.textContent =
+                (
+                    usuario.displayName ||
+                    usuario.username ||
+                    "U"
+                )
                 .charAt(0)
                 .toUpperCase();
 
+        }
+
     }
+
+}
+
+
+/* =========================================================
+   MENU DE CONFIGURAÇÕES
+========================================================= */
+
+const settingsButton =
+    document.getElementById("settings-button");
+
+const settingsDropdown =
+    document.getElementById("settings-dropdown");
+
+
+if (settingsButton && settingsDropdown) {
+
+    settingsButton.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            settingsDropdown.classList.toggle("active");
+
+        }
+    );
+
+
+    settingsDropdown.addEventListener(
+        "click",
+        function (event) {
+
+            event.stopPropagation();
+
+        }
+    );
+
+
+    document.addEventListener(
+        "click",
+        function () {
+
+            settingsDropdown.classList.remove("active");
+
+        }
+    );
 
 }

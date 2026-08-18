@@ -89,3 +89,21 @@ if (footerLogout) {
     );
 
 }
+const settingsLogout =
+    document.getElementById("settings-logout");
+
+
+if (settingsLogout) {
+
+    settingsLogout.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            sair();
+
+        }
+    );
+
+}
