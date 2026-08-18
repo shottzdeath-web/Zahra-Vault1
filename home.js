@@ -9,79 +9,51 @@ if (logado !== "true") {
 }
 
 
-/* =========================================================
-   CARREGAR DADOS DO USUÁRIO
-========================================================= */
+/* =====================================================
+   AVATAR
+===================================================== */
 
-const dadosSalvos = localStorage.getItem("usuario");
+const avatarContainer =
+    document.querySelector(".account-avatar");
 
-if (!dadosSalvos) {
-
-    window.location.href = "login.html";
-
-} else {
-
-    const usuario = JSON.parse(dadosSalvos);
-
-    const username =
-        document.getElementById("account-username");
-
-    const email =
-        document.getElementById("account-email");
-
-    const avatar =
-        document.getElementById("account-avatar");
+const avatar =
+    document.getElementById("account-avatar");
 
 
-    if (username) {
+if (avatarContainer && avatar) {
 
-        username.textContent =
-            usuario.displayName ||
-            usuario.username ||
-            "Usuário";
+    if (usuario.avatar) {
 
-    }
+        avatar.textContent = "";
 
+        avatarContainer.style.backgroundImage =
+            `url("${usuario.avatar}")`;
 
-    if (email) {
+        avatarContainer.style.backgroundSize =
+            "cover";
 
-        email.textContent =
-            usuario.email || "—";
+        avatarContainer.style.backgroundPosition =
+            "center";
 
-    }
+        avatarContainer.style.backgroundRepeat =
+            "no-repeat";
 
+    } else {
 
-    if (avatar) {
+        avatarContainer.style.backgroundImage = "none";
 
-        if (usuario.avatar) {
-
-            avatar.textContent = "";
-
-            avatar.style.backgroundImage =
-                `url("${usuario.avatar}")`;
-
-            avatar.style.backgroundSize = "cover";
-            avatar.style.backgroundPosition = "center";
-            avatar.style.backgroundRepeat = "no-repeat";
-
-        } else {
-
-            avatar.textContent =
-                (
-                    usuario.displayName ||
-                    usuario.username ||
-                    "U"
-                )
-                .charAt(0)
-                .toUpperCase();
-
-        }
+        avatar.textContent =
+            (
+                usuario.displayName ||
+                usuario.username ||
+                "U"
+            )
+            .charAt(0)
+            .toUpperCase();
 
     }
 
 }
-
-
 /* =========================================================
    MENU DE CONFIGURAÇÕES
 ========================================================= */
