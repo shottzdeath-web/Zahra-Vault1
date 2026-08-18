@@ -2,140 +2,159 @@
    PROTEÇÃO DO PERFIL
 ========================================================= */
 
-const logado =
-    localStorage.getItem("logado");
-
+const logado = localStorage.getItem("logado");
 
 if (logado !== "true") {
-
-    window.location.href =
-        "login.html";
-
+    window.location.href = "login.html";
 }
 
 
 /* =========================================================
-   CARREGAR DADOS DO USUÁRIO
+   USUÁRIO
 ========================================================= */
 
-const dadosSalvos =
-    localStorage.getItem("usuario");
-
+const dadosSalvos = localStorage.getItem("usuario");
 
 if (!dadosSalvos) {
 
-    window.location.href =
-        "login.html";
+    window.location.href = "login.html";
 
 } else {
 
-    const usuario =
-        JSON.parse(dadosSalvos);
-
-
-    const usernameInput =
-        document.getElementById(
-            "profile-username"
-        );
-
-
-    const emailInput =
-        document.getElementById(
-            "profile-email"
-        );
-
-
-    const displayInput =
-        document.getElementById(
-            "profile-display"
-        );
-
-
-    const usernameDisplay =
-        document.getElementById(
-            "account-username"
-        );
-
-
-    const emailDisplay =
-        document.getElementById(
-            "account-email"
-        );
-
-
-    const avatar =
-        document.getElementById(
-            "profile-avatar"
-        );
-
-
-    const avatarInput =
-        document.getElementById(
-            "avatar-input"
-        );
-
-
-    const avatarButton =
-        document.getElementById(
-            "change-avatar"
-        );
-
-
-    const saveButton =
-        document.getElementById(
-            "save-profile"
-        );
-
-
-    const message =
-        document.getElementById(
-            "profile-message"
-        );
+    const usuario = JSON.parse(dadosSalvos);
 
 
     /* =====================================================
-       PREENCHER DADOS
+       ELEMENTOS
+    ===================================================== */
+
+    const avatar =
+        document.getElementById("profile-avatar");
+
+    const avatarLetter =
+        document.getElementById("avatar-letter");
+
+    const avatarInput =
+        document.getElementById("avatar-input");
+
+    const changeAvatar =
+        document.getElementById("change-avatar");
+
+    const editProfile =
+        document.getElementById("edit-profile");
+
+    const editor =
+        document.getElementById("profile-editor");
+
+    const closeEditor =
+        document.getElementById("close-editor");
+
+    const usernameInput =
+        document.getElementById("profile-username");
+
+    const displayInput =
+        document.getElementById("profile-display");
+
+    const bioInput =
+        document.getElementById("profile-bio");
+
+    const emailInput =
+        document.getElementById("profile-email");
+
+    const saveButton =
+        document.getElementById("save-profile");
+
+    const message =
+        document.getElementById("profile-message");
+
+
+    const displayName =
+        document.getElementById("profile-display-name");
+
+    const usernameDisplay =
+        document.getElementById("profile-username-display");
+
+    const bioDisplay =
+        document.getElementById("profile-bio-display");
+
+    const bioDetails =
+        document.getElementById("profile-bio-details");
+
+    const infoUsername =
+        document.getElementById("info-username");
+
+    const infoEmail =
+        document.getElementById("info-email");
+
+
+    /* =====================================================
+       CARREGAR PERFIL
+    ===================================================== */
+
+    const username =
+        usuario.username || "usuario";
+
+    const nome =
+        usuario.displayName ||
+        usuario.username ||
+        "Usuário";
+
+    const bio =
+        usuario.bio ||
+        "Este usuário ainda não adicionou uma bio.";
+
+
+    if (displayName) {
+        displayName.textContent = nome;
+    }
+
+    if (usernameDisplay) {
+        usernameDisplay.textContent =
+            "@" + username;
+    }
+
+    if (bioDisplay) {
+        bioDisplay.textContent = bio;
+    }
+
+    if (bioDetails) {
+        bioDetails.textContent = bio;
+    }
+
+    if (infoUsername) {
+        infoUsername.textContent = username;
+    }
+
+    if (infoEmail) {
+        infoEmail.textContent =
+            usuario.email || "—";
+    }
+
+
+    /* =====================================================
+       FORMULÁRIO
     ===================================================== */
 
     if (usernameInput) {
-
         usernameInput.value =
             usuario.username || "";
-
     }
-
-
-    if (emailInput) {
-
-        emailInput.value =
-            usuario.email || "";
-
-    }
-
 
     if (displayInput) {
-
         displayInput.value =
             usuario.displayName ||
             usuario.username ||
             "";
-
     }
 
-
-    if (usernameDisplay) {
-
-        usernameDisplay.textContent =
-            usuario.username || "Usuário";
-
+    if (bioInput) {
+        bioInput.value =
+            usuario.bio || "";
     }
 
-
-    if (emailDisplay) {
-
-        emailDisplay.textContent =
-            usuario.email || "—";
-
+    if (emailInput) {
+        emailInput.value =
+            usuario.email || "";
     }
 
 
@@ -143,42 +162,54 @@ if (!dadosSalvos) {
        AVATAR
     ===================================================== */
 
-    if (avatar) {
+    function carregarAvatar() {
+
+        if (!avatar) {
+            return;
+        }
 
         if (usuario.avatar) {
 
-            avatar.textContent = "";
+            avatar.innerHTML = "";
 
-            avatar.style.backgroundImage =
-                `url("${usuario.avatar}")`;
+            const imagem =
+                document.createElement("img");
 
-            avatar.style.backgroundSize =
-                "cover";
+            imagem.src =
+                usuario.avatar;
 
-            avatar.style.backgroundPosition =
-                "center";
+            imagem.alt =
+                "Avatar do usuário";
+
+            avatar.appendChild(imagem);
 
         } else {
 
-            avatar.textContent =
-                (usuario.username || "U")
-                    .charAt(0)
-                    .toUpperCase();
+            if (avatarLetter) {
+
+                avatarLetter.textContent =
+                    username
+                        .charAt(0)
+                        .toUpperCase();
+
+            }
 
         }
 
     }
 
+    carregarAvatar();
+
 
     /* =====================================================
-       ESCOLHER AVATAR
+       ALTERAR AVATAR
     ===================================================== */
 
-    if (avatarButton && avatarInput) {
+    if (changeAvatar && avatarInput) {
 
-        avatarButton.addEventListener(
+        changeAvatar.addEventListener(
             "click",
-            function () {
+            () => {
 
                 avatarInput.click();
 
@@ -188,14 +219,25 @@ if (!dadosSalvos) {
 
         avatarInput.addEventListener(
             "change",
-            function () {
+            () => {
 
                 const file =
                     avatarInput.files[0];
 
-
                 if (!file) {
                     return;
+                }
+
+
+                if (!file.type.startsWith("image/")) {
+
+                    mostrarMensagem(
+                        "Escolha uma imagem válida.",
+                        true
+                    );
+
+                    return;
+
                 }
 
 
@@ -204,31 +246,21 @@ if (!dadosSalvos) {
 
 
                 reader.onload =
-                    function (event) {
-
-                        const imagem =
-                            event.target.result;
-
-
-                        if (avatar) {
-
-                            avatar.textContent =
-                                "";
-
-                            avatar.style.backgroundImage =
-                                `url("${imagem}")`;
-
-                            avatar.style.backgroundSize =
-                                "cover";
-
-                            avatar.style.backgroundPosition =
-                                "center";
-
-                        }
-
+                    event => {
 
                         usuario.avatar =
-                            imagem;
+                            event.target.result;
+
+                        carregarAvatar();
+
+                        localStorage.setItem(
+                            "usuario",
+                            JSON.stringify(usuario)
+                        );
+
+                        mostrarMensagem(
+                            "Avatar atualizado."
+                        );
 
                     };
 
@@ -242,24 +274,71 @@ if (!dadosSalvos) {
 
 
     /* =====================================================
-       SALVAR PERFIL
+       ABRIR EDITOR
+    ===================================================== */
+
+    if (editProfile && editor) {
+
+        editProfile.addEventListener(
+            "click",
+            () => {
+
+                editor.classList.add(
+                    "active"
+                );
+
+                editor.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       FECHAR EDITOR
+    ===================================================== */
+
+    if (closeEditor && editor) {
+
+        closeEditor.addEventListener(
+            "click",
+            () => {
+
+                editor.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       SALVAR
     ===================================================== */
 
     if (saveButton) {
 
         saveButton.addEventListener(
             "click",
-            function () {
+            () => {
 
-                const username =
+                const novoUsername =
                     usernameInput.value.trim();
 
-
-                const displayName =
+                const novoDisplay =
                     displayInput.value.trim();
 
+                const novaBio =
+                    bioInput.value.trim();
 
-                if (!username) {
+
+                if (!novoUsername) {
 
                     mostrarMensagem(
                         "Digite um nome de usuário.",
@@ -272,11 +351,14 @@ if (!dadosSalvos) {
 
 
                 usuario.username =
-                    username;
-
+                    novoUsername;
 
                 usuario.displayName =
-                    displayName || username;
+                    novoDisplay ||
+                    novoUsername;
+
+                usuario.bio =
+                    novaBio;
 
 
                 localStorage.setItem(
@@ -285,9 +367,40 @@ if (!dadosSalvos) {
                 );
 
 
+                if (displayName) {
+
+                    displayName.textContent =
+                        usuario.displayName;
+
+                }
+
                 if (usernameDisplay) {
 
                     usernameDisplay.textContent =
+                        "@" +
+                        usuario.username;
+
+                }
+
+                if (bioDisplay) {
+
+                    bioDisplay.textContent =
+                        usuario.bio ||
+                        "Este usuário ainda não adicionou uma bio.";
+
+                }
+
+                if (bioDetails) {
+
+                    bioDetails.textContent =
+                        usuario.bio ||
+                        "Este usuário ainda não adicionou uma bio.";
+
+                }
+
+                if (infoUsername) {
+
+                    infoUsername.textContent =
                         usuario.username;
 
                 }
@@ -320,15 +433,14 @@ if (!dadosSalvos) {
         message.textContent =
             texto;
 
-
-        message.classList.toggle(
-            "error",
+        message.style.color =
             erro
-        );
+                ? "#aaa"
+                : "#ddd";
 
 
         setTimeout(
-            function () {
+            () => {
 
                 message.textContent =
                     "";

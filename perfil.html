@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="perfil.css">
 
     <title>Perfil | Zvory Vault</title>
 </head>
@@ -26,29 +27,12 @@
 
     <nav id="main-nav">
 
-        <a href="home.html">
-            Início
-        </a>
-
-        <a href="produtos.html">
-            Produtos
-        </a>
-
-        <a href="categorias.html">
-            Categorias
-        </a>
-
-        <a href="suporte.html">
-            Suporte
-        </a>
-
-        <a href="carrinho.html">
-            Carrinho
-        </a>
-
-        <a href="perfil.html">
-            Perfil
-        </a>
+        <a href="home.html">Início</a>
+        <a href="produtos.html">Produtos</a>
+        <a href="categorias.html">Categorias</a>
+        <a href="suporte.html">Suporte</a>
+        <a href="carrinho.html">Carrinho</a>
+        <a href="perfil.html">Perfil</a>
 
     </nav>
 
@@ -61,49 +45,232 @@
 
 <main class="profile-page">
 
-    <section class="profile-header">
+    <!-- PERFIL -->
 
-        <p class="subtitle chrome-text">
-            MEU PERFIL
-        </p>
+    <section class="profile-card">
 
-        <h2>
-            Personalize sua conta.
-        </h2>
+        <!-- BANNER -->
 
-        <p>
-            Gerencie as informações que aparecem
-            no seu perfil da Zvory Vault.
-        </p>
+        <div class="profile-banner">
 
-    </section>
-
-
-    <section class="profile-panel">
-
-        <div class="profile-avatar-section">
-
-            <div class="profile-avatar" id="profile-avatar">
-                U
-            </div>
-
-            <button type="button" id="change-avatar">
-                Alterar avatar
-            </button>
-
-            <input
-                type="file"
-                id="avatar-input"
-                accept="image/*"
-                hidden
-            >
+            <div class="banner-overlay"></div>
 
         </div>
 
 
-        <div class="profile-form">
+        <!-- CONTEÚDO -->
 
-            <div class="profile-field">
+        <div class="profile-content">
+
+            <!-- AVATAR -->
+
+            <div class="profile-avatar-wrapper">
+
+                <div
+                    class="profile-avatar"
+                    id="profile-avatar"
+                >
+                    <span id="avatar-letter">U</span>
+                </div>
+
+            </div>
+
+
+            <!-- IDENTIDADE -->
+
+            <div class="profile-identity">
+
+                <div class="profile-name-row">
+
+                    <h1 id="profile-display-name">
+                        Usuário
+                    </h1>
+
+                    <span class="profile-status">
+                        ●
+                    </span>
+
+                </div>
+
+                <p
+                    class="profile-username"
+                    id="profile-username-display"
+                >
+                    @usuario
+                </p>
+
+                <p
+                    class="profile-bio"
+                    id="profile-bio-display"
+                >
+                    Este usuário ainda não adicionou uma bio.
+                </p>
+
+            </div>
+
+
+            <!-- AÇÕES -->
+
+            <div class="profile-actions">
+
+                <button
+                    type="button"
+                    id="change-avatar"
+                    class="profile-action"
+                >
+                    Alterar avatar
+                </button>
+
+                <button
+                    type="button"
+                    class="profile-action secondary"
+                    id="edit-profile"
+                >
+                    Editar perfil
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- INFORMAÇÕES -->
+
+        <div class="profile-details">
+
+            <div class="profile-section">
+
+                <p class="profile-section-label">
+                    SOBRE
+                </p>
+
+                <p
+                    id="profile-bio-details"
+                    class="profile-description"
+                >
+                    Este usuário ainda não adicionou uma bio.
+                </p>
+
+            </div>
+
+
+            <div class="profile-section">
+
+                <p class="profile-section-label">
+                    INFORMAÇÕES
+                </p>
+
+                <div class="profile-info-grid">
+
+                    <div class="profile-info-item">
+
+                        <span>
+                            Usuário
+                        </span>
+
+                        <strong id="info-username">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-info-item">
+
+                        <span>
+                            E-mail
+                        </span>
+
+                        <strong id="info-email">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-info-item">
+
+                        <span>
+                            STATUS
+                        </span>
+
+                        <strong>
+                            Conta ativa
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ASSINATURA -->
+
+            <div class="profile-section subscription-section">
+
+                <div>
+
+                    <p class="profile-section-label">
+                        ZVORY
+                    </p>
+
+                    <h2>
+                        Personalize ainda mais seu perfil.
+                    </h2>
+
+                    <p>
+                        Assinantes poderão desbloquear
+                        banners, GIFs e outras personalizações.
+                    </p>
+
+                </div>
+
+                <span class="subscription-badge">
+                    EM BREVE
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- EDITOR -->
+
+    <section
+        class="profile-editor"
+        id="profile-editor"
+    >
+
+        <div class="editor-header">
+
+            <div>
+
+                <p class="profile-section-label">
+                    CONFIGURAÇÕES
+                </p>
+
+                <h2>
+                    Editar perfil
+                </h2>
+
+            </div>
+
+            <button
+                type="button"
+                id="close-editor"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="editor-form">
+
+            <div class="editor-field">
 
                 <label for="profile-username">
                     NOME DE USUÁRIO
@@ -112,30 +279,14 @@
                 <input
                     type="text"
                     id="profile-username"
-                    placeholder="Seu usuário"
                     maxlength="30"
+                    placeholder="Seu usuário"
                 >
 
             </div>
 
 
-            <div class="profile-field">
-
-                <label for="profile-email">
-                    E-MAIL
-                </label>
-
-                <input
-                    type="email"
-                    id="profile-email"
-                    placeholder="seuemail@gmail.com"
-                    disabled
-                >
-
-            </div>
-
-
-            <div class="profile-field">
+            <div class="editor-field">
 
                 <label for="profile-display">
                     NOME DE EXIBIÇÃO
@@ -144,8 +295,38 @@
                 <input
                     type="text"
                     id="profile-display"
-                    placeholder="Como você quer aparecer?"
                     maxlength="40"
+                    placeholder="Como você quer aparecer?"
+                >
+
+            </div>
+
+
+            <div class="editor-field">
+
+                <label for="profile-bio">
+                    BIO
+                </label>
+
+                <textarea
+                    id="profile-bio"
+                    maxlength="160"
+                    placeholder="Fale um pouco sobre você..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="editor-field">
+
+                <label>
+                    E-MAIL
+                </label>
+
+                <input
+                    type="email"
+                    id="profile-email"
+                    disabled
                 >
 
             </div>
@@ -153,7 +334,7 @@
 
             <button
                 type="button"
-                class="profile-save"
+                class="save-profile"
                 id="save-profile"
             >
                 Salvar alterações
@@ -169,63 +350,10 @@
     </section>
 
 
-    <section class="profile-account">
-
-        <div>
-
-            <p class="account-label">
-                CONTA
-            </p>
-
-            <h2>
-                Informações da conta
-            </h2>
-
-        </div>
-
-
-        <div class="profile-info-row">
-
-            <span>
-                Status
-            </span>
-
-            <strong>
-                Conta ativa
-            </strong>
-
-        </div>
-
-
-        <div class="profile-info-row">
-
-            <span>
-                E-mail
-            </span>
-
-            <strong id="account-email">
-                —
-            </strong>
-
-        </div>
-
-
-        <div class="profile-info-row">
-
-            <span>
-                Usuário
-            </span>
-
-            <strong id="account-username">
-                —
-            </strong>
-
-        </div>
-
-    </section>
-
-
-    <a href="home.html" class="profile-back">
+    <a
+        href="home.html"
+        class="profile-back"
+    >
         ← Voltar para minha conta
     </a>
 
@@ -256,17 +384,9 @@
                 Explorar
             </h3>
 
-            <a href="home.html">
-                Início
-            </a>
-
-            <a href="produtos.html">
-                Produtos
-            </a>
-
-            <a href="categorias.html">
-                Categorias
-            </a>
+            <a href="home.html">Início</a>
+            <a href="produtos.html">Produtos</a>
+            <a href="categorias.html">Categorias</a>
 
         </div>
 
@@ -277,15 +397,13 @@
                 Conta
             </h3>
 
-            <a href="perfil.html">
-                Perfil
-            </a>
+            <a href="perfil.html">Perfil</a>
+            <a href="pedidos.html">Meus pedidos</a>
 
-            <a href="pedidos.html">
-                Meus pedidos
-            </a>
-
-            <a href="#" id="footer-logout">
+            <a
+                href="#"
+                id="footer-logout"
+            >
                 Sair
             </a>
 
@@ -328,6 +446,14 @@
     </div>
 
 </footer>
+
+
+<input
+    type="file"
+    id="avatar-input"
+    accept="image/*"
+    hidden
+>
 
 
 <script src="script.js"></script>

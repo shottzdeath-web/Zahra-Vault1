@@ -1,0 +1,649 @@
+/* =========================================================
+   PERFIL ZVORY
+========================================================= */
+
+.profile-page {
+    width: min(1050px, 92%);
+    margin: 0 auto;
+    padding: 70px 0 100px;
+}
+
+
+/* =========================================================
+   CARD PRINCIPAL
+========================================================= */
+
+.profile-card {
+    overflow: hidden;
+
+    background: #111;
+
+    border: 1px solid #292929;
+    border-radius: 20px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.45);
+}
+
+
+/* =========================================================
+   BANNER
+========================================================= */
+
+.profile-banner {
+    position: relative;
+
+    height: 220px;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            #444 0,
+            transparent 40%
+        ),
+        linear-gradient(
+            135deg,
+            #242424,
+            #0b0b0b
+        );
+
+    border-bottom: 1px solid #292929;
+}
+
+.banner-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent,
+            rgba(0, 0, 0, 0.45)
+        );
+}
+
+
+/* =========================================================
+   CONTEÚDO DO PERFIL
+========================================================= */
+
+.profile-content {
+    position: relative;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 25px;
+
+    padding: 0 35px 30px;
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.profile-avatar-wrapper {
+    margin-top: -70px;
+
+    flex-shrink: 0;
+}
+
+.profile-avatar {
+    width: 140px;
+    height: 140px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border: 7px solid #111;
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f5f5f5,
+            #8b8b8b
+        );
+
+    color: #111;
+
+    font-size: 50px;
+    font-weight: bold;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.profile-avatar span {
+    display: flex;
+
+    width: 100%;
+    height: 100%;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   IDENTIDADE
+========================================================= */
+
+.profile-identity {
+    flex: 1;
+
+    padding-top: 25px;
+
+    min-width: 0;
+}
+
+.profile-name-row {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.profile-name-row h1 {
+    margin: 0;
+
+    font-size: 28px;
+    font-weight: 600;
+
+    word-break: break-word;
+}
+
+.profile-status {
+    color: #aaa;
+
+    font-size: 12px;
+}
+
+.profile-username {
+    margin: 5px 0 14px;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+.profile-bio {
+    max-width: 600px;
+
+    margin: 0;
+
+    color: #aaa;
+
+    line-height: 1.6;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   AÇÕES
+========================================================= */
+
+.profile-actions {
+    display: flex;
+
+    gap: 10px;
+
+    padding-top: 25px;
+}
+
+.profile-action {
+    padding: 11px 16px;
+
+    border: 1px solid #555;
+    border-radius: 8px;
+
+    background: #ddd;
+    color: #111;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    transition: 0.25s ease;
+}
+
+.profile-action:hover {
+    background: #fff;
+
+    transform: translateY(-2px);
+}
+
+.profile-action.secondary {
+    background: #181818;
+
+    color: #ddd;
+
+    border-color: #333;
+}
+
+.profile-action.secondary:hover {
+    background: #222;
+}
+
+
+/* =========================================================
+   DETALHES
+========================================================= */
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+
+    gap: 35px;
+
+    padding: 35px;
+}
+
+.profile-section {
+    padding-top: 5px;
+}
+
+.profile-section-label {
+    margin: 0 0 10px;
+
+    color: #777;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 3px;
+}
+
+.profile-description {
+    max-width: 700px;
+
+    margin: 0;
+
+    color: #aaa;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   INFORMAÇÕES
+========================================================= */
+
+.profile-info-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+.profile-info-item {
+    padding: 18px;
+
+    background: #0d0d0d;
+
+    border: 1px solid #252525;
+    border-radius: 12px;
+}
+
+.profile-info-item span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #666;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+.profile-info-item strong {
+    color: #ddd;
+
+    font-size: 14px;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   ASSINATURA
+========================================================= */
+
+.subscription-section {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 30px;
+
+    padding: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #181818,
+            #0d0d0d
+        );
+
+    border: 1px solid #303030;
+    border-radius: 14px;
+}
+
+.subscription-section h2 {
+    margin: 0 0 8px;
+
+    font-size: 19px;
+}
+
+.subscription-section p:last-child {
+    margin: 0;
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+.subscription-badge {
+    flex-shrink: 0;
+
+    padding: 8px 12px;
+
+    border: 1px solid #555;
+    border-radius: 20px;
+
+    color: #aaa;
+
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   EDITOR
+========================================================= */
+
+.profile-editor {
+    display: none;
+
+    margin-top: 25px;
+
+    padding: 30px;
+
+    background: #111;
+
+    border: 1px solid #292929;
+    border-radius: 18px;
+}
+
+.profile-editor.active {
+    display: block;
+}
+
+.editor-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+.editor-header h2 {
+    margin: 0;
+
+    font-size: 25px;
+}
+
+#close-editor {
+    width: 35px;
+    height: 35px;
+
+    border: 1px solid #333;
+    border-radius: 50%;
+
+    background: transparent;
+    color: #aaa;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+#close-editor:hover {
+    background: #222;
+    color: white;
+}
+
+
+/* =========================================================
+   FORMULÁRIO
+========================================================= */
+
+.editor-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.editor-field {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.editor-field label {
+    color: #777;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+.editor-field input,
+.editor-field textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 13px 15px;
+
+    background: #090909;
+
+    border: 1px solid #292929;
+    border-radius: 8px;
+
+    color: white;
+
+    outline: none;
+
+    font-family: inherit;
+}
+
+.editor-field textarea {
+    min-height: 100px;
+
+    resize: vertical;
+}
+
+.editor-field input:focus,
+.editor-field textarea:focus {
+    border-color: #777;
+}
+
+.editor-field input:disabled {
+    opacity: 0.4;
+}
+
+
+/* =========================================================
+   SALVAR
+========================================================= */
+
+.save-profile {
+    padding: 14px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #ddd;
+    color: #111;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+.save-profile:hover {
+    background: white;
+
+    transform: translateY(-2px);
+}
+
+.profile-message {
+    min-height: 18px;
+
+    margin: 0;
+
+    text-align: center;
+
+    color: #aaa;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   VOLTAR
+========================================================= */
+
+.profile-back {
+    display: block;
+
+    width: fit-content;
+
+    margin: 30px auto 0;
+
+    color: #777;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    transition: 0.2s;
+}
+
+.profile-back:hover {
+    color: white;
+
+    transform: translateX(-3px);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .profile-page {
+        width: calc(100% - 30px);
+
+        padding: 45px 0 70px;
+    }
+
+    .profile-banner {
+        height: 170px;
+    }
+
+    .profile-content {
+        flex-direction: column;
+
+        padding: 0 22px 25px;
+    }
+
+    .profile-avatar-wrapper {
+        margin-top: -60px;
+    }
+
+    .profile-avatar {
+        width: 115px;
+        height: 115px;
+
+        font-size: 40px;
+    }
+
+    .profile-identity {
+        padding-top: 0;
+    }
+
+    .profile-actions {
+        width: 100%;
+
+        padding-top: 0;
+    }
+
+    .profile-action {
+        flex: 1;
+    }
+
+    .profile-details {
+        padding: 25px 22px;
+    }
+
+    .profile-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .subscription-section {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .profile-banner {
+        height: 140px;
+    }
+
+    .profile-name-row h1 {
+        font-size: 23px;
+    }
+
+    .profile-actions {
+        flex-direction: column;
+    }
+
+    .profile-action {
+        width: 100%;
+    }
+
+    .profile-editor {
+        padding: 22px 18px;
+    }
+
+}
