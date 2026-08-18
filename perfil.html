@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>Perfil | Zvory Vault</title>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        <h1 class="chrome-text">Zvory Vault</h1>
+    </div>
+
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+        <span>—</span>
+        <span>—</span>
+        <span>—</span>
+    </button>
+
+    <nav id="main-nav">
+
+        <a href="home.html">
+            Início
+        </a>
+
+        <a href="produtos.html">
+            Produtos
+        </a>
+
+        <a href="categorias.html">
+            Categorias
+        </a>
+
+        <a href="suporte.html">
+            Suporte
+        </a>
+
+        <a href="carrinho.html">
+            Carrinho
+        </a>
+
+        <a href="perfil.html">
+            Perfil
+        </a>
+
+    </nav>
+
+    <button class="login" id="logout" type="button">
+        Sair
+    </button>
+
+</header>
+
+
+<main class="profile-page">
+
+    <section class="profile-header">
+
+        <p class="subtitle chrome-text">
+            MEU PERFIL
+        </p>
+
+        <h2>
+            Personalize sua conta.
+        </h2>
+
+        <p>
+            Gerencie as informações que aparecem
+            no seu perfil da Zvory Vault.
+        </p>
+
+    </section>
+
+
+    <section class="profile-panel">
+
+        <div class="profile-avatar-section">
+
+            <div class="profile-avatar" id="profile-avatar">
+                U
+            </div>
+
+            <button type="button" id="change-avatar">
+                Alterar avatar
+            </button>
+
+            <input
+                type="file"
+                id="avatar-input"
+                accept="image/*"
+                hidden
+            >
+
+        </div>
+
+
+        <div class="profile-form">
+
+            <div class="profile-field">
+
+                <label for="profile-username">
+                    NOME DE USUÁRIO
+                </label>
+
+                <input
+                    type="text"
+                    id="profile-username"
+                    placeholder="Seu usuário"
+                    maxlength="30"
+                >
+
+            </div>
+
+
+            <div class="profile-field">
+
+                <label for="profile-email">
+                    E-MAIL
+                </label>
+
+                <input
+                    type="email"
+                    id="profile-email"
+                    placeholder="seuemail@gmail.com"
+                    disabled
+                >
+
+            </div>
+
+
+            <div class="profile-field">
+
+                <label for="profile-display">
+                    NOME DE EXIBIÇÃO
+                </label>
+
+                <input
+                    type="text"
+                    id="profile-display"
+                    placeholder="Como você quer aparecer?"
+                    maxlength="40"
+                >
+
+            </div>
+
+
+            <button
+                type="button"
+                class="profile-save"
+                id="save-profile"
+            >
+                Salvar alterações
+            </button>
+
+            <p
+                class="profile-message"
+                id="profile-message"
+            ></p>
+
+        </div>
+
+    </section>
+
+
+    <section class="profile-account">
+
+        <div>
+
+            <p class="account-label">
+                CONTA
+            </p>
+
+            <h2>
+                Informações da conta
+            </h2>
+
+        </div>
+
+
+        <div class="profile-info-row">
+
+            <span>
+                Status
+            </span>
+
+            <strong>
+                Conta ativa
+            </strong>
+
+        </div>
+
+
+        <div class="profile-info-row">
+
+            <span>
+                E-mail
+            </span>
+
+            <strong id="account-email">
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="profile-info-row">
+
+            <span>
+                Usuário
+            </span>
+
+            <strong id="account-username">
+                —
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <a href="home.html" class="profile-back">
+        ← Voltar para minha conta
+    </a>
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+
+            <h2>
+                Zvory Vault
+            </h2>
+
+            <p>
+                Um espaço onde produtos, criatividade
+                e oportunidades se encontram.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Explorar
+            </h3>
+
+            <a href="home.html">
+                Início
+            </a>
+
+            <a href="produtos.html">
+                Produtos
+            </a>
+
+            <a href="categorias.html">
+                Categorias
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Conta
+            </h3>
+
+            <a href="perfil.html">
+                Perfil
+            </a>
+
+            <a href="pedidos.html">
+                Meus pedidos
+            </a>
+
+            <a href="#" id="footer-logout">
+                Sair
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h3>
+                Ajuda
+            </h3>
+
+            <a href="suporte.html">
+                Central de suporte
+            </a>
+
+            <a href="#">
+                Termos de uso
+            </a>
+
+            <a href="#">
+                Privacidade
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Zvory Vault
+        </p>
+
+        <span>
+            Feito para quem busca mais.
+        </span>
+
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+<script src="perfil.js"></script>
+
+</body>
+
+</html>
