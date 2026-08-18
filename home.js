@@ -5,15 +5,19 @@
 const logado = localStorage.getItem("logado");
 
 if (logado !== "true") {
+
     window.location.href = "login.html";
+
 }
 
 
 /* =========================================================
-   CARREGAR DADOS DO USUÁRIO
+   CARREGAR USUÁRIO
 ========================================================= */
 
-const dadosSalvos = localStorage.getItem("usuario");
+const dadosSalvos =
+    localStorage.getItem("usuario");
+
 
 if (!dadosSalvos) {
 
@@ -21,90 +25,181 @@ if (!dadosSalvos) {
 
 } else {
 
-    const usuario = JSON.parse(dadosSalvos);
+    const usuarioLocal =
+        JSON.parse(dadosSalvos);
 
 
-    /* =====================================================
-       ELEMENTOS DA HOME
-    ===================================================== */
-
-    const username =
-        document.getElementById("account-username");
-
-    const email =
-        document.getElementById("account-email");
-
-    const avatarContainer =
-        document.querySelector(".account-avatar");
-
-    const avatar =
-        document.getElementById("account-avatar");
+    const usuarioId =
+        usuarioLocal.id;
 
 
-    /* =====================================================
-       NOME
-    ===================================================== */
+    if (!usuarioId) {
 
-    if (username) {
+        console.error(
+            "ID do usuário não encontrado."
+        );
 
-        username.textContent =
-            usuario.displayName ||
-            usuario.username ||
-            "Seu usuário";
+    } else {
+
+        carregarUsuario(usuarioId);
 
     }
 
-
-    /* =====================================================
-       E-MAIL
-    ===================================================== */
-
-    if (email) {
-
-        email.textContent =
-            usuario.email ||
-            "exemplo@gmail.com";
-
-    }
+}
 
 
-    /* =====================================================
-       AVATAR
-    ===================================================== */
+/* =========================================================
+   BUSCAR USUÁRIO NO BANCO
+========================================================= */
 
-    if (avatarContainer && avatar) {
+async function carregarUsuario(id) {
 
-        if (usuario.avatar) {
+    try {
 
-            avatar.textContent = "";
+        const resposta =
+            await fetch(
+                `http://localhost:3000/api/usuario/${id}`
+            );
 
-            avatarContainer.style.backgroundImage =
-                `url("${usuario.avatar}")`;
 
-            avatarContainer.style.backgroundSize =
-                "cover";
+        const dados =
+            await resposta.json();
 
-            avatarContainer.style.backgroundPosition =
-                "center";
 
-            avatarContainer.style.backgroundRepeat =
-                "no-repeat";
+        if (!resposta.ok) {
 
-        } else {
+            console.error(
+                dados.error ||
+                "Não foi possível carregar o usuário."
+            );
 
-            avatarContainer.style.backgroundImage =
-                "none";
-
-            avatar.textContent =
-                (
-                    usuario.displayName ||
-                    usuario.username ||
-                    "U"
-                )
-                .charAt(0)
-                .toUpperCase();
+            return;
 
         }
+
+
+        const usuario =
+            dados.user;
+
+
+        /* ================================================
+           ATUALIZAR CACHE LOCAL
+        ================================================= */
+
+        localStorage.setItem(
+            "usuario",
+            JSON.stringify(usuario)
+        );
+
+
+        /* ================================================
+           ELEMENTOS DA HOME
+        ================================================= */
+
+        const username =
+            document.getElementById(
+                "account-username"
+            );
+
+
+        const email =
+            document.getElementById(
+                "account-email"
+            );
+
+
+        const avatarContainer =
+            document.querySelector(
+                ".account-avatar"
+            );
+
+
+        const avatar =
+            document.getElementById(
+                "account-avatar"
+            );
+
+
+        /* ================================================
+           NOME
+        ================================================= */
+
+        if (username) {
+
+            username.textContent =
+                usuario.display_name ||
+                usuario.displayName ||
+                usuario.username ||
+                "Seu usuário";
+
+        }
+
+
+        /* ================================================
+           E-MAIL
+        ================================================= */
+
+        if (email) {
+
+            email.textContent =
+                usuario.email ||
+                "exemplo@gmail.com";
+
+        }
+
+
+        /* ================================================
+           AVATAR
+        ================================================= */
+
+        if (
+            avatarContainer &&
+            avatar
+        ) {
+
+            if (usuario.avatar) {
+
+                avatar.textContent = "";
+
+                avatarContainer.style.backgroundImage =
+                    `url("${usuario.avatar}")`;
+
+                avatarContainer.style.backgroundSize =
+                    "cover";
+
+                avatarContainer.style.backgroundPosition =
+                    "center";
+
+                avatarContainer.style.backgroundRepeat =
+                    "no-repeat";
+
+            } else {
+
+                avatarContainer.style.backgroundImage =
+                    "none";
+
+
+                avatar.textContent =
+                    (
+                        usuario.display_name ||
+                        usuario.displayName ||
+                        usuario.username ||
+                        "U"
+                    )
+                    .charAt(0)
+                    .toUpperCase();
+
+            }
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Erro ao carregar usuário:",
+            error
+        );
 
     }
 
@@ -116,13 +211,21 @@ if (!dadosSalvos) {
 ========================================================= */
 
 const settingsButton =
-    document.getElementById("settings-button");
+    document.getElementById(
+        "settings-button"
+    );
+
 
 const settingsDropdown =
-    document.getElementById("settings-dropdown");
+    document.getElementById(
+        "settings-dropdown"
+    );
 
 
-if (settingsButton && settingsDropdown) {
+if (
+    settingsButton &&
+    settingsDropdown
+) {
 
     settingsButton.addEventListener(
         "click",
@@ -131,7 +234,9 @@ if (settingsButton && settingsDropdown) {
             event.preventDefault();
             event.stopPropagation();
 
-            settingsDropdown.classList.toggle("active");
+            settingsDropdown.classList.toggle(
+                "active"
+            );
 
         }
     );
@@ -151,7 +256,9 @@ if (settingsButton && settingsDropdown) {
         "click",
         function () {
 
-            settingsDropdown.classList.remove("active");
+            settingsDropdown.classList.remove(
+                "active"
+            );
 
         }
     );
