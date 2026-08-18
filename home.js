@@ -9,51 +9,108 @@ if (logado !== "true") {
 }
 
 
-/* =====================================================
-   AVATAR
-===================================================== */
+/* =========================================================
+   CARREGAR DADOS DO USUÁRIO
+========================================================= */
 
-const avatarContainer =
-    document.querySelector(".account-avatar");
+const dadosSalvos = localStorage.getItem("usuario");
 
-const avatar =
-    document.getElementById("account-avatar");
+if (!dadosSalvos) {
+
+    window.location.href = "login.html";
+
+} else {
+
+    const usuario = JSON.parse(dadosSalvos);
 
 
-if (avatarContainer && avatar) {
+    /* =====================================================
+       ELEMENTOS DA HOME
+    ===================================================== */
 
-    if (usuario.avatar) {
+    const username =
+        document.getElementById("account-username");
 
-        avatar.textContent = "";
+    const email =
+        document.getElementById("account-email");
 
-        avatarContainer.style.backgroundImage =
-            `url("${usuario.avatar}")`;
+    const avatarContainer =
+        document.querySelector(".account-avatar");
 
-        avatarContainer.style.backgroundSize =
-            "cover";
+    const avatar =
+        document.getElementById("account-avatar");
 
-        avatarContainer.style.backgroundPosition =
-            "center";
 
-        avatarContainer.style.backgroundRepeat =
-            "no-repeat";
+    /* =====================================================
+       NOME
+    ===================================================== */
 
-    } else {
+    if (username) {
 
-        avatarContainer.style.backgroundImage = "none";
+        username.textContent =
+            usuario.displayName ||
+            usuario.username ||
+            "Seu usuário";
 
-        avatar.textContent =
-            (
-                usuario.displayName ||
-                usuario.username ||
-                "U"
-            )
-            .charAt(0)
-            .toUpperCase();
+    }
+
+
+    /* =====================================================
+       E-MAIL
+    ===================================================== */
+
+    if (email) {
+
+        email.textContent =
+            usuario.email ||
+            "exemplo@gmail.com";
+
+    }
+
+
+    /* =====================================================
+       AVATAR
+    ===================================================== */
+
+    if (avatarContainer && avatar) {
+
+        if (usuario.avatar) {
+
+            avatar.textContent = "";
+
+            avatarContainer.style.backgroundImage =
+                `url("${usuario.avatar}")`;
+
+            avatarContainer.style.backgroundSize =
+                "cover";
+
+            avatarContainer.style.backgroundPosition =
+                "center";
+
+            avatarContainer.style.backgroundRepeat =
+                "no-repeat";
+
+        } else {
+
+            avatarContainer.style.backgroundImage =
+                "none";
+
+            avatar.textContent =
+                (
+                    usuario.displayName ||
+                    usuario.username ||
+                    "U"
+                )
+                .charAt(0)
+                .toUpperCase();
+
+        }
 
     }
 
 }
+
+
 /* =========================================================
    MENU DE CONFIGURAÇÕES
 ========================================================= */
