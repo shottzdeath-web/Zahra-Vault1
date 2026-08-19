@@ -496,6 +496,21 @@
 
                         usuario.avatar =
                             event.target.result;
+                            
+                            console.log(
+    "TIPO DO AVATAR:",
+    arquivo.type
+);
+
+console.log(
+    "TAMANHO:",
+    arquivo.size
+);
+
+console.log(
+    "INÍCIO DO AVATAR:",
+    event.target.result.substring(0, 30)
+);
 
 
                         renderizarAvatar();
