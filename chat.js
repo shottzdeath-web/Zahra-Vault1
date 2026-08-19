@@ -1,717 +1,365 @@
 /* =========================================================
-   PROTEÇÃO DA CONTA
+   ZVORY
+   CHAT JS
 ========================================================= */
 
-const logado = localStorage.getItem("logado");
+const conversations = document.querySelectorAll(".conversation");
 
-if (logado !== "true") {
+const conversationPanel =
+    document.querySelector(".conversations");
 
-    window.location.href = "login.html";
+const chatPanel =
+    document.querySelector(".chat");
 
-}
+const backBtn =
+    document.getElementById("backBtn");
 
+const headerName =
+    document.getElementById("headerName");
 
-/* =========================================================
-   ELEMENTOS
-========================================================= */
+const headerAvatar =
+    document.getElementById("headerAvatar");
 
-const conversationList =
-    document.getElementById("conversationList");
+const headerStatus =
+    document.getElementById("headerStatus");
 
-const conversations =
-    document.querySelectorAll(".conversation");
+const headerOnline =
+    document.getElementById("headerOnline");
 
-const conversationTabs =
-    document.querySelectorAll(".conversation-tab");
-
-const currentName =
-    document.getElementById("currentName");
-
-const currentStatus =
-    document.getElementById("currentStatus");
-
-const currentAvatar =
-    document.getElementById("currentAvatar");
-
-const infoName =
-    document.getElementById("infoName");
-
-const infoAvatar =
-    document.getElementById("infoAvatar");
-
-const infoRole =
-    document.getElementById("infoRole");
-
-const messages =
-    document.getElementById("messages");
+const messageForm =
+    document.getElementById("messageForm");
 
 const messageInput =
     document.getElementById("messageInput");
 
-const sendButton =
-    document.getElementById("sendButton");
+const messages =
+    document.getElementById("messages");
 
-const chatSearch =
+const searchInput =
     document.getElementById("searchInput");
 
+const moreBtn =
+    document.getElementById("moreBtn");
 
-/* =========================================================
-   USUÁRIO
-========================================================= */
+const moreMenu =
+    document.getElementById("moreMenu");
 
-const dadosSalvos =
-    localStorage.getItem("usuario");
+const clearChatBtn =
+    document.getElementById("clearChatBtn");
 
+const blockBtn =
+    document.getElementById("blockBtn");
 
-if (dadosSalvos) {
+const voiceBtn =
+    document.getElementById("voiceBtn");
 
-    try {
-
-        const usuario =
-            JSON.parse(dadosSalvos);
-
-
-        const nome =
-            usuario.display_name ||
-            usuario.displayName ||
-            usuario.username ||
-            "Usuário";
-
-
-        const inicial =
-            nome
-                .charAt(0)
-                .toUpperCase();
-
-
-        document
-            .querySelectorAll(
-                "#sidebarUsername, #messageUsername"
-            )
-            .forEach(element => {
-
-                element.textContent = nome;
-
-            });
-
-
-        document
-            .querySelectorAll(
-                "#sidebarAvatar, #railAvatar, #topAvatar"
-            )
-            .forEach(element => {
-
-                element.textContent = inicial;
-
-            });
-
-
-    } catch (error) {
-
-        console.error(
-            "Erro ao carregar usuário:",
-            error
-        );
-
-    }
-
-}
-
+const newChatBtn =
+    document.getElementById("newChatBtn");
 
 
 /* =========================================================
-   TROCAR CONVERSA
+   ABRIR CONVERSA
 ========================================================= */
 
 conversations.forEach(conversation => {
 
-    conversation.addEventListener(
-        "click",
-        () => {
+    conversation.addEventListener("click", () => {
 
-            conversations.forEach(item => {
+        conversations.forEach(item => {
+            item.classList.remove("active");
+        });
 
-                item.classList.remove("active");
+        conversation.classList.add("active");
 
-            });
+        const user =
+            conversation.dataset.user;
 
+        const status =
+            conversation.dataset.status;
 
-            conversation.classList.add("active");
+        const avatar =
+            user.charAt(0).toUpperCase();
 
+        headerName.textContent = user;
+        headerAvatar.textContent = avatar;
 
-            const nome =
-                conversation.dataset.name ||
-                "Conversa";
+        headerStatus.textContent =
+            status === "online"
+                ? "online"
+                : "offline";
 
+        headerStatus.style.color =
+            status === "online"
+                ? "#54d17d"
+                : "#777c86";
 
-            currentName.textContent =
-                nome;
-
-
-            infoName.textContent =
-                nome;
-
-
-            currentAvatar.textContent =
-                nome
-                    .charAt(0)
-                    .toUpperCase();
-
-
-            infoAvatar.textContent =
-                nome
-                    .charAt(0)
-                    .toUpperCase();
+        headerOnline.style.display =
+            status === "online"
+                ? "block"
+                : "none";
 
 
-            if (nome === "Zvory") {
+        /* MOBILE */
 
-                currentStatus.textContent =
-                    "Equipe · Online";
+        if (window.innerWidth <= 700) {
 
-                infoRole.textContent =
-                    "Equipe oficial";
+            conversationPanel.classList.add("hidden");
 
-            } else {
-
-                currentStatus.textContent =
-                    "Membro · Online";
-
-                infoRole.textContent =
-                    "Membro da comunidade";
-
-            }
-
-
-            /* MOBILE */
-
-            if (
-                window.innerWidth <= 760
-            ) {
-
-                const main =
-                    document.querySelector(
-                        ".conversation-main"
-                    );
-
-                const sidebar =
-                    document.querySelector(
-                        ".conversation-sidebar"
-                    );
-
-
-                main.classList.add(
-                    "mobile-open"
-                );
-
-                sidebar.classList.add(
-                    "chat-open"
-                );
-
-            }
-
+            chatPanel.classList.add("mobile-active");
 
         }
-    );
+
+    });
 
 });
 
 
-
 /* =========================================================
-   VOLTAR NO MOBILE
+   VOLTAR NO CELULAR
 ========================================================= */
 
-document
-    .querySelector(".conversation-top")
-    ?.addEventListener(
-        "click",
-        event => {
+backBtn.addEventListener("click", () => {
 
-            if (
-                window.innerWidth <= 760 &&
-                event.target ===
-                document.querySelector(
-                    ".conversation-top"
-                )
-            ) {
+    chatPanel.classList.remove("mobile-active");
 
-                voltarConversas();
-
-            }
-
-        }
-    );
-
-
-function voltarConversas() {
-
-    const main =
-        document.querySelector(
-            ".conversation-main"
-        );
-
-    const sidebar =
-        document.querySelector(
-            ".conversation-sidebar"
-        );
-
-
-    main.classList.remove(
-        "mobile-open"
-    );
-
-    sidebar.classList.remove(
-        "chat-open"
-    );
-
-}
-
-
-
-/* =========================================================
-   PESQUISA
-========================================================= */
-
-if (chatSearch) {
-
-    chatSearch.addEventListener(
-        "input",
-        () => {
-
-            const termo =
-                chatSearch.value
-                    .toLowerCase()
-                    .trim();
-
-
-            conversations.forEach(
-                conversation => {
-
-                    const nome =
-                        (
-                            conversation.dataset.name ||
-                            ""
-                        )
-                        .toLowerCase();
-
-
-                    if (
-                        nome.includes(termo)
-                    ) {
-
-                        conversation.style.display =
-                            "flex";
-
-                    } else {
-
-                        conversation.style.display =
-                            "none";
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-}
-
-
-
-/* =========================================================
-   ABAS
-========================================================= */
-
-conversationTabs.forEach(tab => {
-
-    tab.addEventListener(
-        "click",
-        () => {
-
-            conversationTabs.forEach(item => {
-
-                item.classList.remove(
-                    "active"
-                );
-
-            });
-
-
-            tab.classList.add(
-                "active"
-            );
-
-
-            const filter =
-                tab.dataset.filter;
-
-
-            conversations.forEach(
-                conversation => {
-
-                    if (
-                        filter === "all"
-                    ) {
-
-                        conversation.style.display =
-                            "flex";
-
-                    } else {
-
-                        /*
-                         * FUTURAMENTE:
-                         * verificar mensagens não lidas
-                         */
-
-                        conversation.style.display =
-                            "none";
-
-                    }
-
-                }
-            );
-
-        }
-    );
+    conversationPanel.classList.remove("hidden");
 
 });
-
 
 
 /* =========================================================
    ENVIAR MENSAGEM
 ========================================================= */
 
-function enviarMensagem() {
+messageForm.addEventListener("submit", event => {
 
-    if (!messageInput) {
-        return;
-    }
+    event.preventDefault();
 
-
-    const texto =
+    const text =
         messageInput.value.trim();
 
+    if (!text) return;
 
-    if (!texto) {
-        return;
-    }
-
-
-    const usuario =
-        localStorage.getItem("usuario");
-
-
-    let nome =
-        "Usuário";
-
-
-    if (usuario) {
-
-        try {
-
-            const dados =
-                JSON.parse(usuario);
-
-
-            nome =
-                dados.display_name ||
-                dados.displayName ||
-                dados.username ||
-                "Usuário";
-
-        } catch {}
-
-    }
-
-
-    const mensagem =
-        document.createElement("div");
-
-
-    mensagem.className =
-        "message own";
-
-
-    mensagem.innerHTML = `
-
-        <div class="message-avatar">
-            ${nome
-                .charAt(0)
-                .toUpperCase()}
-        </div>
-
-        <div class="message-body">
-
-            <div class="message-meta">
-
-                <strong>
-                    ${escaparHTML(nome)}
-                </strong>
-
-                <span>
-                    agora
-                </span>
-
-            </div>
-
-            <p>
-                ${escaparHTML(texto)}
-            </p>
-
-        </div>
-
-    `;
-
-
-    messages.appendChild(
-        mensagem
-    );
-
+    createMessage(text);
 
     messageInput.value = "";
 
-    messageInput.style.height =
-        "auto";
+    scrollMessages();
+
+});
 
 
-    messages.scrollTop =
-        messages.scrollHeight;
+/* =========================================================
+   CRIAR MENSAGEM
+========================================================= */
+
+function createMessage(text) {
+
+    const message =
+        document.createElement("div");
+
+    message.className =
+        "message sent";
+
+    const bubble =
+        document.createElement("div");
+
+    bubble.className =
+        "bubble";
+
+    bubble.textContent =
+        text;
+
+    const time =
+        document.createElement("span");
+
+    time.className =
+        "message-time";
+
+    time.textContent =
+        getCurrentTime();
+
+    message.appendChild(bubble);
+
+    message.appendChild(time);
+
+    messages.appendChild(message);
 
 }
 
 
-
 /* =========================================================
-   ENTER
+   HORÁRIO
 ========================================================= */
 
-if (messageInput) {
+function getCurrentTime() {
 
-    messageInput.addEventListener(
-        "keydown",
-        event => {
+    const now =
+        new Date();
 
-            if (
-                event.key === "Enter" &&
-                !event.shiftKey
-            ) {
-
-                event.preventDefault();
-
-                enviarMensagem();
-
-            }
-
-        }
-    );
-
-
-    messageInput.addEventListener(
-        "input",
-        () => {
-
-            messageInput.style.height =
-                "auto";
-
-
-            messageInput.style.height =
-                Math.min(
-                    messageInput.scrollHeight,
-                    120
-                ) + "px";
-
-        }
-    );
-
-}
-
-
-
-/* =========================================================
-   BOTÃO ENVIAR
-========================================================= */
-
-if (sendButton) {
-
-    sendButton.addEventListener(
-        "click",
-        enviarMensagem
-    );
-
-}
-
-
-
-/* =========================================================
-   NOVA CONVERSA
-========================================================= */
-
-const newChatButton =
-    document.getElementById(
-        "newChatButton"
-    );
-
-
-if (newChatButton) {
-
-    newChatButton.addEventListener(
-        "click",
-        () => {
-
-            alert(
-                "A criação de conversas será conectada ao sistema de usuários."
-            );
-
+    return now.toLocaleTimeString(
+        "pt-BR",
+        {
+            hour: "2-digit",
+            minute: "2-digit"
         }
     );
 
 }
 
 
-
 /* =========================================================
-   HOME
+   SCROLL
 ========================================================= */
 
-function abrirHome() {
+function scrollMessages() {
 
-    window.location.href =
-        "home.html";
+    messages.scrollTo({
+        top: messages.scrollHeight,
+        behavior: "smooth"
+    });
 
 }
 
 
-document
-    .getElementById("homeButton")
-    ?.addEventListener(
-        "click",
-        abrirHome
-    );
+/* =========================================================
+   PESQUISA
+========================================================= */
 
+searchInput.addEventListener("input", () => {
 
-document
-    .getElementById("homeRail")
-    ?.addEventListener(
-        "click",
-        abrirHome
-    );
+    const search =
+        searchInput.value
+            .toLowerCase()
+            .trim();
 
+    conversations.forEach(conversation => {
+
+        const user =
+            conversation.dataset.user
+                .toLowerCase();
+
+        conversation.style.display =
+            user.includes(search)
+                ? "flex"
+                : "none";
+
+    });
+
+});
 
 
 /* =========================================================
-   PERFIL
+   MENU
 ========================================================= */
 
-document
-    .getElementById("profileButton")
-    ?.addEventListener(
-        "click",
-        () => {
+moreBtn.addEventListener("click", event => {
 
-            window.location.href =
-                "perfil.html";
+    event.stopPropagation();
 
-        }
-    );
+    const rect =
+        moreBtn.getBoundingClientRect();
 
+    moreMenu.style.top =
+        `${rect.bottom + 7}px`;
+
+    moreMenu.style.right =
+        `${window.innerWidth - rect.right}px`;
+
+    moreMenu.classList.toggle("show");
+
+});
+
+
+document.addEventListener("click", () => {
+
+    moreMenu.classList.remove("show");
+
+});
+
+
+moreMenu.addEventListener("click", event => {
+
+    event.stopPropagation();
+
+});
 
 
 /* =========================================================
-   CONFIGURAÇÕES
+   LIMPAR CONVERSA
 ========================================================= */
 
-function abrirConfiguracoes() {
+clearChatBtn.addEventListener("click", () => {
 
-    window.location.href =
-        "configuracoes.html";
+    const confirmed =
+        confirm("Limpar todas as mensagens desta conversa?");
 
-}
+    if (!confirmed) return;
 
+    messages.innerHTML = "";
 
-document
-    .getElementById("settingsButton")
-    ?.addEventListener(
-        "click",
-        abrirConfiguracoes
-    );
+    moreMenu.classList.remove("show");
+
+});
 
 
-document
-    .getElementById("sidebarSettings")
-    ?.addEventListener(
-        "click",
-        abrirConfiguracoes
-    );
+/* =========================================================
+   BLOQUEAR
+========================================================= */
 
+blockBtn.addEventListener("click", () => {
+
+    alert("Sistema de bloqueio será conectado ao backend.");
+
+    moreMenu.classList.remove("show");
+
+});
 
 
 /* =========================================================
    CHAMADA DE VOZ
 ========================================================= */
 
-document
-    .getElementById("voiceButton")
-    ?.addEventListener(
-        "click",
-        () => {
+voiceBtn.addEventListener("click", () => {
 
-            alert(
-                "A chamada de voz será conectada ao sistema de voz da Zvory."
-            );
+    alert("Chamadas de voz serão conectadas ao sistema da Zvory.");
 
-        }
-    );
-
-
-document
-    .getElementById("startVoice")
-    ?.addEventListener(
-        "click",
-        () => {
-
-            alert(
-                "A chamada de voz será iniciada quando o sistema de voz estiver conectado."
-            );
-
-        }
-    );
-
+});
 
 
 /* =========================================================
-   CHAMADA DE VÍDEO
+   NOVA CONVERSA
 ========================================================= */
 
-document
-    .getElementById("videoButton")
-    ?.addEventListener(
-        "click",
-        () => {
+newChatBtn.addEventListener("click", () => {
 
-            alert(
-                "Chamadas de vídeo serão adicionadas posteriormente."
-            );
+    alert("A busca de usuários será conectada ao backend.");
 
-        }
-    );
-
+});
 
 
 /* =========================================================
-   UTILIDADE
+   ENTER PARA ENVIAR
 ========================================================= */
 
-function escaparHTML(texto) {
+messageInput.addEventListener("keydown", event => {
 
-    const div =
-        document.createElement("div");
+    if (
+        event.key === "Enter" &&
+        !event.shiftKey
+    ) {
 
-    div.textContent =
-        texto;
+        event.preventDefault();
 
-    return div.innerHTML;
+        messageForm.requestSubmit();
 
-}
+    }
+
+});
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
+scrollMessages();
