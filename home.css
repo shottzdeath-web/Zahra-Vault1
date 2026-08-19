@@ -2140,3 +2140,132 @@ input:focus {
         width: auto;
     }
 }
+/* =========================================================
+   TOPBAR - PERFIL
+========================================================= */
+
+.profile-button {
+    width: 38px;
+    height: 38px;
+
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+.profile-button:hover {
+    background: rgba(255, 255, 255, .06);
+    transform: translateY(-1px);
+}
+
+
+/* AVATAR DO PERFIL */
+
+.top-profile-avatar {
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eeeeee,
+            #888888
+        );
+
+    color: #111;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   TOPBAR - BOTÕES
+========================================================= */
+
+.top-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .top-search {
+        display: none;
+    }
+
+    .top-actions {
+        margin-left: auto;
+        gap: 4px;
+    }
+
+    .icon-button {
+        width: 36px;
+        height: 36px;
+    }
+
+    .profile-button {
+        width: 36px;
+        height: 36px;
+    }
+
+    .top-profile-avatar {
+        width: 30px;
+        height: 30px;
+    }
+
+}
+
+
+/* =========================================================
+   TELAS MUITO PEQUENAS
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .topbar {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .brand-text span {
+        display: none;
+    }
+
+    .top-actions {
+        gap: 2px;
+    }
+
+    .top-actions .icon-button:nth-child(3) {
+        display: none;
+    }
+
+}
