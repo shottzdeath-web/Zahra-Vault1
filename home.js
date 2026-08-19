@@ -2,17 +2,28 @@
    PROTEÇÃO DA CONTA
 ========================================================= */
 
-const logado = localStorage.getItem("logado");
+const logado =
+    localStorage.getItem("logado");
+
 
 if (logado !== "true") {
 
-    window.location.href = "login.html";
+    window.location.href =
+        "login.html";
 
 }
 
 
 /* =========================================================
-   CARREGAR USUÁRIO
+   CONFIGURAÇÃO
+========================================================= */
+
+const API =
+    "http://localhost:3000";
+
+
+/* =========================================================
+   CARREGAR USUÁRIO LOCAL
 ========================================================= */
 
 const dadosSalvos =
@@ -21,27 +32,40 @@ const dadosSalvos =
 
 if (!dadosSalvos) {
 
-    window.location.href = "login.html";
+    window.location.href =
+        "login.html";
 
 } else {
 
-    const usuarioLocal =
-        JSON.parse(dadosSalvos);
+    try {
+
+        const usuarioLocal =
+            JSON.parse(dadosSalvos);
 
 
-    const usuarioId =
-        usuarioLocal.id;
+        if (!usuarioLocal.id) {
 
+            console.error(
+                "ID do usuário não encontrado."
+            );
 
-    if (!usuarioId) {
+        } else {
+
+            carregarUsuario(
+                usuarioLocal.id
+            );
+
+        }
+
+    } catch (error) {
 
         console.error(
-            "ID do usuário não encontrado."
+            "Erro ao ler usuário:",
+            error
         );
 
-    } else {
-
-        carregarUsuario(usuarioId);
+        window.location.href =
+            "login.html";
 
     }
 
@@ -49,7 +73,7 @@ if (!dadosSalvos) {
 
 
 /* =========================================================
-   BUSCAR USUÁRIO NO BANCO
+   BUSCAR USUÁRIO NO BACKEND
 ========================================================= */
 
 async function carregarUsuario(id) {
@@ -58,7 +82,7 @@ async function carregarUsuario(id) {
 
         const resposta =
             await fetch(
-                `http://localhost:3000/api/usuario/${id}`
+                `${API}/api/usuario/${id}`
             );
 
 
@@ -82,8 +106,19 @@ async function carregarUsuario(id) {
             dados.user;
 
 
-        /* ================================================
-           ATUALIZAR CACHE LOCAL
+        if (!usuario) {
+
+            console.error(
+                "Usuário não encontrado."
+            );
+
+            return;
+
+        }
+
+
+        /* =================================================
+           ATUALIZAR CACHE
         ================================================= */
 
         localStorage.setItem(
@@ -92,107 +127,175 @@ async function carregarUsuario(id) {
         );
 
 
-        /* ================================================
+        /* =================================================
+           DADOS DO PERFIL
+        ================================================= */
+
+        const nome =
+            usuario.displayName ||
+            usuario.display_name ||
+            usuario.username ||
+            "Usuário";
+
+
+        const letra =
+            nome
+                .charAt(0)
+                .toUpperCase();
+
+
+        /* =================================================
            ELEMENTOS DA HOME
         ================================================= */
 
         const username =
             document.getElementById(
-                "account-username"
+                "username"
             );
 
 
-        const email =
+        const userAvatar =
             document.getElementById(
-                "account-email"
+                "userAvatar"
             );
 
 
-        const avatarContainer =
-            document.querySelector(
-                ".account-avatar"
-            );
-
-
-        const avatar =
+        const sidebarAvatar =
             document.getElementById(
-                "account-avatar"
+                "sidebarAvatar"
             );
 
 
-        /* ================================================
-           NOME
+        const memberUsername =
+            document.getElementById(
+                "memberUsername"
+            );
+
+
+        const chatUsername =
+            document.getElementById(
+                "chatUsername"
+            );
+
+
+        const topProfileAvatar =
+            document.getElementById(
+                "topProfileAvatar"
+            );
+
+
+        /* =================================================
+           NOME NA SIDEBAR
         ================================================= */
 
         if (username) {
 
             username.textContent =
-                usuario.display_name ||
-                usuario.displayName ||
-                usuario.username ||
-                "Seu usuário";
+                nome;
 
         }
 
 
-        /* ================================================
-           E-MAIL
+        /* =================================================
+           NOME NOS MEMBROS
         ================================================= */
 
-        if (email) {
+        if (memberUsername) {
 
-            email.textContent =
-                usuario.email ||
-                "exemplo@gmail.com";
+            memberUsername.textContent =
+                nome;
 
         }
 
 
-        /* ================================================
+        /* =================================================
+           NOME NO CHAT PREVIEW
+        ================================================= */
+
+        if (chatUsername) {
+
+            chatUsername.textContent =
+                nome;
+
+        }
+
+
+        /* =================================================
            AVATAR
         ================================================= */
 
-        if (
-            avatarContainer &&
-            avatar
-        ) {
+        function aplicarAvatar(elemento) {
+
+            if (!elemento) {
+                return;
+            }
+
 
             if (usuario.avatar) {
 
-                avatar.textContent = "";
+                elemento.textContent =
+                    "";
 
-                avatarContainer.style.backgroundImage =
+
+                elemento.style.backgroundImage =
                     `url("${usuario.avatar}")`;
 
-                avatarContainer.style.backgroundSize =
+
+                elemento.style.backgroundSize =
                     "cover";
 
-                avatarContainer.style.backgroundPosition =
+
+                elemento.style.backgroundPosition =
                     "center";
 
-                avatarContainer.style.backgroundRepeat =
+
+                elemento.style.backgroundRepeat =
                     "no-repeat";
+
 
             } else {
 
-                avatarContainer.style.backgroundImage =
+                elemento.style.backgroundImage =
                     "none";
 
 
-                avatar.textContent =
-                    (
-                        usuario.display_name ||
-                        usuario.displayName ||
-                        usuario.username ||
-                        "U"
-                    )
-                    .charAt(0)
-                    .toUpperCase();
+                elemento.textContent =
+                    letra;
 
             }
 
         }
 
+
+        /* =================================================
+           APLICAR AVATAR
+        ================================================= */
+
+        aplicarAvatar(
+            userAvatar
+        );
+
+
+        aplicarAvatar(
+            sidebarAvatar
+        );
+
+
+        aplicarAvatar(
+            topProfileAvatar
+        );
+
+
+        /* =================================================
+           PERFIL DO TOPO
+        ================================================= */
+
+        if (topProfileAvatar) {
+
+            topProfileAvatar.title =
+                nome;
+
+        }
 
     } catch (error) {
 
@@ -232,7 +335,9 @@ if (
         function (event) {
 
             event.preventDefault();
+
             event.stopPropagation();
+
 
             settingsDropdown.classList.toggle(
                 "active"
