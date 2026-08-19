@@ -2439,3 +2439,27 @@ input:focus {
 
     text-transform: uppercase;
 }
+/* =========================================================
+   LOGO ZVORY
+========================================================= */
+
+.brand-mark {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+
+.brand-mark img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+}
