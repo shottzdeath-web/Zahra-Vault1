@@ -2464,16 +2464,21 @@ input:focus {
     display: block;
 }
 /* =========================================================
-   LOGO DA ZVORY NA TOPBAR
+   LOGO ZVORY - TOPBAR
 ========================================================= */
 
 .brand {
+    width: var(--channels-width);
+
     display: flex;
     align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-}
 
+    gap: 11px;
+
+    flex-shrink: 0;
+
+    min-width: 0;
+}
 
 .brand-mark {
     width: 38px;
@@ -2486,8 +2491,9 @@ input:focus {
     justify-content: center;
 
     overflow: hidden;
-}
 
+    border-radius: 10px;
+}
 
 .brand-mark img {
     width: 100%;
@@ -2498,32 +2504,83 @@ input:focus {
     display: block;
 }
 
-
-/* TEXTO DA MARCA */
-
 .brand-text {
+    min-width: 0;
+
     display: flex;
     flex-direction: column;
 
     justify-content: center;
 
-    min-width: 0;
+    line-height: 1;
 }
-
 
 .brand-text strong {
     display: block;
 
-    line-height: 1;
+    font-size: 15px;
+    font-weight: 800;
+
+    letter-spacing: -.3px;
+
+    white-space: nowrap;
+}
+
+.brand-text span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--text-muted);
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
 
     white-space: nowrap;
 }
 
 
-.brand-text span {
-    display: block;
+/* =========================================================
+   LOGO NO MOBILE
+========================================================= */
 
-    line-height: 1;
+@media (max-width: 700px) {
 
-    white-space: nowrap;
+    .brand {
+        width: auto;
+
+        gap: 8px;
+    }
+
+    .brand-mark {
+        width: 32px;
+        height: 32px;
+
+        border-radius: 9px;
+    }
+
+    .brand-text strong {
+        font-size: 13px;
+    }
+
+    .brand-text span {
+        font-size: 7px;
+        letter-spacing: 1.5px;
+    }
+
+}
+
+
+/* =========================================================
+   TELAS MUITO PEQUENAS
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .brand-text span {
+        display: none;
+    }
+
 }
