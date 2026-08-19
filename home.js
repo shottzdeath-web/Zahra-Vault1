@@ -2,15 +2,10 @@
    PROTEÇÃO DA CONTA
 ========================================================= */
 
-const logado =
-    localStorage.getItem("logado");
-
+const logado = localStorage.getItem("logado");
 
 if (logado !== "true") {
-
-    window.location.href =
-        "login.html";
-
+    window.location.href = "login.html";
 }
 
 
@@ -18,30 +13,24 @@ if (logado !== "true") {
    CONFIGURAÇÃO
 ========================================================= */
 
-const API =
-    "http://localhost:3000";
+const API = "http://localhost:3000";
 
 
 /* =========================================================
    CARREGAR USUÁRIO LOCAL
 ========================================================= */
 
-const dadosSalvos =
-    localStorage.getItem("usuario");
-
+const dadosSalvos = localStorage.getItem("usuario");
 
 if (!dadosSalvos) {
 
-    window.location.href =
-        "login.html";
+    window.location.href = "login.html";
 
 } else {
 
     try {
 
-        const usuarioLocal =
-            JSON.parse(dadosSalvos);
-
+        const usuarioLocal = JSON.parse(dadosSalvos);
 
         if (!usuarioLocal.id) {
 
@@ -51,9 +40,7 @@ if (!dadosSalvos) {
 
         } else {
 
-            carregarUsuario(
-                usuarioLocal.id
-            );
+            carregarUsuario(usuarioLocal.id);
 
         }
 
@@ -64,11 +51,8 @@ if (!dadosSalvos) {
             error
         );
 
-        window.location.href =
-            "login.html";
-
+        window.location.href = "login.html";
     }
-
 }
 
 
@@ -80,14 +64,12 @@ async function carregarUsuario(id) {
 
     try {
 
-        const resposta =
-            await fetch(
-                `${API}/api/usuario/${id}`
-            );
+        const resposta = await fetch(
+            `${API}/api/usuario/${id}`
+        );
 
 
-        const dados =
-            await resposta.json();
+        const dados = await resposta.json();
 
 
         if (!resposta.ok) {
@@ -98,12 +80,10 @@ async function carregarUsuario(id) {
             );
 
             return;
-
         }
 
 
-        const usuario =
-            dados.user;
+        const usuario = dados.user;
 
 
         if (!usuario) {
@@ -113,7 +93,6 @@ async function carregarUsuario(id) {
             );
 
             return;
-
         }
 
 
@@ -128,7 +107,7 @@ async function carregarUsuario(id) {
 
 
         /* =================================================
-           DADOS DO PERFIL
+           NOME
         ================================================= */
 
         const nome =
@@ -145,36 +124,12 @@ async function carregarUsuario(id) {
 
 
         /* =================================================
-           ELEMENTOS DA HOME
+           ELEMENTOS
         ================================================= */
-
-        const username =
-            document.getElementById(
-                "username"
-            );
-
 
         const userAvatar =
             document.getElementById(
                 "userAvatar"
-            );
-
-
-        const sidebarAvatar =
-            document.getElementById(
-                "sidebarAvatar"
-            );
-
-
-        const memberUsername =
-            document.getElementById(
-                "memberUsername"
-            );
-
-
-        const chatUsername =
-            document.getElementById(
-                "chatUsername"
             );
 
 
@@ -185,43 +140,7 @@ async function carregarUsuario(id) {
 
 
         /* =================================================
-           NOME NA SIDEBAR
-        ================================================= */
-
-        if (username) {
-
-            username.textContent =
-                nome;
-
-        }
-
-
-        /* =================================================
-           NOME NOS MEMBROS
-        ================================================= */
-
-        if (memberUsername) {
-
-            memberUsername.textContent =
-                nome;
-
-        }
-
-
-        /* =================================================
-           NOME NO CHAT PREVIEW
-        ================================================= */
-
-        if (chatUsername) {
-
-            chatUsername.textContent =
-                nome;
-
-        }
-
-
-        /* =================================================
-           AVATAR
+           APLICAR AVATAR
         ================================================= */
 
         function aplicarAvatar(elemento) {
@@ -233,68 +152,51 @@ async function carregarUsuario(id) {
 
             if (usuario.avatar) {
 
-                elemento.textContent =
-                    "";
-
+                elemento.textContent = "";
 
                 elemento.style.backgroundImage =
                     `url("${usuario.avatar}")`;
 
-
                 elemento.style.backgroundSize =
                     "cover";
-
 
                 elemento.style.backgroundPosition =
                     "center";
 
-
                 elemento.style.backgroundRepeat =
                     "no-repeat";
-
 
             } else {
 
                 elemento.style.backgroundImage =
                     "none";
 
-
                 elemento.textContent =
                     letra;
-
             }
-
         }
 
 
-        /* =================================================
-           APLICAR AVATAR
-        ================================================= */
+        aplicarAvatar(userAvatar);
 
-        aplicarAvatar(
-            userAvatar
-        );
-
-
-        aplicarAvatar(
-            sidebarAvatar
-        );
-
-
-        aplicarAvatar(
-            topProfileAvatar
-        );
+        aplicarAvatar(topProfileAvatar);
 
 
         /* =================================================
-           PERFIL DO TOPO
+           TITULO DO PERFIL
         ================================================= */
 
         if (topProfileAvatar) {
 
             topProfileAvatar.title =
                 nome;
+        }
 
+
+        if (userAvatar) {
+
+            userAvatar.title =
+                nome;
         }
 
     } catch (error) {
@@ -303,69 +205,5 @@ async function carregarUsuario(id) {
             "Erro ao carregar usuário:",
             error
         );
-
     }
-
-}
-
-
-/* =========================================================
-   MENU DE CONFIGURAÇÕES
-========================================================= */
-
-const settingsButton =
-    document.getElementById(
-        "settings-button"
-    );
-
-
-const settingsDropdown =
-    document.getElementById(
-        "settings-dropdown"
-    );
-
-
-if (
-    settingsButton &&
-    settingsDropdown
-) {
-
-    settingsButton.addEventListener(
-        "click",
-        function (event) {
-
-            event.preventDefault();
-
-            event.stopPropagation();
-
-
-            settingsDropdown.classList.toggle(
-                "active"
-            );
-
-        }
-    );
-
-
-    settingsDropdown.addEventListener(
-        "click",
-        function (event) {
-
-            event.stopPropagation();
-
-        }
-    );
-
-
-    document.addEventListener(
-        "click",
-        function () {
-
-            settingsDropdown.classList.remove(
-                "active"
-            );
-
-        }
-    );
-
 }

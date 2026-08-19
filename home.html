@@ -14,22 +14,24 @@
 
 <div class="app">
 
-    <!-- ================= TOPBAR ================= -->
+    <!-- =====================================================
+         TOPBAR
+    ====================================================== -->
 
     <header class="topbar">
 
         <div class="brand">
 
-    <div class="brand-mark">
-        <img src="Zvory.png" alt="Zvory Vault">
-    </div>
+            <div class="brand-mark">
+                <img src="Zvory.png" alt="Zvory Vault">
+            </div>
 
-    <div class="brand-text">
-        <strong>Zvory Vault</strong>
-        <span>MARKETPLACE</span>
-    </div>
+            <div class="brand-text">
+                <strong>Zvory Vault</strong>
+                <span>MARKETPLACE</span>
+            </div>
 
-</div>
+        </div>
 
 
         <div class="top-search">
@@ -49,11 +51,9 @@
         </div>
 
 
-        <!-- ================= TOP ACTIONS ================= -->
-
         <div class="top-actions">
 
-            <!-- CHAT -->
+            <!-- CONVERSAS -->
 
             <button
                 class="icon-button"
@@ -120,12 +120,16 @@
     </header>
 
 
-    <!-- ================= LAYOUT ================= -->
+    <!-- =====================================================
+         LAYOUT
+    ====================================================== -->
 
     <main class="layout">
 
 
-        <!-- ================= RAIL ================= -->
+        <!-- =================================================
+             RAIL
+        ================================================== -->
 
         <aside class="rail">
 
@@ -138,7 +142,7 @@
 
             <!-- HOME -->
 
-            <button class="rail-button active">
+            <button class="rail-button active" title="Início">
 
                 <svg viewBox="0 0 24 24">
                     <path d="M4 12l8-8 8 8"></path>
@@ -150,7 +154,7 @@
 
             <!-- LOJA -->
 
-            <button class="rail-button">
+            <button class="rail-button" title="Loja">
 
                 <svg viewBox="0 0 24 24">
                     <rect
@@ -170,7 +174,7 @@
 
             <!-- CATEGORIAS -->
 
-            <button class="rail-button">
+            <button class="rail-button" title="Categorias">
 
                 <svg viewBox="0 0 24 24">
                     <path d="M7 7h10"></path>
@@ -183,7 +187,7 @@
 
             <!-- PEDIDOS -->
 
-            <button class="rail-button">
+            <button class="rail-button" title="Pedidos">
 
                 <svg viewBox="0 0 24 24">
                     <path d="M6 4h12v16H6z"></path>
@@ -200,7 +204,11 @@
 
             <!-- CONFIGURAÇÕES -->
 
-            <button class="rail-button">
+            <button
+                class="rail-button"
+                title="Configurações"
+                id="settings-button"
+            >
 
                 <svg viewBox="0 0 24 24">
 
@@ -219,7 +227,11 @@
 
             <!-- PERFIL -->
 
-            <div class="rail-profile">
+            <button
+                class="rail-profile-button"
+                title="Meu perfil"
+                onclick="window.location.href='perfil.html'"
+            >
 
                 <div
                     class="avatar"
@@ -228,303 +240,31 @@
                     U
                 </div>
 
-                <div class="status-dot"></div>
+                <span class="status-dot"></span>
 
-            </div>
+            </button>
 
         </aside>
 
 
-
-        <!-- ================= CHANNELS ================= -->
-
-        <aside class="channels">
-
-            <div class="community">
-
-                <div>
-
-                    <strong>
-                        Zvory Community
-                    </strong>
-
-                    <span>
-                        Comunidade oficial
-                    </span>
-
-                </div>
-
-
-                <button class="community-menu">
-
-                    <svg viewBox="0 0 24 24">
-                        <path d="M6 9l6 6 6-6"></path>
-                    </svg>
-
-                </button>
-
-            </div>
-
-
-            <div class="channel-list">
-
-
-                <!-- PRINCIPAL -->
-
-                <div class="channel-category">
-
-                    <div class="category-label">
-                        <span></span>
-                        PRINCIPAL
-                    </div>
-
-
-                    <button class="channel active-channel">
-
-                        <span class="channel-icon">
-                            #
-                        </span>
-
-                        início
-
-                    </button>
-
-
-                    <button class="channel">
-
-                        <span class="channel-icon">
-                            #
-                        </span>
-
-                        geral
-
-                    </button>
-
-
-                    <button class="channel">
-
-                        <span class="channel-icon">
-                            !
-                        </span>
-
-                        anúncios
-
-                    </button>
-
-                </div>
-
-
-
-                <!-- LOJA -->
-
-                <div class="channel-category">
-
-                    <div class="category-label">
-                        <span></span>
-                        LOJA
-                    </div>
-
-
-                    <button class="channel">
-
-                        <span class="channel-icon">
-                            /
-                        </span>
-
-                        produtos
-
-                    </button>
-
-
-                    <button class="channel">
-
-                        <span class="channel-icon">
-                            %
-                        </span>
-
-                        ofertas
-
-                    </button>
-
-
-                    <button class="channel">
-
-                        <span class="channel-icon">
-                            $
-                        </span>
-
-                        gift cards
-
-                    </button>
-
-
-                    <button class="channel">
-
-                        <span class="channel-icon">
-                            +
-                        </span>
-
-                        jogos
-
-                    </button>
-
-                </div>
-
-
-
-                <!-- SUPORTE -->
-
-                <div class="channel-category">
-
-                    <div class="category-label">
-                        <span></span>
-                        SUPORTE
-                    </div>
-
-
-                    <button class="channel">
-
-                        <span class="channel-icon">
-                            ?
-                        </span>
-
-                        ajuda
-
-                    </button>
-
-
-                    <button class="channel">
-
-                        <span class="channel-icon">
-                            #
-                        </span>
-
-                        suporte
-
-                    </button>
-
-                </div>
-
-
-
-                <!-- VOZ -->
-
-                <div class="channel-category">
-
-                    <div class="category-label">
-                        <span></span>
-                        VOZ
-                    </div>
-
-
-                    <button class="channel voice-channel">
-
-                        <span class="channel-icon">
-                            ◉
-                        </span>
-
-                        Geral
-
-                    </button>
-
-
-                    <button class="channel voice-channel">
-
-                        <span class="channel-icon">
-                            ◉
-                        </span>
-
-                        Gaming
-
-                    </button>
-
-
-                    <button class="channel voice-channel">
-
-                        <span class="channel-icon">
-                            ◉
-                        </span>
-
-                        Música
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- ================= USER PANEL ================= -->
-
-            <div class="user-panel">
-
-                <div
-                    class="avatar"
-                    id="sidebarAvatar"
-                >
-                    U
-                </div>
-
-
-                <div class="user-details">
-
-                    <strong id="username">
-                        Usuário
-                    </strong>
-
-                    <span>
-                        Online
-                    </span>
-
-                </div>
-
-
-                <button class="settings-button">
-
-                    <svg viewBox="0 0 24 24">
-
-                        <circle
-                            cx="12"
-                            cy="12"
-                            r="3"
-                        ></circle>
-
-                        <path d="M19 13a7 7 0 0 0 0-2l2-1-2-3-2 .8a7 7 0 0 0-2-1L14.5 4h-5L9 6.8a7 7 0 0 0-2 1L5 7 3 10l2 1a7 7 0 0 0 0 2l-2 1 2 3 2-.8a7 7 0 0 0 2 1L9.5 20h5l.5-2.8a7 7 0 0 0 2-1l2 .8 2-3z"></path>
-
-                    </svg>
-
-                </button>
-
-            </div>
-
-        </aside>
-
-
-
-        <!-- ================= MAIN ================= -->
+        <!-- =================================================
+             MAIN
+        ================================================== -->
 
         <section class="main">
-
-
-            <!-- ================= CHANNEL HEADER ================= -->
 
             <header class="channel-header">
 
                 <div class="channel-title">
 
-                    <span>
-                        #
-                    </span>
+                    <span>⌂</span>
 
-                    <strong>
-                        início
-                    </strong>
+                    <strong>Início</strong>
 
                     <div class="header-line"></div>
 
                     <p>
-                        Bem-vindo à comunidade Zvory
+                        Bem-vindo à Zvory Vault
                     </p>
 
                 </div>
@@ -532,7 +272,7 @@
 
                 <div class="header-actions">
 
-                    <button>
+                    <button title="Informações">
 
                         <svg viewBox="0 0 24 24">
 
@@ -555,7 +295,10 @@
                     </button>
 
 
-                    <button>
+                    <button
+                        title="Conversas"
+                        onclick="window.location.href='chat.html'"
+                    >
 
                         <svg viewBox="0 0 24 24">
 
@@ -574,13 +317,12 @@
             </header>
 
 
-
-            <!-- ================= HOME ================= -->
-
             <div class="main-scroll">
 
 
-                <!-- HERO -->
+                <!-- =================================================
+                     HERO
+                ================================================== -->
 
                 <section class="hero">
 
@@ -590,37 +332,33 @@
                             ZVORY VAULT
                         </span>
 
-
                         <h1>
-
                             Tudo o que você procura.
-
                             <br>
-
-                            <span>
-                                Em um só lugar.
-                            </span>
-
+                            <span>Em um só lugar.</span>
                         </h1>
 
-
                         <p>
-
-                            Jogos, gift cards, Robux, contas e uma
-                            comunidade feita para quem vive o universo digital.
-
+                            Jogos, gift cards, Robux, contas e tudo
+                            que você precisa para o seu universo digital.
                         </p>
 
 
                         <div class="hero-actions">
 
-                            <button class="primary-button">
+                            <button
+                                class="primary-button"
+                                onclick="window.location.href='produtos.html'"
+                            >
                                 Explorar produtos
                             </button>
 
 
-                            <button class="secondary-button">
-                                Conhecer a comunidade
+                            <button
+                                class="secondary-button"
+                                onclick="window.location.href='chat.html'"
+                            >
+                                Abrir conversas
                             </button>
 
                         </div>
@@ -628,21 +366,24 @@
                     </div>
 
 
-                    <div class="hero-mark">
+                    <div class="hero-visual">
 
-                        <div class="hero-ring"></div>
+                        <div class="hero-circle hero-circle-one"></div>
+                        <div class="hero-circle hero-circle-two"></div>
 
-                        <span>
-                            Z
-                        </span>
+                        <img
+                            src="Zvory.png"
+                            alt="Zvory"
+                        >
 
                     </div>
 
                 </section>
 
 
-
-                <!-- ================= CATEGORIES ================= -->
+                <!-- =================================================
+                     CATEGORIAS
+                ================================================== -->
 
                 <section class="section">
 
@@ -661,8 +402,11 @@
                         </div>
 
 
-                        <button class="view-button">
-                            Ver todas
+                        <button
+                            class="view-button"
+                            onclick="window.location.href='categorias.html'"
+                        >
+                            Ver todas →
                         </button>
 
                     </div>
@@ -673,9 +417,9 @@
 
                         <article class="product-card">
 
-                            <div class="product-number">
+                            <span class="product-number">
                                 01
-                            </div>
+                            </span>
 
                             <div class="product-symbol">
                                 G
@@ -686,28 +430,24 @@
                             </h3>
 
                             <p>
-                                Encontre novos títulos e experiências.
+                                Encontre jogos e experiências digitais.
                             </p>
 
-                            <span class="card-link">
-
-                                Explorar
-
-                                <b>
-                                    →
-                                </b>
-
-                            </span>
+                            <button
+                                class="card-link"
+                                onclick="window.location.href='produtos.html'"
+                            >
+                                Explorar →
+                            </button>
 
                         </article>
 
 
-
                         <article class="product-card">
 
-                            <div class="product-number">
+                            <span class="product-number">
                                 02
-                            </div>
+                            </span>
 
                             <div class="product-symbol">
                                 GC
@@ -721,25 +461,21 @@
                                 Créditos para suas plataformas favoritas.
                             </p>
 
-                            <span class="card-link">
-
-                                Explorar
-
-                                <b>
-                                    →
-                                </b>
-
-                            </span>
+                            <button
+                                class="card-link"
+                                onclick="window.location.href='produtos.html'"
+                            >
+                                Explorar →
+                            </button>
 
                         </article>
 
 
-
                         <article class="product-card">
 
-                            <div class="product-number">
+                            <span class="product-number">
                                 03
-                            </div>
+                            </span>
 
                             <div class="product-symbol">
                                 R
@@ -753,25 +489,21 @@
                                 Recarregue sua experiência no Roblox.
                             </p>
 
-                            <span class="card-link">
-
-                                Explorar
-
-                                <b>
-                                    →
-                                </b>
-
-                            </span>
+                            <button
+                                class="card-link"
+                                onclick="window.location.href='produtos.html'"
+                            >
+                                Explorar →
+                            </button>
 
                         </article>
 
 
-
                         <article class="product-card">
 
-                            <div class="product-number">
+                            <span class="product-number">
                                 04
-                            </div>
+                            </span>
 
                             <div class="product-symbol">
                                 A
@@ -785,15 +517,12 @@
                                 Confira as contas disponíveis na Vault.
                             </p>
 
-                            <span class="card-link">
-
-                                Explorar
-
-                                <b>
-                                    →
-                                </b>
-
-                            </span>
+                            <button
+                                class="card-link"
+                                onclick="window.location.href='produtos.html'"
+                            >
+                                Explorar →
+                            </button>
 
                         </article>
 
@@ -802,8 +531,9 @@
                 </section>
 
 
-
-                <!-- ================= FEATURED ================= -->
+                <!-- =================================================
+                     DESTAQUES
+                ================================================== -->
 
                 <section class="section">
 
@@ -822,8 +552,11 @@
                         </div>
 
 
-                        <button class="view-button">
-                            Ver tudo
+                        <button
+                            class="view-button"
+                            onclick="window.location.href='produtos.html'"
+                        >
+                            Ver tudo →
                         </button>
 
                     </div>
@@ -858,14 +591,16 @@
                                     chamando atenção na Vault.
                                 </p>
 
-                                <button class="small-button">
+                                <button
+                                    class="small-button"
+                                    onclick="window.location.href='produtos.html'"
+                                >
                                     Explorar
                                 </button>
 
                             </div>
 
                         </article>
-
 
 
                         <article class="featured-card">
@@ -894,7 +629,10 @@
                                     especiais por tempo limitado.
                                 </p>
 
-                                <button class="small-button">
+                                <button
+                                    class="small-button"
+                                    onclick="window.location.href='produtos.html'"
+                                >
                                     Ver ofertas
                                 </button>
 
@@ -907,232 +645,87 @@
                 </section>
 
 
-<!-- ================= SUPORTE ================= -->
+                <!-- =================================================
+                     SUPORTE
+                ================================================== -->
 
-<section class="chat-preview support-preview">
+                <section class="support-preview">
 
-    <div class="chat-preview-header">
-
-        <div>
-
-            <span>
-                SUPORTE
-            </span>
-
-            <h2>
-                Suporte Zvory
-            </h2>
-
-        </div>
+                    <div class="support-icon">
+                        ?
+                    </div>
 
 
-        <span class="online-indicator">
+                    <div class="support-content">
 
-            <i></i>
+                        <span>
+                            SUPORTE
+                        </span>
 
-            Equipe disponível
+                        <h2>
+                            Precisa de ajuda?
+                        </h2>
 
-        </span>
+                        <p>
+                            Fale diretamente com a equipe da Zvory
+                            e tire suas dúvidas.
+                        </p>
 
-    </div>
-
-
-    <div class="support-preview-content">
-
-        <div class="support-preview-icon">
-            ?
-        </div>
-
-
-        <div class="support-preview-text">
-
-            <h3>
-                Precisa de ajuda?
-            </h3>
-
-            <p>
-                Entre no suporte da Zvory e fale
-                diretamente com nossa equipe.
-            </p>
-
-        </div>
+                    </div>
 
 
-        <button
-            class="small-button"
-            onclick="window.location.href='suporte.html'"
-        >
-            Abrir suporte
-        </button>
+                    <button
+                        class="small-button"
+                        onclick="window.location.href='suporte.html'"
+                    >
+                        Abrir suporte
+                    </button>
 
-    </div>
-
-</section>
+                </section>
 
 
+                <!-- =================================================
+                     CHAT CTA
+                ================================================== -->
 
-        <!-- ================= MEMBERS ================= -->
+                <section class="chat-cta">
 
-        <aside class="members">
+                    <div>
+
+                        <span>
+                            ZVORY CHAT
+                        </span>
+
+                        <h2>
+                            Converse com a comunidade.
+                        </h2>
+
+                        <p>
+                            Envie mensagens, conheça outros usuários
+                            e continue sua experiência dentro da Vault.
+                        </p>
+
+                    </div>
 
 
-            <div class="members-header">
+                    <button
+                        class="primary-button"
+                        onclick="window.location.href='chat.html'"
+                    >
+                        Abrir conversas
+                    </button>
 
-                <span>
-                    COMUNIDADE
-                </span>
+                </section>
 
-                <h3>
-                    Membros online
-                </h3>
-
-
-                <div class="member-count">
-
-                    <i></i>
-
-                    3 online
-
-                </div>
 
             </div>
 
-
-
-            <div class="member-list">
-
-
-                <div class="member">
-
-                    <div class="member-avatar">
-
-                        Z
-
-                        <i></i>
-
-                    </div>
-
-
-                    <div>
-
-                        <strong>
-                            Zvory
-                        </strong>
-
-                        <span>
-                            Equipe
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="member">
-
-                    <div class="member-avatar">
-
-                        U
-
-                        <i></i>
-
-                    </div>
-
-
-                    <div>
-
-                        <strong id="memberUsername">
-                            Usuário
-                        </strong>
-
-                        <span>
-                            Membro
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="member">
-
-                    <div class="member-avatar">
-
-                        V
-
-                        <i></i>
-
-                    </div>
-
-
-                    <div>
-
-                        <strong>
-                            Visitante
-                        </strong>
-
-                        <span>
-                            Membro
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- ================= VOICE ================= -->
-
-            <div class="voice-card">
-
-                <div class="voice-top">
-
-                    <div class="voice-icon">
-                        V
-                    </div>
-
-
-                    <div>
-
-                        <span>
-                            CANAL DE VOZ
-                        </span>
-
-                        <strong>
-                            Geral
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <p>
-
-                    Entre em um canal de voz e converse
-                    com outros membros da comunidade.
-
-                </p>
-
-
-                <button>
-                    Entrar no canal
-                </button>
-
-            </div>
-
-        </aside>
+        </section>
 
     </main>
 
 </div>
 
-
-<!-- ================= JAVASCRIPT ================= -->
 
 <script src="home.js"></script>
 
