@@ -19,33 +19,55 @@
     <aside class="conversations">
 
         <div class="conversations-header">
+
             <div>
                 <span class="brand">ZVORY</span>
                 <h1>Conversas</h1>
             </div>
 
-            <button class="new-chat" id="newChatBtn" title="Nova conversa">
+            <button
+                class="new-chat"
+                id="newChatBtn"
+                title="Nova conversa"
+                aria-label="Nova conversa"
+            >
                 +
             </button>
+
         </div>
 
+
+        <!-- PESQUISA -->
+
         <div class="search-box">
+
             <span>⌕</span>
+
             <input
                 type="text"
                 id="searchInput"
-                placeholder="Pesquisar"
+                placeholder="Pesquisar conversas"
                 autocomplete="off"
             >
+
         </div>
 
-        <div class="conversation-list" id="conversationList">
+
+        <!-- LISTA -->
+
+        <div
+            class="conversation-list"
+            id="conversationList"
+        >
+
+            <!-- ISABELA -->
 
             <button
                 class="conversation active"
                 data-user="Isabela"
                 data-status="online"
             >
+
                 <div class="avatar">
                     I
                     <span class="online"></span>
@@ -57,13 +79,18 @@
                 </div>
 
                 <time>14:42</time>
+
             </button>
+
+
+            <!-- JOÃO -->
 
             <button
                 class="conversation"
                 data-user="João"
                 data-status="offline"
             >
+
                 <div class="avatar">
                     J
                 </div>
@@ -74,13 +101,18 @@
                 </div>
 
                 <time>13:21</time>
+
             </button>
+
+
+            <!-- MARIA -->
 
             <button
                 class="conversation"
                 data-user="Maria"
                 data-status="online"
             >
+
                 <div class="avatar">
                     M
                     <span class="online"></span>
@@ -92,6 +124,7 @@
                 </div>
 
                 <time>11:08</time>
+
             </button>
 
         </div>
@@ -103,27 +136,28 @@
 
     <main class="chat">
 
+
         <!-- HEADER -->
 
         <header class="chat-header">
 
-            <button class="back-btn" id="backBtn" aria-label="Voltar">
+            <button
+                class="back-btn"
+                id="backBtn"
+                aria-label="Voltar"
+            >
                 ←
             </button>
 
-            <div class="chat-user">
 
-                <div class="avatar large">
-                    <span id="headerAvatar">I</span>
-                    <span class="online" id="headerOnline"></span>
-                </div>
+            <div class="chat-title">
 
-                <div>
-                    <strong id="headerName">Isabela</strong>
-                    <span id="headerStatus">online</span>
-                </div>
+                <span>CONVERSA</span>
+
+                <strong>Zvory Chat</strong>
 
             </div>
+
 
             <div class="chat-actions">
 
@@ -131,6 +165,7 @@
                     class="action-btn"
                     id="voiceBtn"
                     title="Chamada de voz"
+                    aria-label="Chamada de voz"
                 >
                     ♫
                 </button>
@@ -139,6 +174,7 @@
                     class="action-btn"
                     id="moreBtn"
                     title="Mais opções"
+                    aria-label="Mais opções"
                 >
                     ⋮
                 </button>
@@ -148,54 +184,145 @@
         </header>
 
 
-        <!-- MENSAGENS -->
+        <!-- ================= CONTEÚDO ================= -->
 
-        <section
-            class="messages"
-            id="messages"
-            aria-label="Mensagens"
+        <div class="chat-content">
+
+
+            <!-- CARD DO PERFIL -->
+
+            <section class="user-card">
+
+                <div class="chat-user">
+
+
+                    <!-- AVATAR -->
+
+                    <div class="avatar large">
+
+                        <span id="headerAvatar">
+                            I
+                        </span>
+
+                        <span
+                            class="online"
+                            id="headerOnline"
+                        ></span>
+
+                    </div>
+
+
+                    <!-- INFORMAÇÕES -->
+
+                    <div class="chat-user-info">
+
+                        <strong id="headerName">
+                            Isabela
+                        </strong>
+
+                        <span id="headerStatus">
+                            online
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= TÍTULO ================= -->
+
+            <div class="messages-title">
+
+                <div>
+
+                    <span>
+                        CONVERSA ATIVA
+                    </span>
+
+                    <h2>
+                        Mensagens
+                    </h2>
+
+                </div>
+
+
+                <span class="message-count">
+                    CHAT
+                </span>
+
+            </div>
+
+
+            <!-- ================= MENSAGENS ================= -->
+
+            <section
+                class="messages"
+                id="messages"
+                aria-label="Mensagens"
+            >
+
+                <div class="date-divider">
+                    <span>Hoje</span>
+                </div>
+
+
+                <!-- RECEBIDA -->
+
+                <div class="message received">
+
+                    <div class="bubble">
+                        Oii
+                    </div>
+
+                    <span class="message-time">
+                        14:40
+                    </span>
+
+                </div>
+
+
+                <!-- ENVIADA -->
+
+                <div class="message sent">
+
+                    <div class="bubble">
+                        Oii, tudo bem?
+                    </div>
+
+                    <span class="message-time">
+                        14:41
+                    </span>
+
+                </div>
+
+
+                <!-- RECEBIDA -->
+
+                <div class="message received">
+
+                    <div class="bubble">
+                        Tudo sim ❤️
+                    </div>
+
+                    <span class="message-time">
+                        14:42
+                    </span>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- ================= INPUT ================= -->
+
+        <form
+            class="message-form"
+            id="messageForm"
         >
-
-            <div class="date-divider">
-                <span>Hoje</span>
-            </div>
-
-            <div class="message received">
-                <div class="bubble">
-                    Oii
-                </div>
-
-                <span class="message-time">
-                    14:40
-                </span>
-            </div>
-
-            <div class="message sent">
-                <div class="bubble">
-                    Oii, tudo bem?
-                </div>
-
-                <span class="message-time">
-                    14:41
-                </span>
-            </div>
-
-            <div class="message received">
-                <div class="bubble">
-                    Tudo sim ❤️
-                </div>
-
-                <span class="message-time">
-                    14:42
-                </span>
-            </div>
-
-        </section>
-
-
-        <!-- INPUT -->
-
-        <form class="message-form" id="messageForm">
 
             <button
                 type="button"
@@ -206,6 +333,7 @@
                 +
             </button>
 
+
             <input
                 type="text"
                 id="messageInput"
@@ -213,6 +341,7 @@
                 autocomplete="off"
                 maxlength="2000"
             >
+
 
             <button
                 type="button"
@@ -222,6 +351,7 @@
             >
                 ☺
             </button>
+
 
             <button
                 type="submit"
@@ -240,7 +370,10 @@
 
 <!-- ================= MENU ================= -->
 
-<div class="dropdown" id="moreMenu">
+<div
+    class="dropdown"
+    id="moreMenu"
+>
 
     <button id="clearChatBtn">
         Limpar conversa
@@ -256,4 +389,5 @@
 <script src="chat.js"></script>
 
 </body>
+
 </html>

@@ -1,9 +1,16 @@
 /* =========================================================
    ZVORY
    CHAT JS
+   PROTÓTIPO FUNCIONAL
 ========================================================= */
 
-const conversations = document.querySelectorAll(".conversation");
+
+/* =========================================================
+   ELEMENTOS
+========================================================= */
+
+const conversations =
+    document.querySelectorAll(".conversation");
 
 const conversationPanel =
     document.querySelector(".conversations");
@@ -58,30 +65,148 @@ const newChatBtn =
 
 
 /* =========================================================
+   ESTADO
+========================================================= */
+
+let currentUser = "Isabela";
+
+let blockedUsers =
+    JSON.parse(
+        localStorage.getItem("zvory_blocked_users") || "[]"
+    );
+
+
+/* =========================================================
+   MENSAGENS INICIAIS
+========================================================= */
+
+const defaultMessages = {
+
+    Isabela: [
+        {
+            type: "received",
+            text: "Oii",
+            time: "14:40"
+        },
+        {
+            type: "sent",
+            text: "Oii, tudo bem?",
+            time: "14:41"
+        },
+        {
+            type: "received",
+            text: "Tudo sim ❤️",
+            time: "14:42"
+        }
+    ],
+
+    João: [
+        {
+            type: "received",
+            text: "Beleza, depois te falo",
+            time: "13:21"
+        }
+    ],
+
+    Maria: [
+        {
+            type: "received",
+            text: "Enviou uma imagem",
+            time: "11:08"
+        }
+    ]
+
+};
+
+
+/* =========================================================
+   CARREGAR MENSAGENS
+========================================================= */
+
+function loadMessages(user) {
+
+    const saved =
+        localStorage.getItem(
+            `zvory_chat_${user}`
+        );
+
+    if (saved) {
+
+        return JSON.parse(saved);
+
+    }
+
+    return defaultMessages[user]
+        ? [...defaultMessages[user]]
+        : [];
+
+}
+
+
+/* =========================================================
+   SALVAR MENSAGENS
+========================================================= */
+
+function saveMessages(user, data) {
+
+    localStorage.setItem(
+        `zvory_chat_${user}`,
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* =========================================================
    ABRIR CONVERSA
 ========================================================= */
 
-conversations.forEach(conversation => {
+function openConversation(conversation) {
 
-    conversation.addEventListener("click", () => {
+    conversations.forEach(item => {
 
-        conversations.forEach(item => {
-            item.classList.remove("active");
-        });
+        item.classList.remove("active");
 
-        conversation.classList.add("active");
+    });
 
-        const user =
-            conversation.dataset.user;
+    conversation.classList.add("active");
 
-        const status =
-            conversation.dataset.status;
 
-        const avatar =
-            user.charAt(0).toUpperCase();
+    const user =
+        conversation.dataset.user;
 
-        headerName.textContent = user;
-        headerAvatar.textContent = avatar;
+    const status =
+        conversation.dataset.status;
+
+    currentUser = user;
+
+
+    /* AVATAR */
+
+    const avatar =
+        user.charAt(0).toUpperCase();
+
+
+    headerName.textContent =
+        user;
+
+    headerAvatar.textContent =
+        avatar;
+
+
+    /* STATUS */
+
+    if (blockedUsers.includes(user)) {
+
+        headerStatus.textContent =
+            "bloqueado";
+
+        headerStatus.style.color =
+            "#777c86";
+
+    }
+
+    else {
 
         headerStatus.textContent =
             status === "online"
@@ -93,73 +218,130 @@ conversations.forEach(conversation => {
                 ? "#54d17d"
                 : "#777c86";
 
-        headerOnline.style.display =
-            status === "online"
-                ? "block"
-                : "none";
+    }
 
 
-        /* MOBILE */
+    /* ONLINE */
 
-        if (window.innerWidth <= 700) {
-
-            conversationPanel.classList.add("hidden");
-
-            chatPanel.classList.add("mobile-active");
-
-        }
-
-    });
-
-});
+    headerOnline.style.display =
+        status === "online" &&
+        !blockedUsers.includes(user)
+            ? "block"
+            : "none";
 
 
-/* =========================================================
-   VOLTAR NO CELULAR
-========================================================= */
+    /* CARREGAR MENSAGENS */
 
-backBtn.addEventListener("click", () => {
-
-    chatPanel.classList.remove("mobile-active");
-
-    conversationPanel.classList.remove("hidden");
-
-});
+    renderMessages(user);
 
 
-/* =========================================================
-   ENVIAR MENSAGEM
-========================================================= */
+    /* MOBILE */
 
-messageForm.addEventListener("submit", event => {
+    if (window.innerWidth <= 700) {
 
-    event.preventDefault();
+        conversationPanel.classList.add(
+            "hidden"
+        );
 
-    const text =
-        messageInput.value.trim();
+        chatPanel.classList.add(
+            "mobile-active"
+        );
 
-    if (!text) return;
+    }
 
-    createMessage(text);
-
-    messageInput.value = "";
 
     scrollMessages();
 
+}
+
+
+/* =========================================================
+   EVENTOS DAS CONVERSAS
+========================================================= */
+
+conversations.forEach(conversation => {
+
+    conversation.addEventListener(
+        "click",
+        () => {
+
+            openConversation(
+                conversation
+            );
+
+        }
+    );
+
 });
 
 
 /* =========================================================
-   CRIAR MENSAGEM
+   RENDERIZAR MENSAGENS
 ========================================================= */
 
-function createMessage(text) {
+function renderMessages(user) {
+
+    messages.innerHTML = "";
+
+
+    const data =
+        loadMessages(user);
+
+
+    /* DATA */
+
+    const dateDivider =
+        document.createElement("div");
+
+    dateDivider.className =
+        "date-divider";
+
+    const dateText =
+        document.createElement("span");
+
+    dateText.textContent =
+        "Hoje";
+
+    dateDivider.appendChild(
+        dateText
+    );
+
+    messages.appendChild(
+        dateDivider
+    );
+
+
+    /* MENSAGENS */
+
+    data.forEach(item => {
+
+        createMessageElement(
+            item.type,
+            item.text,
+            item.time
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   CRIAR ELEMENTO DE MENSAGEM
+========================================================= */
+
+function createMessageElement(
+    type,
+    text,
+    time
+) {
 
     const message =
         document.createElement("div");
 
     message.className =
-        "message sent";
+        `message ${type}`;
+
 
     const bubble =
         document.createElement("div");
@@ -170,22 +352,116 @@ function createMessage(text) {
     bubble.textContent =
         text;
 
-    const time =
+
+    const messageTime =
         document.createElement("span");
 
-    time.className =
+    messageTime.className =
         "message-time";
 
-    time.textContent =
-        getCurrentTime();
+    messageTime.textContent =
+        time;
 
-    message.appendChild(bubble);
 
-    message.appendChild(time);
+    message.appendChild(
+        bubble
+    );
 
-    messages.appendChild(message);
+    message.appendChild(
+        messageTime
+    );
+
+
+    messages.appendChild(
+        message
+    );
 
 }
+
+
+/* =========================================================
+   ENVIAR MENSAGEM
+========================================================= */
+
+messageForm.addEventListener(
+    "submit",
+    event => {
+
+        event.preventDefault();
+
+
+        const text =
+            messageInput.value
+                .trim();
+
+
+        if (!text)
+            return;
+
+
+        if (
+            blockedUsers.includes(
+                currentUser
+            )
+        ) {
+
+            alert(
+                "Você bloqueou este usuário."
+            );
+
+            return;
+
+        }
+
+
+        const time =
+            getCurrentTime();
+
+
+        const data =
+            loadMessages(
+                currentUser
+            );
+
+
+        data.push({
+
+            type: "sent",
+
+            text: text,
+
+            time: time
+
+        });
+
+
+        saveMessages(
+            currentUser,
+            data
+        );
+
+
+        createMessageElement(
+            "sent",
+            text,
+            time
+        );
+
+
+        updateConversationPreview(
+            currentUser,
+            text,
+            time
+        );
+
+
+        messageInput.value = "";
+
+
+        scrollMessages();
+
+    }
+);
 
 
 /* =========================================================
@@ -194,16 +470,14 @@ function createMessage(text) {
 
 function getCurrentTime() {
 
-    const now =
-        new Date();
-
-    return now.toLocaleTimeString(
-        "pt-BR",
-        {
-            hour: "2-digit",
-            minute: "2-digit"
-        }
-    );
+    return new Date()
+        .toLocaleTimeString(
+            "pt-BR",
+            {
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        );
 
 }
 
@@ -214,10 +488,74 @@ function getCurrentTime() {
 
 function scrollMessages() {
 
-    messages.scrollTo({
-        top: messages.scrollHeight,
-        behavior: "smooth"
+    requestAnimationFrame(() => {
+
+        messages.scrollTo({
+
+            top:
+                messages.scrollHeight,
+
+            behavior:
+                "smooth"
+
+        });
+
     });
+
+}
+
+
+/* =========================================================
+   ATUALIZAR PRÉVIA DA CONVERSA
+========================================================= */
+
+function updateConversationPreview(
+    user,
+    text,
+    time
+) {
+
+    conversations.forEach(
+        conversation => {
+
+            if (
+                conversation.dataset.user
+                !== user
+            ) {
+
+                return;
+
+            }
+
+
+            const preview =
+                conversation.querySelector(
+                    ".conversation-info span"
+                );
+
+            const timeElement =
+                conversation.querySelector(
+                    "time"
+                );
+
+
+            if (preview) {
+
+                preview.textContent =
+                    text;
+
+            }
+
+
+            if (timeElement) {
+
+                timeElement.textContent =
+                    time;
+
+            }
+
+        }
+    );
 
 }
 
@@ -226,140 +564,322 @@ function scrollMessages() {
    PESQUISA
 ========================================================= */
 
-searchInput.addEventListener("input", () => {
+searchInput.addEventListener(
+    "input",
+    () => {
 
-    const search =
-        searchInput.value
-            .toLowerCase()
-            .trim();
+        const search =
+            searchInput.value
+                .toLowerCase()
+                .trim();
 
-    conversations.forEach(conversation => {
 
-        const user =
-            conversation.dataset.user
-                .toLowerCase();
+        conversations.forEach(
+            conversation => {
 
-        conversation.style.display =
-            user.includes(search)
-                ? "flex"
-                : "none";
+                const user =
+                    conversation.dataset.user
+                        .toLowerCase();
 
-    });
 
-});
+                conversation.style.display =
+                    user.includes(search)
+                        ? "flex"
+                        : "none";
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   VOLTAR NO CELULAR
+========================================================= */
+
+backBtn.addEventListener(
+    "click",
+    () => {
+
+        chatPanel.classList.remove(
+            "mobile-active"
+        );
+
+        conversationPanel.classList.remove(
+            "hidden"
+        );
+
+    }
+);
 
 
 /* =========================================================
    MENU
 ========================================================= */
 
-moreBtn.addEventListener("click", event => {
+moreBtn.addEventListener(
+    "click",
+    event => {
 
-    event.stopPropagation();
-
-    const rect =
-        moreBtn.getBoundingClientRect();
-
-    moreMenu.style.top =
-        `${rect.bottom + 7}px`;
-
-    moreMenu.style.right =
-        `${window.innerWidth - rect.right}px`;
-
-    moreMenu.classList.toggle("show");
-
-});
+        event.stopPropagation();
 
 
-document.addEventListener("click", () => {
-
-    moreMenu.classList.remove("show");
-
-});
+        const rect =
+            moreBtn.getBoundingClientRect();
 
 
-moreMenu.addEventListener("click", event => {
+        moreMenu.style.top =
+            `${rect.bottom + 7}px`;
 
-    event.stopPropagation();
 
-});
+        moreMenu.style.right =
+            `${window.innerWidth - rect.right}px`;
+
+
+        moreMenu.classList.toggle(
+            "show"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   FECHAR MENU
+========================================================= */
+
+document.addEventListener(
+    "click",
+    () => {
+
+        moreMenu.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+moreMenu.addEventListener(
+    "click",
+    event => {
+
+        event.stopPropagation();
+
+    }
+);
 
 
 /* =========================================================
    LIMPAR CONVERSA
 ========================================================= */
 
-clearChatBtn.addEventListener("click", () => {
+clearChatBtn.addEventListener(
+    "click",
+    () => {
 
-    const confirmed =
-        confirm("Limpar todas as mensagens desta conversa?");
+        const confirmed =
+            confirm(
+                "Limpar todas as mensagens desta conversa?"
+            );
 
-    if (!confirmed) return;
 
-    messages.innerHTML = "";
+        if (!confirmed)
+            return;
 
-    moreMenu.classList.remove("show");
 
-});
+        localStorage.removeItem(
+            `zvory_chat_${currentUser}`
+        );
+
+
+        renderMessages(
+            currentUser
+        );
+
+
+        updateConversationPreview(
+            currentUser,
+            "Nenhuma mensagem",
+            ""
+        );
+
+
+        moreMenu.classList.remove(
+            "show"
+        );
+
+
+        scrollMessages();
+
+    }
+);
 
 
 /* =========================================================
-   BLOQUEAR
+   BLOQUEAR USUÁRIO
 ========================================================= */
 
-blockBtn.addEventListener("click", () => {
+blockBtn.addEventListener(
+    "click",
+    () => {
 
-    alert("Sistema de bloqueio será conectado ao backend.");
+        const alreadyBlocked =
+            blockedUsers.includes(
+                currentUser
+            );
 
-    moreMenu.classList.remove("show");
 
-});
+        if (alreadyBlocked) {
+
+            blockedUsers =
+                blockedUsers.filter(
+                    user =>
+                        user !== currentUser
+                );
+
+
+            alert(
+                `${currentUser} foi desbloqueado.`
+            );
+
+        }
+
+        else {
+
+            blockedUsers.push(
+                currentUser
+            );
+
+
+            alert(
+                `${currentUser} foi bloqueado.`
+            );
+
+        }
+
+
+        localStorage.setItem(
+            "zvory_blocked_users",
+            JSON.stringify(
+                blockedUsers
+            )
+        );
+
+
+        const activeConversation =
+            [...conversations].find(
+                conversation =>
+                    conversation.dataset.user
+                    === currentUser
+            );
+
+
+        if (activeConversation) {
+
+            openConversation(
+                activeConversation
+            );
+
+        }
+
+
+        moreMenu.classList.remove(
+            "show"
+        );
+
+    }
+);
 
 
 /* =========================================================
    CHAMADA DE VOZ
 ========================================================= */
 
-voiceBtn.addEventListener("click", () => {
+voiceBtn.addEventListener(
+    "click",
+    () => {
 
-    alert("Chamadas de voz serão conectadas ao sistema da Zvory.");
+        alert(
+            `Chamada de voz com ${currentUser} será conectada ao sistema da Zvory.`
+        );
 
-});
+    }
+);
 
 
 /* =========================================================
    NOVA CONVERSA
 ========================================================= */
 
-newChatBtn.addEventListener("click", () => {
+newChatBtn.addEventListener(
+    "click",
+    () => {
 
-    alert("A busca de usuários será conectada ao backend.");
+        const user =
+            prompt(
+                "Digite o nome do usuário:"
+            );
 
-});
+
+        if (!user)
+            return;
+
+
+        const cleanName =
+            user.trim();
+
+
+        if (!cleanName)
+            return;
+
+
+        alert(
+            `A busca real por ${cleanName} será conectada ao backend.`
+        );
+
+    }
+);
 
 
 /* =========================================================
    ENTER PARA ENVIAR
 ========================================================= */
 
-messageInput.addEventListener("keydown", event => {
+messageInput.addEventListener(
+    "keydown",
+    event => {
 
-    if (
-        event.key === "Enter" &&
-        !event.shiftKey
-    ) {
+        if (
+            event.key === "Enter" &&
+            !event.shiftKey
+        ) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        messageForm.requestSubmit();
+            messageForm.requestSubmit();
+
+        }
 
     }
-
-});
+);
 
 
 /* =========================================================
    INICIALIZAÇÃO
 ========================================================= */
 
-scrollMessages();
+const firstConversation =
+    document.querySelector(
+        ".conversation.active"
+    );
+
+
+if (firstConversation) {
+
+    openConversation(
+        firstConversation
+    );
+
+}
