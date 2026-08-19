@@ -2463,3 +2463,67 @@ input:focus {
 
     display: block;
 }
+/* =========================================================
+   LOGO DA ZVORY NA TOPBAR
+========================================================= */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+
+.brand-mark {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+
+.brand-mark img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+
+/* TEXTO DA MARCA */
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    min-width: 0;
+}
+
+
+.brand-text strong {
+    display: block;
+
+    line-height: 1;
+
+    white-space: nowrap;
+}
+
+
+.brand-text span {
+    display: block;
+
+    line-height: 1;
+
+    white-space: nowrap;
+}
