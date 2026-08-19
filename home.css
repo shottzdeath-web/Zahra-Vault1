@@ -2374,3 +2374,68 @@ input:focus {
     }
 
 }
+/* =========================================================
+   BOTÃO DE PERFIL - DESTAQUE
+========================================================= */
+
+.profile-button {
+    width: 40px;
+    height: 40px;
+
+    padding: 2px;
+
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    border-radius: 50%;
+
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        transform .2s ease;
+}
+
+
+.profile-button:hover {
+    border-color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    transform: translateY(-1px);
+}
+
+
+/* AVATAR */
+
+.top-profile-avatar {
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eeeeee,
+            #888888
+        );
+
+    color: #111;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+}
