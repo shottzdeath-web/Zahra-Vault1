@@ -1,4 +1,4 @@
-/* =========================================================
+ /* =========================================================
    ZVORY — CHAT
    VISUAL PRETO / CINZA
    RESPONSIVO — PC / TABLET / CELULAR
@@ -96,7 +96,7 @@ body {
 
 
 /* =========================================================
-   HEADER CONVERSAS
+   HEADER DAS CONVERSAS
 ========================================================= */
 
 .conversations-header {
@@ -289,7 +289,7 @@ body {
 
 
 /* =========================================================
-   AVATAR
+   AVATAR DA LISTA
 ========================================================= */
 
 .avatar {
@@ -318,41 +318,6 @@ body {
 
 
 /* =========================================================
-   AVATAR ATIVO
-========================================================= */
-
-.conversation.active .avatar {
-    background: var(--black-deep);
-
-    color: var(--white);
-
-    border: 2px solid var(--white-pure);
-}
-
-
-/* =========================================================
-   AVATAR GRANDE
-========================================================= */
-
-.avatar.large {
-    width: 68px;
-    height: 68px;
-
-    min-width: 68px;
-
-    border-radius: 20px;
-
-    background: var(--black);
-
-    color: var(--white);
-
-    border: 2px solid var(--white-pure);
-
-    font-size: 22px;
-}
-
-
-/* =========================================================
    ONLINE
 ========================================================= */
 
@@ -374,7 +339,7 @@ body {
 
 
 /* =========================================================
-   INFO CONVERSA
+   INFO DA CONVERSA
 ========================================================= */
 
 .conversation-info {
@@ -541,97 +506,11 @@ body {
 
 
 /* =========================================================
-   CARD DO PERFIL
-========================================================= */
-
-.user-card {
-    width: 100%;
-
-    min-height: 130px;
-
-    padding: 20px 24px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    background: var(--white);
-
-    color: var(--black);
-
-    border-radius: var(--radius-lg);
-
-    border: 2px solid var(--white-pure);
-
-    flex-shrink: 0;
-}
-
-
-/* =========================================================
-   USUÁRIO
-========================================================= */
-
-.chat-user {
-    display: flex;
-    align-items: center;
-
-    gap: 16px;
-
-    min-width: 0;
-}
-
-.chat-user-info {
-    display: flex;
-    flex-direction: column;
-
-    gap: 5px;
-
-    min-width: 0;
-}
-
-.chat-user-info strong {
-    font-size: 20px;
-
-    font-weight: 750;
-}
-
-.chat-user-info span {
-    font-size: 13px;
-
-    color: #777;
-}
-
-
-/* =========================================================
-   ÍCONE DO PERFIL
-========================================================= */
-
-.user-card-icon {
-    width: 56px;
-    height: 56px;
-
-    min-width: 56px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 18px;
-
-    background: var(--black);
-
-    color: var(--white);
-
-    font-size: 22px;
-}
-
-
-/* =========================================================
    TÍTULO DAS MENSAGENS
 ========================================================= */
 
 .messages-title {
-    padding: 26px 4px 16px;
+    padding: 18px 4px 16px;
 
     display: flex;
     align-items: flex-end;
@@ -690,7 +569,7 @@ body {
     display: flex;
     flex-direction: column;
 
-    gap: 10px;
+    gap: 12px;
 
     padding: 4px;
 
@@ -719,7 +598,7 @@ body {
 
     justify-content: center;
 
-    margin-bottom: 14px;
+    margin-bottom: 10px;
 
     flex-shrink: 0;
 }
@@ -745,21 +624,106 @@ body {
     max-width: 68%;
 
     display: flex;
-    flex-direction: column;
 
     flex-shrink: 0;
 }
+
+
+/* =========================================================
+   RECEBIDA
+========================================================= */
 
 .message.received {
     align-self: flex-start;
 
     align-items: flex-start;
+
+    flex-direction: row;
+
+    gap: 9px;
 }
+
+
+/* =========================================================
+   ENVIADA
+========================================================= */
 
 .message.sent {
     align-self: flex-end;
 
     align-items: flex-end;
+
+    flex-direction: row;
+}
+
+
+/* =========================================================
+   AVATAR DA MENSAGEM
+========================================================= */
+
+.message-avatar {
+    width: 34px;
+    height: 34px;
+
+    min-width: 34px;
+
+    margin-top: 19px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: var(--black-deep);
+
+    color: var(--white);
+
+    border: 1px solid #555;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    user-select: none;
+}
+
+
+/* =========================================================
+   CORPO DA MENSAGEM
+========================================================= */
+
+.message-body {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+.received .message-body {
+    align-items: flex-start;
+}
+
+.sent .message-body {
+    align-items: flex-end;
+}
+
+
+/* =========================================================
+   NOME DE QUEM ENVIOU
+========================================================= */
+
+.message-author {
+    margin-bottom: 5px;
+
+    padding-left: 3px;
+
+    color: var(--white-soft);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    line-height: 1.2;
 }
 
 
@@ -780,7 +744,9 @@ body {
 }
 
 
-/* RECEBIDA */
+/* =========================================================
+   BOLHA RECEBIDA
+========================================================= */
 
 .received .bubble {
     background: var(--black-soft);
@@ -791,7 +757,9 @@ body {
 }
 
 
-/* ENVIADA */
+/* =========================================================
+   BOLHA ENVIADA
+========================================================= */
 
 .sent .bubble {
     background: #333333;
@@ -892,7 +860,9 @@ body {
 }
 
 
-/* BOTÃO ANEXAR / EMOJI */
+/* =========================================================
+   BOTÃO ANEXAR / EMOJI
+========================================================= */
 
 .input-btn {
     background: transparent;
@@ -907,7 +877,9 @@ body {
 }
 
 
-/* BOTÃO ENVIAR */
+/* =========================================================
+   BOTÃO ENVIAR
+========================================================= */
 
 .send-btn {
     background: var(--white);
@@ -1068,39 +1040,9 @@ body {
 
         min-height: 0;
 
-        padding: 8px 14px 2px;
+        padding: 4px 14px 2px;
 
         overflow: hidden;
-    }
-
-
-    /* =====================================================
-       CARD DO PERFIL
-    ===================================================== */
-
-    .user-card {
-        min-height: 108px;
-
-        padding: 16px 18px;
-
-        border-radius: 22px;
-
-        border: 2px solid var(--white-pure);
-    }
-
-    .avatar.large {
-        width: 58px;
-        height: 58px;
-
-        min-width: 58px;
-
-        font-size: 19px;
-
-        border: 2px solid var(--white-pure);
-    }
-
-    .chat-user-info strong {
-        font-size: 18px;
     }
 
 
@@ -1109,7 +1051,11 @@ body {
     ===================================================== */
 
     .messages-title {
-        padding: 22px 2px 12px;
+        padding: 14px 2px 10px;
+    }
+
+    .messages-title h2 {
+        font-size: 20px;
     }
 
 
@@ -1119,6 +1065,35 @@ body {
 
     .message {
         max-width: 84%;
+    }
+
+    .message-avatar {
+        width: 30px;
+        height: 30px;
+
+        min-width: 30px;
+
+        margin-top: 18px;
+
+        border-radius: 10px;
+
+        font-size: 10px;
+    }
+
+    .message.received {
+        gap: 7px;
+    }
+
+    .message-author {
+        font-size: 10px;
+
+        margin-bottom: 4px;
+    }
+
+    .bubble {
+        padding: 12px 15px;
+
+        font-size: 14px;
     }
 
 
@@ -1162,10 +1137,6 @@ body {
 
 @media (max-width: 380px) {
 
-    .user-card-icon {
-        display: none;
-    }
-
     .conversation time {
         display: none;
     }
@@ -1176,5 +1147,16 @@ body {
 
     .message-form input {
         font-size: 13px;
+    }
+
+    .message-avatar {
+        width: 28px;
+        height: 28px;
+
+        min-width: 28px;
+
+        margin-top: 17px;
+
+        border-radius: 9px;
     }
 }

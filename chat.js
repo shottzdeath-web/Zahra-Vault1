@@ -21,18 +21,6 @@ const chatPanel =
 const backBtn =
     document.getElementById("backBtn");
 
-const headerName =
-    document.getElementById("headerName");
-
-const headerAvatar =
-    document.getElementById("headerAvatar");
-
-const headerStatus =
-    document.getElementById("headerStatus");
-
-const headerOnline =
-    document.getElementById("headerOnline");
-
 const messageForm =
     document.getElementById("messageForm");
 
@@ -72,7 +60,9 @@ let currentUser = "Isabela";
 
 let blockedUsers =
     JSON.parse(
-        localStorage.getItem("zvory_blocked_users") || "[]"
+        localStorage.getItem(
+            "zvory_blocked_users"
+        ) || "[]"
     );
 
 
@@ -83,37 +73,45 @@ let blockedUsers =
 const defaultMessages = {
 
     Isabela: [
+
         {
             type: "received",
             text: "Oii",
             time: "14:40"
         },
+
         {
             type: "sent",
             text: "Oii, tudo bem?",
             time: "14:41"
         },
+
         {
             type: "received",
             text: "Tudo sim ❤️",
             time: "14:42"
         }
+
     ],
 
     João: [
+
         {
             type: "received",
             text: "Beleza, depois te falo",
             time: "13:21"
         }
+
     ],
 
     Maria: [
+
         {
             type: "received",
             text: "Enviou uma imagem",
             time: "11:08"
         }
+
     ]
 
 };
@@ -130,11 +128,24 @@ function loadMessages(user) {
             `zvory_chat_${user}`
         );
 
+
     if (saved) {
 
-        return JSON.parse(saved);
+        try {
+
+            return JSON.parse(saved);
+
+        } catch (error) {
+
+            console.error(
+                "Erro ao carregar mensagens:",
+                error
+            );
+
+        }
 
     }
+
 
     return defaultMessages[user]
         ? [...defaultMessages[user]]
@@ -150,8 +161,11 @@ function loadMessages(user) {
 function saveMessages(user, data) {
 
     localStorage.setItem(
+
         `zvory_chat_${user}`,
+
         JSON.stringify(data)
+
     );
 
 }
@@ -163,6 +177,14 @@ function saveMessages(user, data) {
 
 function openConversation(conversation) {
 
+    if (!conversation)
+        return;
+
+
+    /* =====================================================
+       ATIVAR CONVERSA
+    ===================================================== */
+
     conversations.forEach(item => {
 
         item.classList.remove("active");
@@ -172,72 +194,32 @@ function openConversation(conversation) {
     conversation.classList.add("active");
 
 
+    /* =====================================================
+       USUÁRIO
+    ===================================================== */
+
     const user =
         conversation.dataset.user;
 
-    const status =
-        conversation.dataset.status;
 
-    currentUser = user;
-
-
-    /* AVATAR */
-
-    const avatar =
-        user.charAt(0).toUpperCase();
-
-
-    headerName.textContent =
+    currentUser =
         user;
 
-    headerAvatar.textContent =
-        avatar;
 
-
-    /* STATUS */
-
-    if (blockedUsers.includes(user)) {
-
-        headerStatus.textContent =
-            "bloqueado";
-
-        headerStatus.style.color =
-            "#777c86";
-
-    }
-
-    else {
-
-        headerStatus.textContent =
-            status === "online"
-                ? "online"
-                : "offline";
-
-        headerStatus.style.color =
-            status === "online"
-                ? "#54d17d"
-                : "#777c86";
-
-    }
-
-
-    /* ONLINE */
-
-    headerOnline.style.display =
-        status === "online" &&
-        !blockedUsers.includes(user)
-            ? "block"
-            : "none";
-
-
-    /* CARREGAR MENSAGENS */
+    /* =====================================================
+       CARREGAR MENSAGENS
+    ===================================================== */
 
     renderMessages(user);
 
 
-    /* MOBILE */
+    /* =====================================================
+       MOBILE
+    ===================================================== */
 
-    if (window.innerWidth <= 700) {
+    if (
+        window.innerWidth <= 700
+    ) {
 
         conversationPanel.classList.add(
             "hidden"
@@ -250,6 +232,10 @@ function openConversation(conversation) {
     }
 
 
+    /* =====================================================
+       SCROLL
+    ===================================================== */
+
     scrollMessages();
 
 }
@@ -259,20 +245,22 @@ function openConversation(conversation) {
    EVENTOS DAS CONVERSAS
 ========================================================= */
 
-conversations.forEach(conversation => {
+conversations.forEach(
+    conversation => {
 
-    conversation.addEventListener(
-        "click",
-        () => {
+        conversation.addEventListener(
+            "click",
+            () => {
 
-            openConversation(
-                conversation
-            );
+                openConversation(
+                    conversation
+                );
 
-        }
-    );
+            }
+        );
 
-});
+    }
+);
 
 
 /* =========================================================
@@ -281,6 +269,10 @@ conversations.forEach(conversation => {
 
 function renderMessages(user) {
 
+    if (!messages)
+        return;
+
+
     messages.innerHTML = "";
 
 
@@ -288,7 +280,9 @@ function renderMessages(user) {
         loadMessages(user);
 
 
-    /* DATA */
+    /* =====================================================
+       DATA
+    ===================================================== */
 
     const dateDivider =
         document.createElement("div");
@@ -296,29 +290,35 @@ function renderMessages(user) {
     dateDivider.className =
         "date-divider";
 
+
     const dateText =
         document.createElement("span");
 
     dateText.textContent =
         "Hoje";
 
+
     dateDivider.appendChild(
         dateText
     );
+
 
     messages.appendChild(
         dateDivider
     );
 
 
-    /* MENSAGENS */
+    /* =====================================================
+       MENSAGENS
+    ===================================================== */
 
     data.forEach(item => {
 
         createMessageElement(
             item.type,
             item.text,
-            item.time
+            item.time,
+            user
         );
 
     });
@@ -333,43 +333,175 @@ function renderMessages(user) {
 function createMessageElement(
     type,
     text,
-    time
+    time,
+    user = currentUser
 ) {
 
     const message =
         document.createElement("div");
 
+
     message.className =
         `message ${type}`;
 
 
-    const bubble =
-        document.createElement("div");
+    /* =====================================================
+       MENSAGEM RECEBIDA
+    ===================================================== */
 
-    bubble.className =
-        "bubble";
+    if (type === "received") {
 
-    bubble.textContent =
-        text;
+        /* AVATAR */
 
-
-    const messageTime =
-        document.createElement("span");
-
-    messageTime.className =
-        "message-time";
-
-    messageTime.textContent =
-        time;
+        const avatar =
+            document.createElement("div");
 
 
-    message.appendChild(
-        bubble
-    );
+        avatar.className =
+            "message-avatar";
 
-    message.appendChild(
-        messageTime
-    );
+
+        avatar.textContent =
+            user.charAt(0)
+                .toUpperCase();
+
+
+        /* CORPO */
+
+        const body =
+            document.createElement("div");
+
+
+        body.className =
+            "message-body";
+
+
+        /* NOME */
+
+        const author =
+            document.createElement("strong");
+
+
+        author.className =
+            "message-author";
+
+
+        author.textContent =
+            user;
+
+
+        /* BOLHA */
+
+        const bubble =
+            document.createElement("div");
+
+
+        bubble.className =
+            "bubble";
+
+
+        bubble.textContent =
+            text;
+
+
+        /* HORÁRIO */
+
+        const messageTime =
+            document.createElement("span");
+
+
+        messageTime.className =
+            "message-time";
+
+
+        messageTime.textContent =
+            time;
+
+
+        /* MONTAGEM */
+
+        body.appendChild(
+            author
+        );
+
+        body.appendChild(
+            bubble
+        );
+
+        body.appendChild(
+            messageTime
+        );
+
+
+        message.appendChild(
+            avatar
+        );
+
+        message.appendChild(
+            body
+        );
+
+    }
+
+
+    /* =====================================================
+       MENSAGEM ENVIADA
+    ===================================================== */
+
+    else {
+
+        const body =
+            document.createElement("div");
+
+
+        body.className =
+            "message-body";
+
+
+        /* BOLHA */
+
+        const bubble =
+            document.createElement("div");
+
+
+        bubble.className =
+            "bubble";
+
+
+        bubble.textContent =
+            text;
+
+
+        /* HORÁRIO */
+
+        const messageTime =
+            document.createElement("span");
+
+
+        messageTime.className =
+            "message-time";
+
+
+        messageTime.textContent =
+            time;
+
+
+        /* MONTAGEM */
+
+        body.appendChild(
+            bubble
+        );
+
+        body.appendChild(
+            messageTime
+        );
+
+
+        message.appendChild(
+            body
+        );
+
+    }
 
 
     messages.appendChild(
@@ -383,85 +515,107 @@ function createMessageElement(
    ENVIAR MENSAGEM
 ========================================================= */
 
-messageForm.addEventListener(
-    "submit",
-    event => {
+if (messageForm) {
 
-        event.preventDefault();
+    messageForm.addEventListener(
+        "submit",
+        event => {
 
-
-        const text =
-            messageInput.value
-                .trim();
+            event.preventDefault();
 
 
-        if (!text)
-            return;
+            const text =
+                messageInput.value
+                    .trim();
 
 
-        if (
-            blockedUsers.includes(
-                currentUser
-            )
-        ) {
+            if (!text)
+                return;
 
-            alert(
-                "Você bloqueou este usuário."
+
+            /* BLOQUEADO */
+
+            if (
+                blockedUsers.includes(
+                    currentUser
+                )
+            ) {
+
+                alert(
+                    "Você bloqueou este usuário."
+                );
+
+                return;
+
+            }
+
+
+            /* HORÁRIO */
+
+            const time =
+                getCurrentTime();
+
+
+            /* DADOS */
+
+            const data =
+                loadMessages(
+                    currentUser
+                );
+
+
+            data.push({
+
+                type: "sent",
+
+                text: text,
+
+                time: time
+
+            });
+
+
+            /* SALVAR */
+
+            saveMessages(
+                currentUser,
+                data
             );
 
-            return;
+
+            /* MOSTRAR */
+
+            createMessageElement(
+                "sent",
+                text,
+                time,
+                currentUser
+            );
+
+
+            /* ATUALIZAR LISTA */
+
+            updateConversationPreview(
+                currentUser,
+                text,
+                time
+            );
+
+
+            /* LIMPAR INPUT */
+
+            messageInput.value =
+                "";
+
+
+            /* SCROLL */
+
+            scrollMessages();
 
         }
+    );
 
-
-        const time =
-            getCurrentTime();
-
-
-        const data =
-            loadMessages(
-                currentUser
-            );
-
-
-        data.push({
-
-            type: "sent",
-
-            text: text,
-
-            time: time
-
-        });
-
-
-        saveMessages(
-            currentUser,
-            data
-        );
-
-
-        createMessageElement(
-            "sent",
-            text,
-            time
-        );
-
-
-        updateConversationPreview(
-            currentUser,
-            text,
-            time
-        );
-
-
-        messageInput.value = "";
-
-
-        scrollMessages();
-
-    }
-);
+}
 
 
 /* =========================================================
@@ -487,6 +641,10 @@ function getCurrentTime() {
 ========================================================= */
 
 function scrollMessages() {
+
+    if (!messages)
+        return;
+
 
     requestAnimationFrame(() => {
 
@@ -533,6 +691,7 @@ function updateConversationPreview(
                     ".conversation-info span"
                 );
 
+
             const timeElement =
                 conversation.querySelector(
                     "time"
@@ -564,85 +723,98 @@ function updateConversationPreview(
    PESQUISA
 ========================================================= */
 
-searchInput.addEventListener(
-    "input",
-    () => {
+if (searchInput) {
 
-        const search =
-            searchInput.value
-                .toLowerCase()
-                .trim();
+    searchInput.addEventListener(
+        "input",
+        () => {
 
-
-        conversations.forEach(
-            conversation => {
-
-                const user =
-                    conversation.dataset.user
-                        .toLowerCase();
+            const search =
+                searchInput.value
+                    .toLowerCase()
+                    .trim();
 
 
-                conversation.style.display =
-                    user.includes(search)
-                        ? "flex"
-                        : "none";
+            conversations.forEach(
+                conversation => {
 
-            }
-        );
+                    const user =
+                        conversation.dataset.user
+                            .toLowerCase();
 
-    }
-);
+
+                    conversation.style.display =
+                        user.includes(search)
+                            ? "flex"
+                            : "none";
+
+                }
+            );
+
+        }
+    );
+
+}
 
 
 /* =========================================================
    VOLTAR NO CELULAR
 ========================================================= */
 
-backBtn.addEventListener(
-    "click",
-    () => {
+if (backBtn) {
 
-        chatPanel.classList.remove(
-            "mobile-active"
-        );
+    backBtn.addEventListener(
+        "click",
+        () => {
 
-        conversationPanel.classList.remove(
-            "hidden"
-        );
+            chatPanel.classList.remove(
+                "mobile-active"
+            );
 
-    }
-);
+
+            conversationPanel.classList.remove(
+                "hidden"
+            );
+
+        }
+    );
+
+}
 
 
 /* =========================================================
    MENU
 ========================================================= */
 
-moreBtn.addEventListener(
-    "click",
-    event => {
+if (moreBtn && moreMenu) {
 
-        event.stopPropagation();
+    moreBtn.addEventListener(
+        "click",
+        event => {
 
-
-        const rect =
-            moreBtn.getBoundingClientRect();
+            event.stopPropagation();
 
 
-        moreMenu.style.top =
-            `${rect.bottom + 7}px`;
+            const rect =
+                moreBtn.getBoundingClientRect();
 
 
-        moreMenu.style.right =
-            `${window.innerWidth - rect.right}px`;
+            moreMenu.style.top =
+                `${rect.bottom + 7}px`;
 
 
-        moreMenu.classList.toggle(
-            "show"
-        );
+            moreMenu.style.right =
+                `${window.innerWidth - rect.right}px`;
 
-    }
-);
+
+            moreMenu.classList.toggle(
+                "show"
+            );
+
+        }
+    );
+
+}
 
 
 /* =========================================================
@@ -653,217 +825,253 @@ document.addEventListener(
     "click",
     () => {
 
-        moreMenu.classList.remove(
-            "show"
-        );
+        if (moreMenu) {
+
+            moreMenu.classList.remove(
+                "show"
+            );
+
+        }
 
     }
 );
 
 
-moreMenu.addEventListener(
-    "click",
-    event => {
+if (moreMenu) {
 
-        event.stopPropagation();
+    moreMenu.addEventListener(
+        "click",
+        event => {
 
-    }
-);
+            event.stopPropagation();
+
+        }
+    );
+
+}
 
 
 /* =========================================================
    LIMPAR CONVERSA
 ========================================================= */
 
-clearChatBtn.addEventListener(
-    "click",
-    () => {
+if (clearChatBtn) {
 
-        const confirmed =
-            confirm(
-                "Limpar todas as mensagens desta conversa?"
-            );
+    clearChatBtn.addEventListener(
+        "click",
+        () => {
 
-
-        if (!confirmed)
-            return;
-
-
-        localStorage.removeItem(
-            `zvory_chat_${currentUser}`
-        );
-
-
-        renderMessages(
-            currentUser
-        );
-
-
-        updateConversationPreview(
-            currentUser,
-            "Nenhuma mensagem",
-            ""
-        );
-
-
-        moreMenu.classList.remove(
-            "show"
-        );
-
-
-        scrollMessages();
-
-    }
-);
-
-
-/* =========================================================
-   BLOQUEAR USUÁRIO
-========================================================= */
-
-blockBtn.addEventListener(
-    "click",
-    () => {
-
-        const alreadyBlocked =
-            blockedUsers.includes(
-                currentUser
-            );
-
-
-        if (alreadyBlocked) {
-
-            blockedUsers =
-                blockedUsers.filter(
-                    user =>
-                        user !== currentUser
+            const confirmed =
+                confirm(
+                    "Limpar todas as mensagens desta conversa?"
                 );
 
 
-            alert(
-                `${currentUser} foi desbloqueado.`
+            if (!confirmed)
+                return;
+
+
+            localStorage.removeItem(
+                `zvory_chat_${currentUser}`
             );
 
-        }
 
-        else {
-
-            blockedUsers.push(
+            renderMessages(
                 currentUser
             );
 
 
-            alert(
-                `${currentUser} foi bloqueado.`
+            updateConversationPreview(
+                currentUser,
+                "Nenhuma mensagem",
+                ""
             );
+
+
+            if (moreMenu) {
+
+                moreMenu.classList.remove(
+                    "show"
+                );
+
+            }
+
+
+            scrollMessages();
 
         }
+    );
+
+}
 
 
-        localStorage.setItem(
-            "zvory_blocked_users",
-            JSON.stringify(
-                blockedUsers
-            )
-        );
+/* =========================================================
+   BLOQUEAR / DESBLOQUEAR USUÁRIO
+========================================================= */
+
+if (blockBtn) {
+
+    blockBtn.addEventListener(
+        "click",
+        () => {
+
+            const alreadyBlocked =
+                blockedUsers.includes(
+                    currentUser
+                );
 
 
-        const activeConversation =
-            [...conversations].find(
-                conversation =>
-                    conversation.dataset.user
-                    === currentUser
+            if (alreadyBlocked) {
+
+                blockedUsers =
+                    blockedUsers.filter(
+                        user =>
+                            user !== currentUser
+                    );
+
+
+                alert(
+                    `${currentUser} foi desbloqueado.`
+                );
+
+            }
+
+            else {
+
+                blockedUsers.push(
+                    currentUser
+                );
+
+
+                alert(
+                    `${currentUser} foi bloqueado.`
+                );
+
+            }
+
+
+            localStorage.setItem(
+                "zvory_blocked_users",
+                JSON.stringify(
+                    blockedUsers
+                )
             );
 
 
-        if (activeConversation) {
+            const activeConversation =
+                [...conversations].find(
+                    conversation =>
+                        conversation.dataset.user
+                        === currentUser
+                );
 
-            openConversation(
-                activeConversation
-            );
+
+            if (activeConversation) {
+
+                openConversation(
+                    activeConversation
+                );
+
+            }
+
+
+            if (moreMenu) {
+
+                moreMenu.classList.remove(
+                    "show"
+                );
+
+            }
 
         }
+    );
 
-
-        moreMenu.classList.remove(
-            "show"
-        );
-
-    }
-);
+}
 
 
 /* =========================================================
    CHAMADA DE VOZ
 ========================================================= */
 
-voiceBtn.addEventListener(
-    "click",
-    () => {
+if (voiceBtn) {
 
-        alert(
-            `Chamada de voz com ${currentUser} será conectada ao sistema da Zvory.`
-        );
+    voiceBtn.addEventListener(
+        "click",
+        () => {
 
-    }
-);
+            alert(
+                `Chamada de voz com ${currentUser} será conectada ao sistema da Zvory.`
+            );
+
+        }
+    );
+
+}
 
 
 /* =========================================================
    NOVA CONVERSA
 ========================================================= */
 
-newChatBtn.addEventListener(
-    "click",
-    () => {
+if (newChatBtn) {
 
-        const user =
-            prompt(
-                "Digite o nome do usuário:"
+    newChatBtn.addEventListener(
+        "click",
+        () => {
+
+            const user =
+                prompt(
+                    "Digite o nome do usuário:"
+                );
+
+
+            if (!user)
+                return;
+
+
+            const cleanName =
+                user.trim();
+
+
+            if (!cleanName)
+                return;
+
+
+            alert(
+                `A busca real por ${cleanName} será conectada ao backend.`
             );
 
+        }
+    );
 
-        if (!user)
-            return;
-
-
-        const cleanName =
-            user.trim();
-
-
-        if (!cleanName)
-            return;
-
-
-        alert(
-            `A busca real por ${cleanName} será conectada ao backend.`
-        );
-
-    }
-);
+}
 
 
 /* =========================================================
    ENTER PARA ENVIAR
 ========================================================= */
 
-messageInput.addEventListener(
-    "keydown",
-    event => {
+if (messageInput) {
 
-        if (
-            event.key === "Enter" &&
-            !event.shiftKey
-        ) {
+    messageInput.addEventListener(
+        "keydown",
+        event => {
 
-            event.preventDefault();
+            if (
+                event.key === "Enter" &&
+                !event.shiftKey
+            ) {
 
-            messageForm.requestSubmit();
+                event.preventDefault();
+
+                messageForm.requestSubmit();
+
+            }
 
         }
+    );
 
-    }
-);
+}
 
 
 /* =========================================================
