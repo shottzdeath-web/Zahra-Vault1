@@ -69,6 +69,8 @@ body {
     gap: 16px;
 
     padding: 16px;
+
+    overflow: hidden;
 }
 
 
@@ -103,6 +105,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    flex-shrink: 0;
 }
 
 .brand {
@@ -176,6 +180,8 @@ body {
     border-radius: 16px;
 
     background: var(--black-soft);
+
+    flex-shrink: 0;
 }
 
 .search-box span {
@@ -208,6 +214,8 @@ body {
 
 .conversation-list {
     flex: 1;
+
+    min-height: 0;
 
     padding: 0 12px 18px;
 
@@ -413,6 +421,7 @@ body {
     flex: 1;
 
     min-width: 0;
+    min-height: 0;
 
     height: 100%;
 
@@ -438,10 +447,14 @@ body {
 
     display: flex;
     align-items: center;
+
+    flex-shrink: 0;
 }
 
 .chat-title {
     flex: 1;
+
+    min-width: 0;
 
     display: flex;
     flex-direction: column;
@@ -471,6 +484,8 @@ body {
     display: flex;
 
     gap: 8px;
+
+    flex-shrink: 0;
 }
 
 .action-btn,
@@ -520,12 +535,13 @@ body {
     flex-direction: column;
 
     padding: 8px 5% 4px;
+
+    overflow: hidden;
 }
 
 
 /* =========================================================
    CARD DO PERFIL
-   ÚNICA ÁREA BRANCA
 ========================================================= */
 
 .user-card {
@@ -546,6 +562,8 @@ body {
     border-radius: var(--radius-lg);
 
     border: 2px solid var(--white-pure);
+
+    flex-shrink: 0;
 }
 
 
@@ -558,6 +576,8 @@ body {
     align-items: center;
 
     gap: 16px;
+
+    min-width: 0;
 }
 
 .chat-user-info {
@@ -565,6 +585,8 @@ body {
     flex-direction: column;
 
     gap: 5px;
+
+    min-width: 0;
 }
 
 .chat-user-info strong {
@@ -587,6 +609,8 @@ body {
 .user-card-icon {
     width: 56px;
     height: 56px;
+
+    min-width: 56px;
 
     display: flex;
     align-items: center;
@@ -612,6 +636,8 @@ body {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+
+    flex-shrink: 0;
 }
 
 .messages-title > div {
@@ -669,6 +695,8 @@ body {
     padding: 4px;
 
     overflow-y: auto;
+
+    overscroll-behavior: contain;
 }
 
 .messages::-webkit-scrollbar {
@@ -692,6 +720,8 @@ body {
     justify-content: center;
 
     margin-bottom: 14px;
+
+    flex-shrink: 0;
 }
 
 .date-divider span {
@@ -716,6 +746,8 @@ body {
 
     display: flex;
     flex-direction: column;
+
+    flex-shrink: 0;
 }
 
 .message.received {
@@ -790,9 +822,11 @@ body {
 ========================================================= */
 
 .message-form {
-    margin: 8px 22px 10px;
+    width: auto;
 
     min-height: 68px;
+
+    margin: 8px 22px 10px;
 
     padding: 8px 10px;
 
@@ -808,6 +842,8 @@ body {
     border: 1px solid #353535;
 
     flex-shrink: 0;
+
+    position: relative;
 }
 
 .message-form input {
@@ -951,6 +987,10 @@ body {
         padding-left: 3%;
         padding-right: 3%;
     }
+
+    .message {
+        max-width: 76%;
+    }
 }
 
 
@@ -960,10 +1000,23 @@ body {
 
 @media (max-width: 700px) {
 
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+
+        overflow: hidden;
+    }
+
     .chat-app {
+        width: 100%;
+        height: 100vh;
+
         display: block;
 
         padding: 0;
+
+        overflow: hidden;
     }
 
     .conversations,
@@ -973,6 +1026,7 @@ body {
         height: 100vh;
 
         min-width: 0;
+        min-height: 0;
 
         border-radius: 0;
     }
@@ -1010,7 +1064,13 @@ body {
     ===================================================== */
 
     .chat-content {
+        flex: 1;
+
+        min-height: 0;
+
         padding: 8px 14px 2px;
+
+        overflow: hidden;
     }
 
 
@@ -1067,13 +1127,17 @@ body {
     ===================================================== */
 
     .message-form {
-        margin: 5px 10px 7px;
+        width: auto;
 
         min-height: 62px;
+
+        margin: 5px 10px 7px;
 
         padding: 7px 8px;
 
         border-radius: 20px;
+
+        flex-shrink: 0;
     }
 
     .message-form input {
@@ -1108,5 +1172,9 @@ body {
 
     .message-form {
         gap: 2px;
+    }
+
+    .message-form input {
+        font-size: 13px;
     }
 }
